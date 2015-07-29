@@ -59,6 +59,7 @@
         <script src="https://apis.google.com/js/platform.js" async defer>
 			{lang: 'en'}
 		</script>
+		<script>!function(d,s,id){var js,ajs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://secure.assets.tumblr.com/share-button.js";ajs.parentNode.insertBefore(js,ajs);}}(document, "script", "tumblr-js");</script>
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
         <!-- Project Wonderful Ad Box Loader -->
 		<script type="text/javascript">
@@ -135,6 +136,9 @@
                                 <div class="google-button">
                                 	<div class='g-plusone'  data-size='medium'  data-href='http://www.moco-comics.com/<?php echo $post["Url"]; ?>/'></div>
                                 </div>
+								<div class="tumblr-button">
+									<a class='tumblr-share-button' data-color='blue' data-notes='right' href='https://embed.tumblr.com/share' data-content='http://www.moco-comics.com/<?php echo $post["Image"]; ?>' data-posttype='photo'></a>
+								</div>
                             </div>
 						</footer>
 					</article>

@@ -133,9 +133,11 @@ class Custom extends Aegis{
             }else{
                  $image_html="";
             }
+            $description = trim(substr(strip_tags($content),0,150))."...";
+
+            $result.="<article class='clearfix column sd-l7' id='$title_code'>$image_html<time datetime='$date'>$nice_date</time><span data-post='category'>$category</span><h5 data-post='title'>$title</h5>$content<footer data-post='footer'><div class='social-wrapper'><div class='facebook-buttons'><div class='fb-like' data-href='http://www.moco-comics.com/$link/' data-layout='button_count' data-action='like'data-show-faces='false' data-share='true'></div></div><div class='twitter-button'><a href='https://twitter.com/share' class='twitter-share-button' data-url='http://www.moco-comics.com/$link/'>Tweet</a></div><div class='google-button'><div class='g-plusone'  data-size='medium'  data-href='http://www.moco-comics.com/$link/'></div></div><div class='tumblr-button'><a class='tumblr-share-button' data-color='blue' data-notes='right' href='https://embed.tumblr.com/share' data-content='http://www.moco-comics.com/$image' data-posttype='photo'></a></div><div class='comments-button'><a href='$link/' class='link-to-post'><span class='fa fa-comment'></span>Comentarios</a></div></div></footer></article>";
 
 
-            $result.="<article class='clearfix column sd-l7' id='$title_code'>$image_html<time datetime='$date'>$nice_date</time><span data-post='category'>$category</span><h5 data-post='title'>$title</h5>$content<footer data-post='footer'><div class='social-wrapper'><div class='facebook-buttons'><div class='fb-like' data-href='http://www.moco-comics.com/$link/' data-layout='button_count' data-action='like'data-show-faces='false' data-share='true'></div></div><div class='twitter-button'><a href='https://twitter.com/share' class='twitter-share-button' data-url='http://www.moco-comics.com/$link/'>Tweet</a></div><div class='google-button'><div class='g-plusone'  data-size='medium'  data-href='http://www.moco-comics.com/$link/'></div></div><div class='comments-button'><a href='$link/' class='link-to-post'><span class='fa fa-comment'></span>Comentarios</a></div></div></footer></article>";
 
 
 		}
@@ -159,8 +161,10 @@ class Custom extends Aegis{
             $image_html="<img data-post='img' class='small' src='$image' alt='$title'/>";
         }
 
+        $description = trim(substr(strip_tags($content),0,150))."...";
+
         $nice_date=ucwords(strftime("%A %e de %B del %Y ",strtotime($i["Date"])));
-        $html="<article class='clearfix'>$image_html<time datetime='$date'>$nice_date</time><span data-post='category'>$category</span><h5 data-post='title'>$title</h5>$content<footer data-post='footer'><div class='social-wrapper'><div class='facebook-buttons'><div class='fb-like' data-href='http://www.moco-comics.com/$link/' data-layout='button_count' data-action='like'data-show-faces='false' data-share='true'></div></div><div class='twitter-button'><a href='https://twitter.com/share' class='twitter-share-button' data-url='http://www.moco-comics.com/$link/'>Tweet</a></div><div class='google-button'><div class='g-plusone'  data-size='medium'  data-href='http://www.moco-comics.com/$link/'></div></div><div class='comments-button'><a href='$link' class='link-to-post'><span class='fa fa-comment'></span>Comentarios</a></div></div></footer></article>";
+        $html="<article class='clearfix'>$image_html<time datetime='$date'>$nice_date</time><span data-post='category'>$category</span><h5 data-post='title'>$title</h5>$content<footer data-post='footer'><div class='social-wrapper'><div class='facebook-buttons'><div class='fb-like' data-href='http://www.moco-comics.com/$link/' data-layout='button_count' data-action='like'data-show-faces='false' data-share='true'></div></div><div class='twitter-button'><a href='https://twitter.com/share' class='twitter-share-button' data-url='http://www.moco-comics.com/$link/'>Tweet</a></div><div class='google-button'><div class='g-plusone'  data-size='medium'  data-href='http://www.moco-comics.com/$link/'></div></div><div class='tumblr-button'><a class='tumblr-share-button' data-color='blue' data-notes='right' href='https://embed.tumblr.com/share' data-content='http://www.moco-comics.com/$image' data-posttype='photo'></a></div><div class='comments-button' ><a href='$link' class='link-to-post'><span class='fa fa-comment'></span>Comentarios</a></div></div></footer></article>";
         return $html;
 
     }
