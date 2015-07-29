@@ -67,6 +67,7 @@
         <script src="https://apis.google.com/js/platform.js" async defer>
 			{lang: 'en'}
 		</script>
+		<script>!function(d,s,id){var js,ajs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://secure.assets.tumblr.com/share-button.js";ajs.parentNode.insertBefore(js,ajs);}}(document, "script", "tumblr-js");</script>
 		<!-- Project Wonderful Ad Box Loader -->
 		<script type="text/javascript">
 			(function(){function pw_load(){
@@ -167,7 +168,7 @@
 							<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" class="paypal-form">
 								<input type="hidden" name="cmd" value="_s-xclick">
 								<input type="hidden" name="hosted_button_id" value="7RY2U2LCVADW2">
-								<input type="image" class="paypal-link" src="http://moco.hyuchia.com/Paypal-donate.png" border="0" name="submit" alt="PayPal, la forma más segura y rápida de pagar en línea.">
+								<input type="image" class="paypal-link" src="http://moco-comics.com/img/Paypal-donate.png" border="0" name="submit" alt="PayPal, la forma más segura y rápida de pagar en línea.">
 							</form>
 						</button>
 				</div>
@@ -200,7 +201,7 @@
 							<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" class="paypal-form">
 								<input type="hidden" name="cmd" value="_s-xclick">
 								<input type="hidden" name="hosted_button_id" value="7RY2U2LCVADW2">
-								<input type="image" class="paypal-link" src="http://moco.hyuchia.com/img/Paypal-donate.png" border="0" name="submit" alt="PayPal, la forma más segura y rápida de pagar en línea.">
+								<input type="image" class="paypal-link" src="http://moco-comics.com/img/Paypal-donate.png" border="0" name="submit" alt="PayPal, la forma más segura y rápida de pagar en línea.">
 							</form>
 						</button>
 					</div>

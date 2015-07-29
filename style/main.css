@@ -203,19 +203,19 @@ article iframe{
 	padding: 0.5em;
 	color:#fff;
 }
-.facebook-buttons, .twitter-button, .google-button, .comments-button{
+.facebook-buttons, .twitter-button, .google-button, .comments-button, .tumblr-button{
 	display:inline-block;
 	vertical-align:bottom;
 	margin:5px 10px;
 }
-.twitter-button iframe{
+.twitter-button iframe, .tumblr-button iframe{
 	width:100px !important;
 }
 .google-button>div{
 	vertical-align: bottom !important;
 	width:70px !important;
 }
-.facebook-buttons iframe, .twitter-button iframe{
+.facebook-buttons iframe, .twitter-button iframe, .tumblr-button iframe{
 	margin:0;
 }
 .comments-button{
@@ -871,7 +871,7 @@ footer:not([data-post="footer"]){
 		float:right;
 		margin-left:1em;
 	}
-	.facebook-buttons, .twitter-button, .google-button, .comments-button{
+	.facebook-buttons, .twitter-button, .google-button, .comments-button, .tumblr-button{
 		margin:0 10px;
 	}
 	.facebook-buttons{
