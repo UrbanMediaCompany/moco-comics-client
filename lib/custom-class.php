@@ -898,15 +898,14 @@ class Custom extends Aegis{
 						</div>";
             }else{
                $html.="<div class='page clearfix'>
-							<form id='storeform' method='post'>
+							<form class='additional-page' method='post' data-id='".$i["id"]."'>
 								<div class='title xsd12 sd-l3' data-color='".$i["Color"]."'>
 									<h5>".$i["Nombre"]."</h5>
 								</div>
 								<div class='content column xsd12 sd-l9 sd-loffset3'>
 									<textarea name='description' class='store-content'>".$i["Content"]."</textarea>
-									<input type='submit' class='store-button' data-color='".$i["Color"]."' value='Guardar'>
-
-									</div>
+                                    <input type='hidden' value='".$i["Name"]."' name='aid'>
+									<input type='submit' class='store-button' data-color='".$i["Color"]."' value='Guardar' data-id='".$i["id"]."'>
 								</div>
 							</form>
 						</div>";
@@ -948,6 +947,19 @@ class Custom extends Aegis{
         $id=0;
         if($sth=$this->database->getPdo()->prepare("UPDATE `Additional` SET `Content`=? WHERE id=?")){
 		   if (!$sth->execute(array($content,$id))) {
+                $sth=null;
+               return false;
+			}else{
+                $sth=null;
+				return true;
+			}
+
+		  }
+    }
+
+    public function updateAdditional($id, $content){
+        if($sth=$this->database->getPdo()->prepare("UPDATE `Additional` SET `Content`=? WHERE Name=?")){
+		   if (!$sth->execute(array($content, $id))) {
                 $sth=null;
                return false;
 			}else{
@@ -1090,7 +1102,6 @@ class Custom extends Aegis{
         }
         return $feed;
     }
-
 }
 
 $custom=new Custom();

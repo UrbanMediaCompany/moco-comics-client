@@ -55,12 +55,12 @@
         }
 	}
 
-    if(($data=$_->readPost("description")) && $_SESSION['active']){
-        if($custom->updateStore($data["description"])){
-            echo $custom->getAdditionalData("Store Description");
-        }else{
-            echo $custom->getAdditionalData("Store Description");
-        }
+    if(($data=$_->readPost("description,aid")) && $_SESSION['active']){
+		if($custom -> updateAdditional($data["aid"], $data["description"])){
+			echo $custom->buildPages();
+		}else{
+			echo $custom->buildPages();
+		}
 	}
 
     if(($data=$_->readPost("nname,nprice")) && $_SESSION['active']){

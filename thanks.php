@@ -86,8 +86,8 @@
 		</header>
 		<section class="about">
 			<article>
-				<h2>¡Graciash por tu compra!</h2>
-				<p>Tras verificar tu pago, recibirás un correo.</p><p> ¡Por mientras sigue disfrutando de Moco Comics! </p><p><small>En caso de no recibir el correo en un plazo de 24 horas... o hasta que cuco despierte y prenda el internet, notificalo a <a class="mailto" href="tamalito(at)gmail(dot)com">este correo</a></small></p>
+				<h2>Paypal Checkout</h2>
+				<p><?php echo $custom -> getAdditionalData("Thanks"); ?></p>
 			</article>
 		</section>
 		<footer>

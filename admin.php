@@ -285,7 +285,7 @@
                     </form>
 
 						</div>
-						                    <h2>Items de la Tienda</h2>
+	                    <h2>Items de la Tienda</h2>
                         <?php echo $custom->buildAdminStore(); ?>
 					</div>
 				</section>

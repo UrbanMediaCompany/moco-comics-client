@@ -410,12 +410,17 @@ $(document).ready(function () {
 
 
 
-    $(".pages-wrapper").on("submit","#storeform",function(event) {
+    $(".pages-wrapper").on("submit",".additional-page",function(event) {
 	 	event.preventDefault();
-		$.ajax({ type: "POST", url: "lib/deploy.php", data: $("#storeform").serialize(),
+        var temp = $(this);
+		$.ajax({ type: "POST", url: "lib/deploy.php", data: temp.serialize(),
 				success: function(data){
-                    $(".store-content").html(data.trim());
-                    $(".store-button").val("Guardado!");
+                    $(".pages-wrapper").html(data.trim());
+                    $(".store-button[data-id='"+temp.data("id")+"']").val("Guardado!");
+                    $('[data-color]').each(function(){
+                        var color = $(this).data('color');
+                        $(this).css({background: color});
+                    });
 				}
 		});
 		return false;
