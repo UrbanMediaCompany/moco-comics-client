@@ -93,11 +93,11 @@
 			}(document, 'script', 'facebook-jssdk'));
 		</script>
 
-		<aside class="announcement">
+		<!--<aside class="announcement">
 			<div class="container">
 				<p>Proyecto apoyado por el <a href="http://fonca.conaculta.gob.mx" class="bold" target="_blank">Fondo Nacional Para la Cultura y las Artes</a></p>
 			</div>
-		</aside>
+		</aside>-->
 		<header id="main">
 			<h1><a href="">Moco-Comics</a></h1>
 			<span>Monitos de Juanele</span>
