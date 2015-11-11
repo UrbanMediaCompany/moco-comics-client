@@ -958,6 +958,9 @@ class Custom extends Aegis{
     }
 
     public function updateAdditional($id, $content){
+    	if($content == "[EMPTY]"){
+    		$content = "";
+    	}
         if($sth=$this->database->getPdo()->prepare("UPDATE `Additional` SET `Content`=? WHERE Name=?")){
 		   if (!$sth->execute(array($content, $id))) {
                 $sth=null;
@@ -1102,6 +1105,7 @@ class Custom extends Aegis{
         }
         return $feed;
     }
+
 }
 
 $custom=new Custom();

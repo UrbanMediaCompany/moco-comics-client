@@ -16,10 +16,10 @@ class Configuration {
 
         $this -> web_domain = "http://localhost/MocoComics/";
         $this->admin_mail="hyuchia@gmail.com";
-        $this -> db = "Moco";
+        $this -> db = "mococomicsdb";
         $this -> db_host="localhost";
 		$this -> db_user = "root";
-        $this -> db_password = "7+7=Atriangulo";
+        $this -> db_password = "3+3=Aocho";
 
         //$this -> db_password = "xampp123$";
 

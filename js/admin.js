@@ -412,7 +412,11 @@ $(document).ready(function () {
 
     $(".pages-wrapper").on("submit",".additional-page",function(event) {
 	 	event.preventDefault();
-        var temp = $(this);
+        	var temp = $(this);
+        	var da = temp.find("textarea");
+        	if(da.val().trim() == ""){
+        		da.val("[EMPTY]");
+        	}
 		$.ajax({ type: "POST", url: "lib/deploy.php", data: temp.serialize(),
 				success: function(data){
                     $(".pages-wrapper").html(data.trim());
