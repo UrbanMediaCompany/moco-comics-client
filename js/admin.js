@@ -202,7 +202,7 @@ $(document).ready(function () {
             success: function(data){
 
                 $("[data-update='title']").text(data["Title"]);
-                $("[data-update='details']").text("Actualización "+data["Version"]);
+                $("[data-update='details']").text("Actualización "+data["Version"] + " Hash: " + data["Hash"]);
                 $("[data-update='description']").text(data["Description"]);
                 var feat=data["Features"].split(",");
                 var feats="";
