@@ -616,9 +616,13 @@ class Custom extends Aegis{
     public function buildNotifications(){
         $notifications=$this->getNotifications();
         $not="";
-
+		$counter = 25;
         foreach(array_reverse($notifications) as $i){
+        	if($counter <= 0){
+        		break;
+        	}
             $not.="<div class='notification xsd12 column sd-l6' data-status='".$i["Status"]."' data-id='".$i["ID"]."' data-url='".$i["Url"]."'<p>".$i["Content"]."</p><time datetime='".$i["Date"]."'>".$i["Date"]."</time></div>";
+            $counter--;
         }
         return $not;
 
