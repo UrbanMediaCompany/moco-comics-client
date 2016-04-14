@@ -42,10 +42,10 @@
     }
 
     $router -> registerRoute("/", new View([
-    "featured" => $posts[0],
-    "posts" => array_slice($posts, $page, 4),
-    "footer" => ["year" => $meta["year"]],
-    "navigation" => ["counter" => 0, "incoming" => 0, "passed" => 0]
+        "featured" => $posts[0],
+        "posts" => array_slice($posts, $page, 4),
+        "footer" => ["year" => $meta["year"]],
+        "navigation" => ["counter" => 0, "incoming" => 0, "passed" => 0]
     ], $meta));
 
 	$router -> registerRoute("/admin", new View("main", ["main"  => ["title" => "Admin"]], $meta));
