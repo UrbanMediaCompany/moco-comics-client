@@ -75,7 +75,7 @@
 		<!-- build:stylesheets -->
 		<link rel="stylesheet" href="style/animate.css">
 		<link rel="stylesheet" href="style/font-awesome.min.css">
-		<link rel="stylesheet" href="style/aegis.css">
+		<link rel="stylesheet" href="style/lazy-sheet.css">
 		<link rel="stylesheet" href="style/main.css">
 		<!-- endbuild -->
 
