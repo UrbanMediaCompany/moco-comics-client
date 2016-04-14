@@ -48,6 +48,7 @@
 		"navigation" => ["counter" => 0, "incoming" => 0, "passed" => 0]
 	], $meta));
 
+
 	$router -> registerRoute("/admin", new View("main", ["main"  => ["title" => "Admin"]], $meta));
 
 	$router -> registerRoute("/archivo-de-comics", new View("main", ["main"  => ["title" => "Archivo de Comics"]], $meta));
