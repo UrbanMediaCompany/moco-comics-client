@@ -1,8 +1,9 @@
 <?php
 
 	/* Place Your Functions in here */
-    /*$db = new Database("root", "", "moco");
-    
-    print_r($db -> selectAllFrom("Posts"));*/
+
+	$db = new Database("moco_comics", "3+3=Aocho", "mococomicsdb", "mysql.moco-comics.com");
+
+
 
 ?>

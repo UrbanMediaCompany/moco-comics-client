@@ -29,6 +29,7 @@
 		"shareimage" => ""
 	];
 
+
 	$router -> registerRoute("/", new View("main", ["main"  => ["title" => "Página Principal"]], $meta));
 
 	$router -> registerRoute("/admin", new View("main", ["main"  => ["title" => "Admin"]], $meta));
