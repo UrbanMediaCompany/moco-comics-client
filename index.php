@@ -30,7 +30,23 @@
 	];
 
 
-	$router -> registerRoute("/", new View("main", ["main"  => ["title" => "Página Principal"]], $meta));
+    $posts = array_reverse($db -> selectAllByDate("Posts", "Date"));
+
+    $routeParts = explode("/", $router -> getRoute());
+
+
+    if(@$routeParts[1] == "page" && @$routeParts[2]!=""){
+        $page = (intval($routeParts[2]) * 4) - 3;
+    }else{
+       $page = 0;
+    }
+
+    $router -> registerRoute("/", new View([
+    "featured" => $posts[0],
+    "posts" => array_slice($posts, $page, 4),
+    "footer" => ["year" => $meta["year"]],
+    "navigation" => ["counter" => 0, "incoming" => 0, "passed" => 0]
+    ], $meta));
 
 	$router -> registerRoute("/admin", new View("main", ["main"  => ["title" => "Admin"]], $meta));
 
