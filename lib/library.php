@@ -51,8 +51,9 @@
 	}
 
 	// TODO: Make this function accept a page name and retrieve it's information from the database
-	function getPage(){
-
+	function getPages(){
+		global $db;
+		return $query = $db -> query("SELECT * FROM `Page`");
 	}
 
 ?>

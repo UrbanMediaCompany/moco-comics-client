@@ -30,13 +30,22 @@
 	];
 
 
-	$posts = $db -> selectAllByDate("Post", "Date");
-
 	$routeParts = explode("/", $router -> getRoute());
 
 
     if(@$routeParts[1] == "page" && @$routeParts[2]!=""){
         $page = (intval($routeParts[2]) * 4) - 3;
+
+        // TODO: Poner un if para solo registrar el route si getPostsForPage regresa algo.
+
+        $router -> registerRoute("/page/" . $routeParts[2], new View("main", [
+			"main" => ["message" => getSettingsValue("Message")],
+			"featured" => getLatestPost(),
+			"posts" => getPostsForPage($page),
+			"footer" => ["year" => $meta["year"]],
+			// TODO: Cambiar el counter, el incoming y el passed.
+			"navigation" => ["counter" => 0, "incoming" => 0, "passed" => 0]
+		], $meta));
     }else{
        $page = 0;
     }
@@ -51,13 +60,19 @@
 
 	$router -> registerRoute("/admin", new View("main", ["main"  => ["title" => "Admin"]], $meta));
 
-	$router -> registerRoute("/archivo-de-comics", new View("main", ["main"  => ["title" => "Archivo de Comics"]], $meta));
+	$router -> registerRoute("/archivo-de-comics", new View("comics", ["main"  => ["title" => "Archivo de Comics"]], $meta));
 
 	$router -> registerRoute("/el-autor", new View("main", ["main"  => ["title" => "El Autor"]], $meta));
 
 	$router -> registerRoute("/tienda", new View("main", ["main"  => ["title" => "Tienda"]], $meta));
 
 
+	// TODO: Register All routes and info for the pages.
+	$pages = getPages();
+
+	foreach($pages as $page){
+
+	}
 
 
 
