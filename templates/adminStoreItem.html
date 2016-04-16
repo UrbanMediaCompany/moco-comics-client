@@ -1,0 +1,24 @@
+<div class='store-item'>
+	<form class='stor' method='post' enctype='multipart/form-data'>
+        <input type='hidden'  name='sid' value='{{ID}}'>
+
+		<div class='image-input'>
+			<img class='item-img' src='{{Image}}'/>
+			<div class='img-uploader'>
+				<button>
+					<input name='simage' type='file' class='upload-img' />
+				</button>
+			</div>
+		</div>
+		<div class='form-footer'>
+			<input type='text' name='name' value='{{Name}}'>
+			<label>$
+				<input type='number' name='price' value='{{Price}}'>
+			</label>
+
+			<input type='text' name='pp' placeholder='Paypal Button...' value='{{Paypal}}'>
+			<input type='submit' value='Actualizar'>
+			<button data-id='{{ID}}' data-action='deletes'>Eliminar</button>
+		</div>
+	</form>
+</div>
