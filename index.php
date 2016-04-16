@@ -55,19 +55,46 @@
 		"featured" => getLatestPost(),
 		"posts" => getPostsForPage($page),
 		"footer" => ["year" => $meta["year"]],
-		"navigation" => ["counter" => 0, "incoming" => 0, "passed" => 0]
+		"navigation" => ["counter" => countPosts(), "incoming" => 0, "passed" => 0]
 	], $meta));
 
-	$router -> registerRoute("/admin", new View("main", ["main"  => ["title" => "Admin"]], $meta));
+
+
+	if($session -> get("logged")){
+		$router -> registerRoute("/admin", new View("dashboard",
+			[
+				"dashboard" => [
+					"mostCommentedPost" => "",
+					"numberOfPosts" => countPosts(),
+					"numberOfComments" => countComments(),
+					"topCommenter" => ""
+
+				],
+				"notification"  => [],
+				"characters" => getCharacters(),
+				"posts" => getAllPosts()
+
+			]
+			, $meta, "admin.php"));
+	}else{
+		$router -> registerRoute("/admin", new View("login", ["main"  => ["title" => "Admin"]], $meta, "login.php"));
+	}
+
+	$router -> registerRoute("/logout", "logout.php");
+
 
 	$router -> registerRoute("/archivo-de-comics", new View("comics", ["main"  => ["title" => "Archivo de Comics"]], $meta));
 
+
+	// TODO: Quitar esta y remplazarla por la dínamica de Page (Issue #1)
 	$router -> registerRoute("/el-autor", new View("main", ["main"  => ["title" => "El Autor"]], $meta));
 
 	$router -> registerRoute("/tienda", new View("main", ["main"  => ["title" => "Tienda"]], $meta));
 
 
-	// TODO: Register All routes and info for the pages.
+	// TODO: Registrar las rutas de la tabla Page de la base de datos
+	// Y mandar su información, para lograr
+
 	$pages = getPages();
 
 	foreach($pages as $page){

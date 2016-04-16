@@ -1,5 +1,5 @@
 <?php
-	
+
 	/**
 	 * ==============================
 	 * Aegis Framework | MIT License

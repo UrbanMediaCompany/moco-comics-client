@@ -12,6 +12,22 @@ $_ready(function(){
 	    }
 	});
 
+	(function(){
+		$_(".mailto").each(function(element){
+			console.log(element);
+			var email = element.href.replace("(at)", "@").replace("(dot)", ".");
+			var classes = $_(element).attribute("class");
+
+			element.insertAdjacentHTML('beforebegin', '<a href="mailto:' + email
+								+ '" class="' + classes + '"  title="Email ' + email
+								+ '"">'+$_(element).html() + '</a>');
+								element.parentNode.removeChild(element);
+
+
+		});
+
+	})();
+
 
 	$('a[href*="#"]').each(function(){
 	    if(location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
@@ -29,21 +45,7 @@ $_ready(function(){
             }
     });
 
-    (function(){
-		$_(".mailto").each(function(element){
-			console.log(element);
-			var email = element.href.replace("(at)", "@").replace("(dot)", ".");
-			var classes = $_(element).attribute("class");
 
-			element.insertAdjacentHTML('beforebegin', '<a href="mailto:' + email
-								+ '" class="' + classes + '"  title="Email ' + email
-								+ '"">'+$_(element).html() + '</a>');
-								element.parentNode.removeChild(element);
-
-
-		});
-
-	})();
 
     $('.video-wrapper').fitVids();
 

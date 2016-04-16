@@ -80,7 +80,11 @@ class Session extends Visitor {
 	}
 
 	public function get($key){
-		return $_SESSION[$key];
+		if(array_key_exists($key, $_SESSION)){
+			return $_SESSION[$key];
+		}else{
+			return null;
+		}
 	}
 
 }

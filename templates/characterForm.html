@@ -1,0 +1,53 @@
+<div class='character'>
+	<form class='char' method='post'  data-character='$name' data-color='{{Color}}' enctype='multipart/form-data' >
+	    <input type='hidden'  name='cid' value='{{ID}}'>
+	    <input type='hidden'  name='old-name' value='{{Name}}'>
+		<div class='main-wrapper clearfix'>
+			<div class='image-input'>
+				<img src='img/{{Image}}' />
+				<div class='img-uploader'>
+					<button>
+						<input name='image' type='file' class='upload-img' />
+					</button>
+				</div>
+			</div>
+			<input type='text' data-char='name' name='name' value='{{Name}}'>
+
+		</div>
+		<div class='form-footer'>
+			<input type='hidden' name='new-color' value='{{Color}}'>
+			<div class='color-select'>
+				<div class='absolute-select'>
+					<div class='color'>
+						<button class='new-color' data-color='rgb(121,188,50)'></button>
+					</div>
+					<div class='color'>
+						<button class='new-color' data-color='#D5573B'></button>
+					</div>
+					<div class='color'>
+						<button class='new-color' data-color='rgb(218,98,125)'></button>
+					</div>
+					<div class='color'>
+						<button class='new-color' data-color='rgb(54,133,181)'></button>
+					</div>
+					<div class='color'>
+						<button class='new-color' data-color='rgb(230,175,46)'></button>
+					</div>
+					<div class='color'>
+						<button class='new-color' data-color='rgb(135,80,83)'></button>
+					</div>
+					<div class='color'>
+						<button class='new-color' data-color='rgb(57,169,219)'></button>
+					</div>
+					<div class='color'>
+						<button class='new-color' data-color='rgb(91,140,90)'></button>
+					</div>
+					<div class='color'>
+						<button class='new-color' data-color='rgb(244,116,59)'></button>
+					</div>
+				</div>
+			</div>
+			<input type='submit' value='Actualizar'>
+		</div>
+	</form>
+</div>

@@ -4,14 +4,30 @@
 
 	$db = new Database("moco_comics", "3+3=Aocho", "mococomics", "mysql.moco-comics.com");
 
+	function getAllPosts(){
+		global $db;
+		$posts = $db -> query("SELECT * FROM `Post` WHERE `Status` = 'Published' OR `Status` = 'Draft' ORDER BY DATE(`Date`) DESC");
+		foreach($posts as $index => $post){
+			$posts[$index]["nice_date"] = dateToNiceDate($post["Date"]);
+		}
+
+		return $posts;
+	}
+
 	function getAllPublishedPosts(){
 		global $db;
 		return $db -> query("SELECT * FROM `Post` WHERE `Status` = 'Published' ORDER BY Date(`Date`) DESC");
 	}
 
-	// TODO: Make this function return the number of published posts
 	function countPosts(){
+		global $db;
+		$count = $db -> query("SELECT COUNT(`ID`) AS `Count` FROM `Post` WHERE `Status` = 'Published'");
 
+		if(!empty($count)){
+			return $count[0]["Count"];
+		}else{
+			return "";
+		}
 	}
 
 	function getLatestPost(){
@@ -54,6 +70,25 @@
 	function getPages(){
 		global $db;
 		return $query = $db -> query("SELECT * FROM `Page`");
+	}
+
+	function countComments(){
+		global $db;
+		$count = $db -> query("SELECT COUNT(`ID`) AS `Count` FROM `Comment` WHERE `Mail` NOT IN (SELECT `Mail` FROM `Admin`)");
+		if(!empty($count)){
+			return $count[0]["Count"];
+		}else{
+			return "";
+		}
+	}
+
+	function getTopCommenter(){
+
+	}
+
+	function getCharacters(){
+		global $db;
+		return $db -> selectAllFrom("Character");
 	}
 
 ?>

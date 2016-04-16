@@ -1,0 +1,24 @@
+<section data-site="store">
+	<div class="items-wrapper">
+		<div class="double">
+
+			<form method="post" enctype="multipart/form-data">
+				<h2>Subir PDF</h2>
+				<input type="file" name="pdf" required>
+				<p>Perteneciente a: <select name="belong">
+				<?php echo $custom -> storeOptions(); ?>
+				</select></p>
+				<input type="submit" value="Subir">
+			</form>
+
+			<form method="post">
+				<h2>Enviar PDF</h2>
+				<p>Enviar <select name="sitem" id="so" required><?php echo $custom -> storeSendOptions(); ?></select> al mail <input type="email" name="smail" placeholder="example@example.com" name="smail" required> con el mensaje: <input type="text" name="smessage" value="Gracias por tu compra!" required></p>
+				<input type="submit" value="Enviar">
+			</form>
+
+		</div>
+		<h2>Items de la Tienda</h2>
+		<?php echo $custom->buildAdminStore(); ?>
+	</div>
+</section>
