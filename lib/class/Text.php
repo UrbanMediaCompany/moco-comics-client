@@ -96,5 +96,38 @@
 	        $common   = array("","","");
 	        return str_replace($special, $common, $text);
 	    }
+
+	    public static function toFriendlyUrl($text){
+			$expressions = [
+				'[áàâãªä]'   =>   'a',
+		        '[ÁÀÂÃÄ]'    =>   'A',
+		        '[ÍÌÎÏ]'     =>   'I',
+		        '[íìîï]'     =>   'i',
+		        '[éèêë]'     =>   'e',
+		        '[ÉÈÊË]'     =>   'E',
+		        '[óòôõºö]'   =>   'o',
+		        '[ÓÒÔÕÖ]'    =>   'O',
+		        '[úùûü]'     =>   'u',
+		        '[ÚÙÛÜ]'     =>   'U',
+		        'ç'          =>   'c',
+		        'Ç'          =>   'C',
+		        'ñ'          =>   'n',
+		        'Ñ'          =>   'N',
+		        '_'          =>   '-',
+		        '[’‘‹›<>\']' =>   '',
+		        '[“”«»„\"]'  =>   '',
+		        '[\(\)\{\}\[\]]' => '',
+		        '[?¿!¡#$%&^*´`~\/°\|]' => '',
+		        '[,.:;]'     => '',
+		        '\s'         =>   '-'
+		    ];
+
+			foreach($expressions as $regex => $replacement){
+				$text = preg_replace("/$regex/", $replacement, $text);
+			}
+
+			return $text;
+	    }
+
 	}
 ?>

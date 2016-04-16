@@ -30,7 +30,7 @@
 	];
 
 
-	$posts = $db -> selectAllByDate("Posts", "Date");
+	$posts = $db -> selectAllByDate("Post", "Date");
 
 	$routeParts = explode("/", $router -> getRoute());
 
@@ -42,8 +42,9 @@
     }
 
 	$router -> registerRoute("/", new View("main", [
-		"featured" => $posts[0],
-		"posts" => array_slice($posts, $page, 4),
+		"main" => ["message" => getSettingsValue("Message")],
+		"featured" => getLatestPost(),
+		"posts" => getPostsForPage($page),
 		"footer" => ["year" => $meta["year"]],
 		"navigation" => ["counter" => 0, "incoming" => 0, "passed" => 0]
 	], $meta));
