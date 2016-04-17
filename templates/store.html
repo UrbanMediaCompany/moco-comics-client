@@ -1,0 +1,26 @@
+<aside class='announcement'><div class='container'><p>{{message}}</p></div></aside>
+{{> header}}
+<section class="store">
+	<div class="container">
+		<p>Aquí está los tomos que tenemos disponibles en este momento. ¡Pueden pagarlos con un depósito bancario (Banco ScotiaBank) y les llegan directo a su hogar! Para más información pueden dejarme un comentario o escribirme a mi correo: tamalito arroba gmail punto com. ¡Graciash! ¡Selecciona los tomos en los que estas interesado!</p>
+		<div class="items-wrapper">
+            {{each products storeItem}}
+        </div>
+	</div>
+</section>
+
+<section class="js-responsive-aid">
+	<div class="mobile-donation sd-invisible">
+		<div class="paypal-donation xsd-visible">
+			<p>Si te gustan mis cómics puedes apoyar con una donación, ¡grashiash!</p>
+			<button class="donations">
+			<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" class="paypal-form">
+				<input type="hidden" name="cmd" value="_s-xclick">
+				<input type="hidden" name="hosted_button_id" value="7RY2U2LCVADW2">
+				<input type="image" class="paypal-link" src="http://moco-comics.com/img/Paypal-donate.png" border="0" name="submit" alt="PayPal, la forma más segura y rápida de pagar en línea.">
+			</form>
+			</button>
+		</div>
+	</div>
+</section>
+{{> footer}}

@@ -91,4 +91,8 @@
 		return $db -> selectAllFrom("Character");
 	}
 
+	function getProducts(){
+		global $db;
+		return $query = $db -> query("SELECT * FROM `Product`");
+	}
 ?>

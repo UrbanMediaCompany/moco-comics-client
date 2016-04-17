@@ -89,7 +89,12 @@
 	// TODO: Quitar esta y remplazarla por la dínamica de Page (Issue #1)
 	$router -> registerRoute("/el-autor", new View("main", ["main"  => ["title" => "El Autor"]], $meta));
 
-	$router -> registerRoute("/tienda", new View("main", ["main"  => ["title" => "Tienda"]], $meta));
+	$router -> registerRoute("/tienda", new View("store", ["store"  => [
+		"title" => "Tienda",
+		"message" => getSettingsValue("Message"),
+		"products" => getProducts(),
+		"footer" => ["year" => $meta["year"]]
+	]], $meta));
 
 
 	// TODO: Registrar las rutas de la tabla Page de la base de datos
