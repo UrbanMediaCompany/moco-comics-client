@@ -66,7 +66,6 @@
 		return $db -> query("SELECT `Value` FROM `Setting` WHERE `Name` = ?", [$name])[0]["Value"];
 	}
 
-	// TODO: Make this function accept a page name and retrieve it's information from the database
 	function getPages(){
 		global $db;
 		return $query = $db -> query("SELECT * FROM `Page`");
@@ -83,7 +82,8 @@
 	}
 
 	function getTopCommenter(){
-
+		global $db;
+		$count = $db -> query("SELECT COUNT(`ID`) AS `Count` FROM `Comment` WHERE `Mail`");
 	}
 
 	function getCharacters(){
@@ -95,4 +95,61 @@
 		global $db;
 		return $query = $db -> query("SELECT * FROM `Product`");
 	}
+
+	function getStoreItems(){
+		global $db;
+		return $db -> selectAllFrom("Product");
+	}
+
+	function getFileStoreItems(){
+		global $db;
+		return $db -> query("SELECT * FROM `Product` WHERE `File` IS NOT NULL AND `FILE` != ''");
+	}
+
+	function getNotifications(){
+		global $db;
+		return $db -> query("SELECT * FROM `Notification` WHERE `Status` = 'New' ORDER BY DATE(`Date`) DESC LIMIT 25");
+	}
+
+	function getCategories(){
+		global $db;
+		return $db -> query("SELECT * FROM `Category`");
+	}
+
+	function getPost($url){
+		global $db;
+		$post = $db -> query("SELECT * FROM `Post` WHERE `Url` = ?", [$url]);
+		if(!empty($post)){
+			$post = $post[0];
+			$post["nice_date"] = dateToNiceDate($post["Date"]);
+			$post["Category"] = categoryToName($post["CategoryID"]);
+			$post["title_code"] = strtolower(Text::toFriendlyUrl($post["Title"]));
+		}
+
+		return $post;
+	}
+
+	function getCommentsFrom($id){
+		global $db;
+		$comments = $db -> query("SELECT * FROM `Comment` WHERE `PostID` = ? AND (`PARENT` IS NULL OR `Parent` = 4)", [$id]);
+		$temp = [];
+		foreach($comments as $comment){
+			$comment["level"] = "main";
+			array_push($temp, $comment);
+			$replies = getRepliesTo($comment["ID"]);
+			if(!empty($replies)){
+				foreach($replies as $reply){
+					$reply["level"] = "second";
+					array_push($temp, $reply);
+				}
+			}
+		}
+		return $temp;
+	}
+
+	function getRepliesTo($id){
+		global $db;
+		return $db -> query("SELECT * FROM `Comment` WHERE `Parent` = ? ORDER BY DATE(`Date`) DESC", [$id]);
+	}
+
 ?>

@@ -33,8 +33,12 @@
 	$routeParts = explode("/", $router -> getRoute());
 
 
+	$totalPosts = countPosts();
+
     if(@$routeParts[1] == "page" && @$routeParts[2]!=""){
         $page = (intval($routeParts[2]) * 4) - 3;
+
+		$passed = (intval($routeParts[2]) * 4) - 4;
 
         // TODO: Poner un if para solo registrar el route si getPostsForPage regresa algo.
 
@@ -44,18 +48,19 @@
 			"posts" => getPostsForPage($page),
 			"footer" => ["year" => $meta["year"]],
 			// TODO: Cambiar el counter, el incoming y el passed.
-			"navigation" => ["counter" => 0, "incoming" => 0, "passed" => 0]
+			"navigation" => ["counter" => $totalPosts, "incoming" => ceil($totalPosts - 4) - $passed , "passed" => $passed]
 		], $meta));
     }else{
        $page = 0;
     }
+
 
 	$router -> registerRoute("/", new View("main", [
 		"main" => ["message" => getSettingsValue("Message")],
 		"featured" => getLatestPost(),
 		"posts" => getPostsForPage($page),
 		"footer" => ["year" => $meta["year"]],
-		"navigation" => ["counter" => countPosts(), "incoming" => 0, "passed" => 0]
+		"navigation" => ["counter" => $totalPosts, "incoming" => $totalPosts - 4, "passed" => 0]
 	], $meta));
 
 
@@ -70,9 +75,13 @@
 					"topCommenter" => ""
 
 				],
-				"notification"  => [],
+				"notification"  => getNotifications(),
 				"characters" => getCharacters(),
-				"posts" => getAllPosts()
+				"posts" => getAllPosts(),
+				"storeItems" => getStoreItems(),
+				"pages" => getPages(),
+				"fileItems" => getFileStoreItems(),
+				"categories" => getCategories()
 
 			]
 			, $meta, "admin.php"));
@@ -103,6 +112,20 @@
 	$pages = getPages();
 
 	foreach($pages as $page){
+
+	}
+
+	if(@$routeParts[1] != "" && @$routeParts[1] != "page"){
+		$post = getPost(trim($router -> getRoute(), "/"));
+
+		if(!empty($post)){
+			$router -> registerRoute($router -> getRoute(), new View("fullPost",
+				[
+					"fullPost"  => $post,
+					"comments" => getCommentsFrom($post["ID"]),
+					"extendedFooter" => ["year" => date("Y")]
+				], $meta, "post.php"));
+		}
 
 	}
 

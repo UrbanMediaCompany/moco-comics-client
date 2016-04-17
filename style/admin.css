@@ -731,15 +731,16 @@ input[type="number"]{
 	width:100%;
 	margin:0.5em auto;
 }
-.page input, .page textarea{
+.page input, .page div[contenteditable="true"]{
 	display:block;
 	width:100%;
 	max-width:500px;
 	margin:0 auto;
 	text-align: center;
 	font-family: 'Paytone One', sans-serif;
+	background: #b03333;
 }
-.page textarea{
+.page div[contenteditable="true"]{
 	height: 17em;
 	background:transparent;
 	color:rgba(0,0,0,0.5);
