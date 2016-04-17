@@ -92,6 +92,11 @@
 		return $db -> selectAllFrom("Character");
 	}
 
+	function getProducts(){
+		global $db;
+		return $query = $db -> query("SELECT * FROM `Product`");
+	}
+
 	function getStoreItems(){
 		global $db;
 		return $db -> selectAllFrom("Product");
@@ -151,7 +156,13 @@
 
 	function getComicsFromCategory($category){
 		global $db;
-		return $db -> query("SELECT * FROM `Post` WHERE `CategoryID` = ? ORDER BY DATE(`Date`) DESC", [$category]);
+		//$comics = $db -> query("SELECT * FROM `Post` WHERE `CategoryID` = ? ORDER BY DATE(`Date`) DESC", [$category]);
+		$comics = $db -> query("SELECT * FROM `Post`ORDER BY DATE(`Date`) DESC");
+		foreach($comics as $index => $comic){
+			$comics[$index]["nice_date"] = dateToNiceDate($comic["Date"]);
+			$comics[$index]["Category"] = explode(" ", categoryToName($comic["CategoryID"]))[0];
+		}
+		return $comics;
 	}
 
 ?>

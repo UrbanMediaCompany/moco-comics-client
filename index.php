@@ -94,9 +94,10 @@
 
 	$router -> registerRoute("/archivo-de-comics", new View("comics",
 		[
-			"main"  => ["title" => "Archivo de Comics"],
-			"item" => getCharacters(),
-			"comic" => getComicsFromCategory(2)
+			"header"  => ["message" => getSettingsValue("Message")],
+			"items" => getCharacters(),
+			"comic" => getComicsFromCategory(2),
+			"footer" => ["year" => $meta["year"]]
 
 		], $meta, "archive.php"));
 
@@ -104,7 +105,14 @@
 	// TODO: Quitar esta y remplazarla por la dínamica de Page (Issue #1)
 
 
-	$router -> registerRoute("/tienda", new View("main", ["main"  => ["title" => "Tienda"]], $meta));
+	$router -> registerRoute("/tienda", new View("store", [
+		"store"  => [
+			"title" => "Tienda"
+		],
+		"header" => ["message" => getSettingsValue("Message")],
+		"products" => getProducts(),
+		"footer" => ["year" => $meta["year"]]
+	], $meta));
 
 
 	// TODO: Registrar las rutas de la tabla Page de la base de datos
