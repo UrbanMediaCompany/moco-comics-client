@@ -22,6 +22,31 @@
 		}
 
 	}
+	// Receive the data of a comment
+	if($data = $receiver -> receive("POST", "name,email,web,rep,cuco,comment", false, true)){
+		$comment = [
+			//"ID" => 0,
+			"PostID" => $data["cuco"],
+			"Parent" => $data["rep"],
+			"Name" => $data["name"],
+			"Mail" => $data["email"],
+			"Web" => $data["web"],
+			"Content" => $data["comment"],
+			"Gravatar" => "http://www.gravatar.com/avatar/" . md5($data["email"]),
+			"Agent" => Visitor::getUserAgent(),
+			"IP" => Visitor::getIP(),
+			"Status" => "Approved"
+		];
+
+		if($data["rep"] == "None" || $data["rep"] == "0"){
+			$comment["Parent"] = 4;
+		}
+
+		if($db -> insert("Comment", $comment)){
+			$template = new Template("{{each comments comment}}", ["comments" => getCommentsFrom($comment["PostID"])]);
+			echo $template -> compile();
+		}
+	}
 
 
 

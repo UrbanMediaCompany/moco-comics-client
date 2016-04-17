@@ -2,7 +2,8 @@
 
 	/* Place Your Functions in here */
 
-	$db = new Database("moco_comics", "3+3=Aocho", "mococomics", "mysql.moco-comics.com");
+	//$db = new Database("moco_comics", "3+3=Aocho", "mococomics", "mysql.moco-comics.com");
+	$db = new Database("root", "", "MocoComics2");
 
 	function getAllPosts(){
 		global $db;
@@ -135,6 +136,7 @@
 			if(!empty($replies)){
 				foreach($replies as $reply){
 					$reply["level"] = "second";
+					$reply["ID"] = $reply["Parent"];
 					array_push($temp, $reply);
 				}
 			}

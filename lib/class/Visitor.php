@@ -16,7 +16,7 @@ class Visitor {
 	 * @access public
 	 * @return string | boolean - returns Ip if it's valid or false if it's invalid.
 	 */
-	public function getIP(){
+	public static function getIP(){
 		if (!empty($_SERVER["HTTP_CLIENT_IP"])){
 			//check for ip from share internet
 			$ip = $_SERVER["HTTP_CLIENT_IP"];
@@ -30,7 +30,7 @@ class Visitor {
 		return filter_var($ip, FILTER_VALIDATE_IP) ? $ip : null;
 	}
 
-	public function getUserAgent(){
+	public static function getUserAgent(){
 		return $_SERVER['HTTP_USER_AGENT'];
 	}
 

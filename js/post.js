@@ -30,19 +30,25 @@ $(document).ready(function(){
 	   	}
    	})
 
-   $(".respond").click(function(){
-            $("input[name='rep']").val($(this).data('parent'));
+   $(".comments-wrapper").on("click", ".respond", function(){
+        $("input[name='rep']").val($(this).data('parent'));
     });
-    var ht=$("#Commenter").html();
 
     $("#Commenter").submit(function(event) {
 	 	event.preventDefault();
-		$.ajax({ type: "POST", url: "lib/deploy.php", data: $("#Commenter").serialize(),
+		$.ajax({ type: "POST", url: "deploy.php", data: $("#Commenter").serialize(),
             success: function(data){
-                    if(data.trim()=="Graciash por tu comentario!"){
-                        $("input[name='rep']").val(0);
+                    if(data.trim() != ""){
+
+                        $("input[name='rep']").val("None");
+                        $("input[name='web']").val("");
+                        $("input[name='email']").val("");
+                        $("input[name='name']").val("");
+						$("textarea[name='comment']").val("");
                         $("#cFail").hide();
-                        $("#Commenter").html(data);
+                        $(".comments-wrapper").html(data);
+                    	newPostForm.removeClass("active");
+						newPostButton.attr("class", "fa fa-plus");
                     }else{
                         $("#cFail").show();
                     }

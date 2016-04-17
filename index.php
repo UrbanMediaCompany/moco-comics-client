@@ -43,7 +43,7 @@
         // TODO: Poner un if para solo registrar el route si getPostsForPage regresa algo.
 
         $router -> registerRoute("/page/" . $routeParts[2], new View("main", [
-			"main" => ["message" => getSettingsValue("Message")],
+			"header" => ["message" => getSettingsValue("Message")],
 			"featured" => getLatestPost(),
 			"posts" => getPostsForPage($page),
 			"footer" => ["year" => $meta["year"]],
@@ -56,7 +56,7 @@
 
 
 	$router -> registerRoute("/", new View("main", [
-		"main" => ["message" => getSettingsValue("Message")],
+		"header" => ["message" => getSettingsValue("Message")],
 		"featured" => getLatestPost(),
 		"posts" => getPostsForPage($page),
 		"footer" => ["year" => $meta["year"]],
@@ -96,7 +96,7 @@
 
 
 	// TODO: Quitar esta y remplazarla por la dínamica de Page (Issue #1)
-	$router -> registerRoute("/el-autor", new View("main", ["main"  => ["title" => "El Autor"]], $meta));
+
 
 	$router -> registerRoute("/tienda", new View("main", ["main"  => ["title" => "Tienda"]], $meta));
 
@@ -107,16 +107,23 @@
 	$pages = getPages();
 
 	foreach($pages as $page){
-
+		$meta["title"] = $page["Title"];
+		$router -> registerRoute("/".$page["Url"], new View("page", ["page"  => $page,
+			"extendedFooter" => ["year" => date("Y")],
+			"header" => ["message" => getSettingsValue("Message")],
+			], $meta));
 	}
 
 	if(@$routeParts[1] != "" && @$routeParts[1] != "page"){
 		$post = getPost(trim($router -> getRoute(), "/"));
 
+
 		if(!empty($post)){
+			$meta["title"] = $post["Title"];
 			$router -> registerRoute($router -> getRoute(), new View("fullPost",
 				[
 					"fullPost"  => $post,
+					"header" => ["message" => getSettingsValue("Message")],
 					"comments" => getCommentsFrom($post["ID"]),
 					"extendedFooter" => ["year" => date("Y")]
 				], $meta, "post.php"));
