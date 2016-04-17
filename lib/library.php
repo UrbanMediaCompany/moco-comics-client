@@ -149,4 +149,9 @@
 		return $db -> query("SELECT * FROM `Comment` WHERE `Parent` = ? ORDER BY DATE(`Date`) DESC", [$id]);
 	}
 
+	function getComicsFromCategory($category){
+		global $db;
+		return $db -> query("SELECT * FROM `Post` WHERE `CategoryID` = ? ORDER BY DATE(`Date`) DESC", [$category]);
+	}
+
 ?>

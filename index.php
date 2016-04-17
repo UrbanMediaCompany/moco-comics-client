@@ -92,7 +92,13 @@
 	$router -> registerRoute("/logout", "logout.php");
 
 
-	$router -> registerRoute("/archivo-de-comics", new View("comics", ["main"  => ["title" => "Archivo de Comics"]], $meta));
+	$router -> registerRoute("/archivo-de-comics", new View("comics",
+		[
+			"main"  => ["title" => "Archivo de Comics"],
+			"item" => getCharacters(),
+			"comic" => getComicsFromCategory(2)
+
+		], $meta, "archive.php"));
 
 
 	// TODO: Quitar esta y remplazarla por la dínamica de Page (Issue #1)
