@@ -2,8 +2,7 @@
 
 	/* Place Your Functions in here */
 
-	//$db = new Database("moco_comics", "3+3=Aocho", "mococomics", "mysql.moco-comics.com");
-	$db = new Database("root", "", "MocoComics2");
+	$db = new Database("moco_comics", "3+3=Aocho", "mococomics", "mysql.moco-comics.com");
 
 	function getAllPosts(){
 		global $db;
