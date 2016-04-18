@@ -164,4 +164,19 @@
 		return $comics;
 	}
 
+	function getFeed(){
+		global $db;
+		$posts = getPostsForPage(0);
+		foreach($posts as $index => $post){
+			$length = strlen($post["Content"]);
+            if($length > 200){
+                $posts[$index]["Description"]= substr($post["Content"], 0, $length/2);
+            }else{
+                $posts[$index]["Description"] = $post["Content"];
+            }
+
+		}
+		return $posts;
+	}
+
 ?>

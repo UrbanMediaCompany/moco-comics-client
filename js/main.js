@@ -28,6 +28,25 @@ $_ready(function(){
 
 	})();
 
+	$_('button.prev').click(function(){
+		var previous = parseInt($_('button.prev').text());
+        if(previous == 4){
+            window.location.href = '/#blog';
+        }else if(previous > 0){
+            window.location.href = 'page/' + (previous/4) + "/#blog";
+        }
+    });
+
+    $_('button.next').click(function(){
+	    var next = parseInt($_('button.next').text());
+	    var previous = parseInt($_('button.prev').text());
+	    if(previous == 0){
+            window.location.href = 'page/2'+"/#blog";
+        }else if(next > 0){
+            window.location.href = 'page/' + ((previous + 8)/4) + "/#blog";
+        }
+    });
+
 
 	$('a[href*="#"]').each(function(){
 	    if(location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
@@ -106,47 +125,6 @@ $_ready(function(){
 
     $(window).resize(function(){
 	    getArticleTop();
-    });
-
-    $('button.prev').click(function(){
-	    if($('.mobile-donation').is(":visible")){
-		    if($('.prev span').text()=='0'){
-
-            }else{
-                if($('.prev span').text()=='4'){
-                    window.location.href = '/#blog';
-                }else{
-                    window.location.href = 'page/'+(parseInt($('.prev span').text()))/4+"/#blog";
-                }
-
-            }
-	    }else{
-            if($('.prev span').text()=='0'){
-
-            }else{
-               if($('.prev span').text()=='4'){
-                    window.location.href = '/#blog';
-                }else{
-                    window.location.href = 'page/'+(parseInt($('.prev span').text()))/4+"/#blog";
-                }
-            }
-	    }
-    });
-
-    $('button.next').click(function(){
-	    if($('.mobile-donation').is(":visible")){
-		    if($('.prev span').text()=='0'){
-                window.location.href = 'page/2'+"/#blog";
-            }else{
-                window.location.href = 'page/'+(parseInt($('.prev span').text())+8)/4+"/#blog";
-            }
-	    }else{
-		    if($('.prev span').text()=='0'){
-                window.location.href = 'page/2'+"/#blog";
-            }else{
-                window.location.href = 'page/'+(parseInt($('.prev span').text())+8)/4+"/#blog";
-            }
-	    }
     });
 
 });

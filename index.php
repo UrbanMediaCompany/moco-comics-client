@@ -33,23 +33,30 @@
 	$routeParts = explode("/", $router -> getRoute());
 
 
-	$totalPosts = countPosts();
+	$totalPosts = countPosts() - 1;
 
-    if(@$routeParts[1] == "page" && @$routeParts[2]!=""){
+    if(@$routeParts[1] == "page" && @$routeParts[2] != ""){
         $page = (intval($routeParts[2]) * 4) - 3;
 
 		$passed = (intval($routeParts[2]) * 4) - 4;
 
         // TODO: Poner un if para solo registrar el route si getPostsForPage regresa algo.
 
-        $router -> registerRoute("/page/" . $routeParts[2], new View("main", [
-			"header" => ["message" => getSettingsValue("Message")],
-			"featured" => getLatestPost(),
-			"posts" => getPostsForPage($page),
-			"footer" => ["year" => $meta["year"]],
-			// TODO: Cambiar el counter, el incoming y el passed.
-			"navigation" => ["counter" => $totalPosts, "incoming" => ceil($totalPosts - 4) - $passed , "passed" => $passed]
-		], $meta));
+        $posts = getPostsForPage($page);
+
+        if(!empty($posts)){
+	       $router -> registerRoute("/page/" . $routeParts[2], new View("main", [
+				"header" => ["message" => getSettingsValue("Message")],
+				"featured" => getLatestPost(),
+				"posts" => $posts,
+				"footer" => ["year" => $meta["year"]],
+				// TODO: Cambiar el counter, el incoming y el passed.
+				"navigation" => ["counter" => $totalPosts, "incoming" => ceil($totalPosts - 4) - $passed , "passed" => $passed]
+			], $meta));
+        }else{
+	        $router -> registerRoute("/page/" . $routeParts[2], "error/404.html");
+        }
+
     }else{
        $page = 0;
     }
@@ -83,8 +90,8 @@
 				"fileItems" => getFileStoreItems(),
 				"categories" => getCategories()
 
-			]
-			, $meta, "admin.php"));
+			],
+			$meta, "admin.php"));
 	}else{
 		$router -> registerRoute("/admin", new View("login", ["main"  => ["title" => "Admin"]], $meta, "login.php"));
 	}
@@ -134,6 +141,7 @@
 
 		if(!empty($post)){
 			$meta["title"] = $post["Title"];
+			$meta["shareimage"] = $post["Image"];
 			$router -> registerRoute($router -> getRoute(), new View("fullPost",
 				[
 					"fullPost"  => $post,
@@ -141,11 +149,16 @@
 					"comments" => getCommentsFrom($post["ID"]),
 					"extendedFooter" => ["year" => date("Y")]
 				], $meta, "post.php"));
+		}else{
+
 		}
 
 	}
 
-
+	if($router -> getRoute() == "/feed"){
+		header('Content-Type: application/xml; charset=utf-8');
+		$router -> registerRoute("/feed", new View(null, ["item" => getFeed()], $meta, "feed.php"));
+	}
 
 	$router -> listen();
 ?>

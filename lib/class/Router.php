@@ -32,7 +32,7 @@
 		}
 
 		public function getFullUrl(){
-			return $this -> getBaseUrl() . $this -> getRoute();
+			return str_replace("//", "/", $this -> getBaseUrl() . $this -> getRoute());
 		}
 
 		public function registerRoute($route, $view){
