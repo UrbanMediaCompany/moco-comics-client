@@ -128,9 +128,9 @@ $(document).ready(function () {
 
     $(".posts-wrapper").on("click","[data-action='edit']",function(){
 
-        $.ajax({ type: "POST", url: "lib/deploy.php",data: {"postinfo":$(this).data("id")},dataType:"json",
+        $.ajax({ type: "POST", url: "deploy.php", data: {"postinfo":$(this).data("id")}, dataType: "json",
 				success: function(data){
-                    $("[data-post='image-preview']").attr("src", data["Image"]);
+                    $("[data-post='image-preview']").attr("src", "img/" + data["Image"]);
                     $("[data-post='content']").html(data["Content"]);
                     $("[name='post-title']").val(data["Title"]);
                     $("[name='post-id']").val(data["ID"]);

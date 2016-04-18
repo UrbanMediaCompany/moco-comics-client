@@ -48,6 +48,17 @@
 		}
 	}
 
+	// Receive the Get Post Info command
+	if(($data = $receiver -> receive("POST", "postinfo")) && $session -> get("logged")){
+		$post = getPostById($data["postinfo"]);
+		if(!empty($post)){
+			$post[0]["Date"] = dateToNiceDate($post[0]["Date"]);
+			$post[0]["Category"] = categoryToName($post[0]["CategoryID"]);
+			$post[0]["title_code"] = strtolower(Text::toFriendlyUrl($post[0]["Title"]));
+			echo new JSON($post[0]);
+		}
+	}
+
 
 
 

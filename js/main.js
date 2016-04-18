@@ -108,7 +108,6 @@ $_ready(function(){
 	    stickyNav.css({top : stickyNavTop});
 
 	    if(scrolled < articleTops[1]){
-		    //console.log(scrolled, articleTops);
 		    $('.spy.current').removeClass('current');
 		    $('.spy:first-child').addClass('current');
 	    }else if(scrolled < articleTops[2]){

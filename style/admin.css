@@ -736,16 +736,22 @@ input[type="number"]{
 	width:100%;
 	max-width:500px;
 	margin:0 auto;
+	margin-bottom: 1em;
 	text-align: center;
 	font-family: 'Paytone One', sans-serif;
 	background: #b03333;
 }
 .page div[contenteditable="true"]{
-	height: 17em;
 	background:transparent;
 	color:rgba(0,0,0,0.5);
 	text-align: justify;
 }
+
+.page h5 {
+	font-family: 'Paytone One', sans-serif;
+	color: #fff;
+}
+
 .page [type="submit"]{
 	color:#fff;
 	max-width:200px;

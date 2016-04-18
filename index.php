@@ -76,10 +76,10 @@
 		$router -> registerRoute("/admin", new View("dashboard",
 			[
 				"dashboard" => [
-					"mostCommentedPost" => "",
+					"mostCommentedPost" => getMostCommentedPost(),
 					"numberOfPosts" => countPosts(),
 					"numberOfComments" => countComments(),
-					"topCommenter" => ""
+					"topCommenter" => getTopCommenter()
 
 				],
 				"notification"  => getNotifications(),

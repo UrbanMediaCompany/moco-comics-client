@@ -18,15 +18,12 @@ $(document).ready(function(){
             }
     });
 
-    //$('a.mailto').mailto();
-    //$('img').absoluteImage();
-
    	$('.archive nav a').each(function(){
 	   	var color = $(this).data('color');
 	   	$(this).css({background: color});
    	})
 
-   	var displaying= "Patote";
+   	var displaying = "Patote";
 
    	function changeComics(character){
 	   $('[data-character-link="' + character + '"]').addClass('active');
@@ -42,7 +39,7 @@ $(document).ready(function(){
 		   $('[data-character="' + displaying + '"]').removeClass('active');
 
 		   changeComics(newC);
-		   displaying=newC;
+		   displaying = newC;
 	   	}
    	})
 

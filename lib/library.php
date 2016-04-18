@@ -2,7 +2,8 @@
 
 	/* Place Your Functions in here */
 
-	$db = new Database("moco_comics", "3+3=Aocho", "mococomics", "mysql.moco-comics.com");
+	//$db = new Database("moco_comics", "3+3=Aocho", "mococomics", "mysql.moco-comics.com");
+	$db = new Database("root", "", "MocoComics3");
 
 	function getAllPosts(){
 		global $db;
@@ -83,7 +84,17 @@
 
 	function getTopCommenter(){
 		global $db;
-		$count = $db -> query("SELECT COUNT(`ID`) AS `Count` FROM `Comment` WHERE `Mail`");
+		$count = $db -> query("SELECT `Name`, COUNT(`Name`) AS `Ocurrence` FROM `Comment` WHERE MONTH(`Date`) = ? AND YEAR(`Date`)= ? AND `Mail` != 'tamalito@gmail.com' GROUP BY `Name` ORDER BY `Ocurrence` DESC LIMIT 1", [date("m"), date("Y")]);
+		if(!empty($count)){
+			$count = $count[0];
+			if($count["Ocurrence"] > 0){
+				return $count["Name"];
+			}else{
+				return "¡Nuevo Mes!";
+			}
+		}else{
+			return "¡Nuevo Mes!";
+		}
 	}
 
 	function getCharacters(){
@@ -179,4 +190,25 @@
 		return $posts;
 	}
 
+	function getPostById($id){
+		global $db;
+		return $db -> selectAllWhere("Post", "ID", $id);
+	}
+
+	function getMostCommentedPost(){
+		global $db;
+		$count = $db -> query("SELECT `PostID` , COUNT(`PostID`) AS `Ocurrence` FROM `Comment`  WHERE MONTH(`Date`) = ? AND YEAR(`Date`)=? GROUP BY `PostID` ORDER BY `Ocurrence` DESC LIMIT 1;", [date("m"), date("Y")]);
+		if(!empty($count)){
+			$count = $count[0];
+			$post = $db -> query("SELECT `Title` FROM Post WHERE ID = ?", [$count["PostID"]]);
+			if(!empty($post)){
+				$post = $post[0];
+				return $post["Title"];
+			}else{
+				return "¡Nuevo Mes!";
+			}
+		}else{
+			return "¡Nuevo Mes!";
+		}
+	}
 ?>
