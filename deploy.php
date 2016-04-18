@@ -25,7 +25,6 @@
 	// Receive the data of a comment
 	if($data = $receiver -> receive("POST", "name,email,web,rep,cuco,comment", false, true)){
 		$comment = [
-			//"ID" => 0,
 			"PostID" => $data["cuco"],
 			"Parent" => $data["rep"],
 			"Name" => $data["name"],
@@ -42,9 +41,21 @@
 			$comment["Parent"] = 4;
 		}
 
-		if($db -> insert("Comment", $comment)){
-			$template = new Template("{{each comments comment}}", ["comments" => getCommentsFrom($comment["PostID"])]);
-			echo $template -> compile();
+		$post = getPostById($comment["PostID"]);
+		if(!empty($post)){
+			$post = $post[0];
+
+			if($db -> insert("Comment", $comment)){
+				$notification = [
+					"Content" => $comment["Name"]. " (" . $comment["Mail"] .") comentó en " . $post["Title"],
+					"Url" => $post["Url"],
+					"Notifies" => $db -> getPdo() -> lastInsertId(),
+					"Status" => "New"
+				];
+				$db -> insert("Notification", $notification);
+				$template = new Template("{{each comments comment}}", ["comments" => getCommentsFrom($comment["PostID"])]);
+				echo $template -> compile();
+			}
 		}
 	}
 
