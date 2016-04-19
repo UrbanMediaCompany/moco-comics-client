@@ -7,7 +7,7 @@ h1,.h1,h2,.h2,h3,.h3,h4,.h4,h5,.h5,h6,.h6{
 body{
 	background: #FFC107;
 	background: url('../img/admin/back.jpg') 50% 50% no-repeat;
-	background-size: cover; 
+	background-size: cover;
 	height:100vh;
 	width:100%;
 }
@@ -55,6 +55,7 @@ form{
 button{
 	width: 2.5em;
 	height: 2.5em;
+	font-size: 1em;
 	border-radius: 100%;
 	text-align: center;
 	padding: 0;
@@ -78,6 +79,7 @@ input{
 	margin:2em auto;
 	border-bottom: 1px solid #F57F17;
 	color:#333;
+	font-size: 1em;
 }
 .config{
 	width:auto;
@@ -121,28 +123,28 @@ button span:not(.fa){
 /* SD Portrait-specific tablets *(min-width: 700px) and (max-width: 768px) and (orientation: portrait) * */
 @media screen and (min-width: 700px){
 	body{
-		
+
 	}
 
 
-	
+
 }
 
 /* Landscape-specific tablets *(min-width:768px) and (max-width: 1024px) and (orientation: landscape)* */
 @media screen and (min-width:769px){
 	body{
-		
+
 	}
-	
+
 
 }
 /* MD Medium laptops */
 @media screen and (min-width: 1025px){
 	body{
-		
+
 	}
-	
-	
+
+
 
 }
 /* LD Large laptops */
@@ -155,25 +157,25 @@ button span:not(.fa){
 /* XLD Extra-large laptops */
 @media screen and (min-width: 1921px){
 	body{
-		
+
 	}
 }
 
 /* 4K, THAT'S RIGHT BABY! */
 @media screen and (min-width: 3840px){
 	body{
-		
+
 	}
-	
+
 }
 /* 5K, WHAT THE HECK?! */
 @media screen and (min-width: 5120px){
 	body{
-		
+
 	}
 }
 
 /* CSS for Printing */
 @media print{
-	
+
 }

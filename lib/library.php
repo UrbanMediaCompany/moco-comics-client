@@ -3,7 +3,7 @@
 	/* Place Your Functions in here */
 
 	//$db = new Database("moco_comics", "3+3=Aocho", "mococomics", "mysql.moco-comics.com");
-	$db = new Database("root", "", "MocoComics3");
+	$db = new Database("root", "xampp123$", "MocoComics");
 
 	function getAllPosts(){
 		global $db;
