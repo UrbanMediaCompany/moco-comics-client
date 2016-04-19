@@ -14,7 +14,7 @@
 	$session = new Session();
 
 
-	$router = new Router("localhost/MocoComics");
+	$router = new Router("10.48.233.193/MocoComics");
 
 	$meta = [
 		"title" => "Moco-Comics - Monitos de Juanele",

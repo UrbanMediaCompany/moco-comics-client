@@ -188,7 +188,7 @@ $(document).ready(function () {
     });
 
     $(".logout").click(function(){
-        window.location.replace("logout.php");
+        window.location.replace("logout");
     });
 
     $("#sendpost").click(function(){

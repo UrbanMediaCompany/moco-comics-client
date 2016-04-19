@@ -9,5 +9,5 @@
 
 	$session = new Session();
 	$session -> end();
-	header("location:/");
+	header("location:/MocoComics");
 ?>
