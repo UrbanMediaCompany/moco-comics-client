@@ -115,7 +115,7 @@
 		  */
 		public function delete($table, $keyname, $key){
 		    if($sth  = $this -> pdo -> prepare("DELETE FROM `$table` WHERE `$keyname`= ?")){
-		       $sth -> execute(array($key));
+		       return $sth -> execute(array($key));
 		    }
 		}
 

@@ -57,6 +57,17 @@
 		return  $db -> query("SELECT `Name` FROM `Category` WHERE `ID` = ?", [$id])[0]["Name"];
 	}
 
+	function getCharacterDirectory($id){
+		global $db;
+		$character = $db -> query("SELECT `Directory` FROM `Character` WHERE `CategoryID` = ?", [$id]);
+		if(!empty($character)){
+			$character = $character[0]["Directory"];
+		}else{
+			$character = "";
+		}
+		return  $character;
+	}
+
 	function dateToNiceDate($date){
 		setlocale(LC_TIME, "es_MX.UTF-8","es");
 		return ucwords(strftime("%A %e de %B del %Y ",strtotime($date)));

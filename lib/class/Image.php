@@ -74,12 +74,7 @@ class Image extends File{
 	                    ImageDestroy($rotate);
 					}
 					ImageDestroy($images_orig);
-					return true;
-            	}else{
-	            	return false;
-            	}
-            }else{
-	            return false;
+				}
             }
         }
 

@@ -154,14 +154,15 @@ $(document).ready(function () {
     $(".post-class").on("submit","#createpost",function(event) {
         event.preventDefault();
         $("[alt='new-image']").each(function(){
-            var newName="img/Posts/"+$(this).data("name").replace(/[#:íóúáéÍÓÚÁÉ]/g, "").replace(/[ñÑ]/,"n").replace(/[ _]/g,"-");
-            $(this).attr("src",newName);
-            $(this).attr("alt",$(this).data("name"));
+
+            var newName="img/Posts/" + Text.tofriendlyURl($(this).data("name"));
+            $(this).attr("src", newName);
+            $(this).attr("alt", $(this).data("name"));
         });
         var formData= new FormData(this);
         formData.append('post-content', $("[data-post='content']").html());
         $.ajax({ type: "POST", data: formData,
-            url: "lib/deploy.php",
+            url: "deploy.php",
             processData: false,
             contentType: false,
             cache: false,
@@ -254,7 +255,7 @@ $(document).ready(function () {
     $(".items-wrapper").on("submit",".stor",function(event) {
         event.preventDefault();
         $.ajax({ type: "POST", data: new FormData(this),
-            url: "lib/deploy.php",
+            url: "deploy.php",
             processData: false,
             contentType: false,
             cache: false,
@@ -270,7 +271,7 @@ $(document).ready(function () {
     $(".items-wrapper").on("submit","#newstor",function(event) {
         event.preventDefault();
         $.ajax({ type: "POST", data: new FormData(this),
-            url: "lib/deploy.php",
+            url: "deploy.php",
             processData: false,
             contentType: false,
             cache: false,
@@ -284,27 +285,30 @@ $(document).ready(function () {
     $(".characters-wrapper").on("submit",".char",function(event) {
         event.preventDefault();
         $.ajax({ type: "POST", data: new FormData(this),
-            url: "lib/deploy.php",
+            url: "deploy.php",
             processData: false,
             contentType: false,
             cache: false,
             success: function(data){
-                $(".characters-wrapper").html(data);
-                $('[data-color]').each(function(){
-                    var color = $(this).data('color');
-                    $(this).css({background: color});
-   	            });
-                $('.characters-wrapper [data-character]').each(function(){
-                    var active= $(this).css("background-color");
-                    $(this).find('.color').each(function(index){
-                        var children= $(this).find('.new-color');
-                        var children_color= children.css("background-color");
-                        if(active==children_color){
-                            $(this).addClass("active");
-                        }
-                    })
-                })
-                $(this).find("input[type='submit']").text("Actualizado");
+	            if(data.trim() != ""){
+		            $(".characters-wrapper").html(data);
+	                $('[data-color]').each(function(){
+	                    var color = $(this).data('color');
+	                    $(this).css({background: color});
+	   	            });
+	                $('.characters-wrapper [data-character]').each(function(){
+	                    var active= $(this).css("background-color");
+	                    $(this).find('.color').each(function(index){
+	                        var children= $(this).find('.new-color');
+	                        var children_color= children.css("background-color");
+	                        if(active==children_color){
+	                            $(this).addClass("active");
+	                        }
+	                    });
+	                });
+	                $(this).find("input[type='submit']").text("Actualizado");
+		        }
+
             }
         });
         return false;
@@ -313,26 +317,29 @@ $(document).ready(function () {
     $(".characters-wrapper").on("submit","#newchar",function(event) {
         event.preventDefault();
         $.ajax({ type: "POST", data: new FormData(this),
-            url: "lib/deploy.php",
+            url: "deploy.php",
             processData: false,
             contentType: false,
             cache: false,
             success: function(data){
-                $(".characters-wrapper").html(data);
-                $('[data-color]').each(function(){
-                    var color = $(this).data('color');
-                    $(this).css({background: color});
-   	            });
-                $('.characters-wrapper [data-character]').each(function(){
-                    var active= $(this).css("background-color");
-                    $(this).find('.color').each(function(index){
-                        var children= $(this).find('.new-color');
-                        var children_color= children.css("background-color");
-                        if(active==children_color){
-                            $(this).addClass("active");
-                        }
-                    })
-                })
+	            if(data.trim() != ""){
+		            $(".characters-wrapper").html(data);
+	                $('[data-color]').each(function(){
+	                    var color = $(this).data('color');
+	                    $(this).css({background: color});
+	   	            });
+	                $('.characters-wrapper [data-character]').each(function(){
+	                    var active= $(this).css("background-color");
+	                    $(this).find('.color').each(function(index){
+	                        var children= $(this).find('.new-color');
+	                        var children_color= children.css("background-color");
+	                        if(active==children_color){
+	                            $(this).addClass("active");
+	                        }
+	                    })
+	                });
+	            }
+
             }
         });
         return false;
@@ -361,7 +368,7 @@ $(document).ready(function () {
 
     $(".items-wrapper").on("click","[data-action='deletes']",function(){
         if(confirm("¿Seguro que quieres eliminar este producto?")){
-              $.ajax({ type: "POST", url: "lib/deploy.php",data: {"DelStore":$(this).data("id")},
+              $.ajax({ type: "POST", url: "deploy.php",data: {"DelStore":$(this).data("id")},
 				success: function(data){
 
 					$(".items-wrapper").html(data);
