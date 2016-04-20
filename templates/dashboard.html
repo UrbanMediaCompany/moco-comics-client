@@ -176,8 +176,10 @@
 					</div>
 					<div class="message-wrapper">
 						<h4>Mensaje:</h4>
-						<input type="text" name="message" value="{{message}}">
-						<input type="submit" value="Guardar">
+						<form id="messageForm" method="post">
+							<input type="text" name="main-message" value="{{message}}">
+							<input type="submit" value="Guardar">
+						</form>
 					</div>
 					<div class="notification-wrapper clearfix">
                         {{each notification notification}}

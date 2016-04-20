@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     /**
      * Smooth scroll links in page.
      */
@@ -17,6 +18,12 @@ $(document).ready(function () {
 				}
             }
     });
+
+    /**
+	* ==============================
+	* Posts Operations
+	* ==============================
+	*/
 
     $('.new-post').on("change",'.staged',function(){
 	    if (this.files && this.files[0]) {
@@ -179,8 +186,9 @@ $(document).ready(function () {
                 $(".image-preview").attr("src", "img/admin/upload.png");
                 $("div[data-post='inputs']").html("");
 
-                    $(".new-post").hasClass("active") ? $(".new-post").removeClass("active") : $(".new-post").addClass("active");
+                $(".new-post").hasClass("active") ? $(".new-post").removeClass("active") : $(".new-post").addClass("active");
                 $(".posts-wrapper").html(data);
+                $(".lazy").lazyload();
 
             }
         });
@@ -365,6 +373,21 @@ $(document).ready(function () {
         return false;
     });
 
+    $("#messageForm").submit(function(event) {
+        event.preventDefault();
+        $.ajax({ type: "POST", data: new FormData(this),
+            url: "deploy.php",
+            processData: false,
+            contentType: false,
+            cache: false,
+            success: function(data){
+	            	$("#messageForm input[type='submit']").val("Guardado!");
+            }
+
+        });
+        return false;
+    });
+
     $(".items-wrapper").on("click","[data-action='deletes']",function(){
         if(confirm("¿Seguro que quieres eliminar este producto?")){
               $.ajax({ type: "POST", url: "deploy.php",data: {"DelStore":$(this).data("id")},
@@ -387,6 +410,7 @@ $(document).ready(function () {
             $.ajax({ type: "POST", url: "deploy.php",data: {"DelPost":$(this).data("id")},
                     success: function(data){
                         $(".posts-wrapper").html(data);
+                        $(".lazy").lazyload();
                     }
             });
             $(this).text("Eliminado");
