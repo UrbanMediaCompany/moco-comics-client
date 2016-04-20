@@ -770,7 +770,20 @@ input[type="number"]{
 	border: none;
 	max-width: 100%;
 }
+[name="message"]{
+	width: 80%;
+	font-size: 1.1em;
+}
+.message-wrapper{
+	width:95%;
+	height:auto;
+	padding:1em;
+}
 
+.message-wrapper [type="submit"]{
+	padding: 1em;
+	background: #fff;
+}
 
 
 

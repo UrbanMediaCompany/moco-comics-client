@@ -6,9 +6,14 @@
 	$receiver = new DataReceiver();
 
 
+	/**
+	* ==============================
+	* Login Operations
+	* ==============================
+	*/
+
 	// Receive Login Data
 	if($data = $receiver -> receive("POST", "user,password")){
-		global $db;
 
 		$savedPasswords = $db -> query("SELECT `Password` FROM Admin WHERE `Mail` = ?", [$data["user"]]);
 
@@ -21,6 +26,12 @@
 			}
 		}
 	}
+
+	/**
+	* ==============================
+	* Comment Operations
+	* ==============================
+	*/
 
 	// Receive the data of a comment
 	if($data = $receiver -> receive("POST", "name,email,web,rep,cuco,comment", false, true)){
@@ -141,7 +152,7 @@
 	*/
 
 	// Create or update a post
-	if(($data = $receiver -> receive("POST", "post-id,post-category,post-title,post-content,image-input", true, true)) && $session -> get("logged")){
+	if(($data = $receiver -> receive("POST", "post-id,post-category,post-title,post-content,image-input,post-next,post-previous", true, true)) && $session -> get("logged")){
 
 		$directory = getCharacterDirectory($data["post-category"]);
 
@@ -152,8 +163,8 @@
 		}
 
 		$post = [
-			"Next" => 188,
-			"Previous" => 188,
+			"Next" => $data["post-next"],
+			"Previous" => $data["post-previous"],
 			"Title" => $data["post-title"],
 			"Description" => "",
 			"Keywords" => "",
@@ -304,6 +315,7 @@
 	* ==============================
 	*/
 
+	// Update a page information
 	if(($data = $receiver -> receive("POST", "page-content,page-title,page-id", true)) && $session -> get("logged")){
 		$page = [
 			"Title" => $data["page-title"],
@@ -317,4 +329,16 @@
 		}
 	}
 
+	/**
+	* ==============================
+	* Various Operations
+	* ==============================
+	*/
+
+	// Save the main message
+	if(($data = $receiver -> receive("POST", "main-message", true, true)) && $session -> get("logged")){
+		if($db -> update("Setting", ["Value" => $data["main-message"]], "Name", "Message")){
+
+		}
+	}
 ?>

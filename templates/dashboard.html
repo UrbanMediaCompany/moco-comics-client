@@ -81,6 +81,21 @@
 						<select  name="post-category">
                             {{each categories categoryOption}}
 						</select>
+						<div>
+							<label> Anterior:</label>
+							<select  name="post-previous">
+								<option value="188">Ninguno</option>
+	                            {{each posts postOption}}
+							</select>
+						</div>
+						<div>
+							<label> Siguiente:</label>
+							<select  name="post-next">
+								<option value="188">Ninguno</option>
+	                            {{{each posts postOption}}
+							</select>
+						</div>
+
 					</span>
 					<div data-post="title">
 						<input type="text" name="post-title" placeholder="Título del post"/>
@@ -159,7 +174,11 @@
 						</div>
 
 					</div>
-
+					<div class="message-wrapper">
+						<h4>Mensaje:</h4>
+						<input type="text" name="message" value="{{message}}">
+						<input type="submit" value="Guardar">
+					</div>
 					<div class="notification-wrapper clearfix">
                         {{each notification notification}}
 					</div>

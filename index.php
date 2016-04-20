@@ -79,7 +79,8 @@
 					"mostCommentedPost" => getMostCommentedPost(),
 					"numberOfPosts" => countPosts(),
 					"numberOfComments" => countComments(),
-					"topCommenter" => getTopCommenter()
+					"topCommenter" => getTopCommenter(),
+					"message" => getSettingsValue("Message")
 
 				],
 				"notification"  => getNotifications(),

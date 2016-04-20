@@ -1,20 +1,7 @@
 $_ready(function(){
 
-    $_(".nav .menu-icon").click(function(){
-		$_(this).parent().find("ul").toggleClass("active");
-		$_(this).toggleClass('fa-bars fa-times');
-	});
-
-	$_(".nav li").click(function(){
-	    if($_(".menu-icon").isVisible()){
-	      $_(".menu-icon").toggleClass('fa-bars fa-times');
-	      $_(this).parent().parent().find("ul").toggleClass("active");
-	    }
-	});
-
 	(function(){
 		$_(".mailto").each(function(element){
-			console.log(element);
 			var email = element.href.replace("(at)", "@").replace("(dot)", ".");
 			var classes = $_(element).attribute("class");
 
@@ -72,16 +59,16 @@ $_ready(function(){
 
     function getArticleTop(){
 	    $('.blog article').each(function(index){
-		    articleTops[index]= $(this).offset().top - 100;
-	    })
+		    articleTops[index] = $(this).offset().top - 100;
+	    });
     }
 
 	getArticleTop();
 
-    var stickyNav= $('.sd-l-aside-wrapper');
+    var stickyNav = $('.sd-l-aside-wrapper');
     var stickyNavHeight;
 
-    var blogSection= $('.blog');
+    var blogSection = $('.blog');
     var blogSectionHeight;
     var blogSectionTop;
 
@@ -89,20 +76,20 @@ $_ready(function(){
     var stickyNavTop;
 
     $(window).scroll(function(){
-	    var scrolled= $(window).scrollTop();
+	    var scrolled = $(window).scrollTop();
 
-	    stickyNavHeight= stickyNav.height();
-	    blogSectionHeight= blogSection.outerHeight();
-	    stickyMaxScroll= blogSectionHeight - stickyNavHeight + blogSectionTop;
-	    blogSectionTop= blogSection.offset().top
+	    stickyNavHeight = stickyNav.height();
+	    blogSectionHeight = blogSection.outerHeight();
+	    stickyMaxScroll = blogSectionHeight - stickyNavHeight + blogSectionTop;
+	    blogSectionTop = blogSection.offset().top
 
 	    if(scrolled < blogSectionTop + 50){
 		    stickyNavTop= blogSectionTop - scrolled + 50;
 	    }else{
 		    if(stickyMaxScroll -100 > scrolled){
-			    stickyNavTop= 0;
+			    stickyNavTop = 0;
 		    }else{
-			    stickyNavTop= stickyMaxScroll - scrolled -100;
+			    stickyNavTop = stickyMaxScroll - scrolled -100;
 		    }
 	    }
 	    stickyNav.css({top : stickyNavTop});

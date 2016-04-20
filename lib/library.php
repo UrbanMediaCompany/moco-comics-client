@@ -222,4 +222,9 @@
 			return "¡Nuevo Mes!";
 		}
 	}
+
+	function getUpdate(){
+
+	}
+
 ?>

@@ -137,6 +137,8 @@ $(document).ready(function () {
                     $("[data-post='date']").text(data["Date"]);
                     $("[data-post='date']").attr("datetime", data["Date"]);
                     $("[name='post-category']").val(data["CategoryID"]);
+                    $("[name='post-next']").val(data["Next"]);
+                    $("[name='post-previous']").val(data["Previous"]);
                     $(".image-preview").attr("src", data["Image"]);
 
                     $(".new-post").hasClass("active") ? $(".new-post").removeClass("active") : $(".new-post").addClass("active");

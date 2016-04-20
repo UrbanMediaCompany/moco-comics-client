@@ -8,8 +8,4 @@ $(document).ready(function(){
 		});
 		return false;
     });
-
-    $(".settings").click(function(){
-        window.location.replace("mailto:soporte@codify.mx");
-    });
 });
