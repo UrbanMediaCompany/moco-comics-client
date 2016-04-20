@@ -32,7 +32,7 @@
 
 
         private function isImage($index = ""){
-	        if($index == ""){
+	        if($index === ""){
 		        $name = explode(".", $this -> file["name"]);
 		        $extension = end($name);
 		        return in_array($extension,  $this -> allowedExtensions["images"])
@@ -57,18 +57,20 @@
         }
 
         private function isFile($index = ""){
-	        if($index == ""){
-		        $extension = end(explode(".", $this -> file["name"]));
+	        if($index === ""){
+		        $name = explode(".", $this -> file["name"]);
+		        $extension = end($name);
 				return in_array($extension,  $this -> allowedExtensions["files"]);
 	        }else{
-		        $extension = end(explode(".", $this -> file["name"][$index]));
+		        $name = explode(".", $this -> file["name"][$index]);
+		        $extension = end($name);
 				return in_array($extension,  $this -> allowedExtensions["files"]);
 	        }
 
         }
 
         private function validate($index = ""){
-	        if($index == ""){
+	        if($index === ""){
 		         if ($this -> file["error"] > 0 || $this -> file["size"] > $this -> maxSize){
 					return false;
 				}
@@ -130,13 +132,14 @@
 
         public function uploadAll(){
 	        $files = array();
+	        print_r($this -> file);
 			for($i = 0; $i < count($this -> file["name"]); $i++){
+				echo $i;
 				if($this -> validate($i)){
 					$final_name = str_replace($this -> forbiddenCharacters, $this -> allowedCharacters, $this -> file["name"][$i]);
 					$final_name_array = explode(".", $final_name);
 			    	$extension = end($final_name_array);
-			    	$location = $this -> path.$this -> file["name"][$i];
-			    	$location = $location.$final_name;
+			    	$location = $this -> path.$final_name;
 			    	move_uploaded_file($this -> file["tmp_name"][$i], $location);
 					if($this -> file["type"][$i] == "image/jpeg" || $this -> file["type"][$i] == "image/jpg"){
 	                	$this -> fixOrientation($location);

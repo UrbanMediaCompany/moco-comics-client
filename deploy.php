@@ -20,7 +20,6 @@
 				$session -> set("logged", true);
 			}
 		}
-
 	}
 
 	// Receive the data of a comment
@@ -100,7 +99,6 @@
 						}
 		            }
 
-
 				}
             }
 		}
@@ -142,9 +140,11 @@
 	* ==============================
 	*/
 
-	// Create a new post
+	// Create or update a post
 	if(($data = $receiver -> receive("POST", "post-id,post-category,post-title,post-content,image-input", true, true)) && $session -> get("logged")){
+
 		$directory = getCharacterDirectory($data["post-category"]);
+
 		if($directory != ""){
 			$upload = new Upload("image-input",  "img/comics/$directory/");
 		}else{
@@ -169,12 +169,34 @@
 			}
 		}
 
-		if($db -> insert("Post", $post)){
+		if($data["post-id"] == "0" || $data["post-id"] == 0){
+			if($db -> insert("Post", $post)){
+				$template = new Template("{{each posts adminPost}}", ["posts" => getAllPosts()]);
+				echo $template -> compile();
+			}
+		}else{
+			if($db -> update("Post", $post, "ID", $data["post-id"])){
+				$template = new Template("{{each posts adminPost}}", ["posts" => getAllPosts()]);
+				echo $template -> compile();
+			}
+		}
+	}
+
+	// Upload the multiple images of a post's body
+	if(($data = $receiver -> receive("POST", "img-pass")) && $session -> get("logged")){
+		$upload = new Upload("img-pass", "img/Posts/");
+		print_r($upload -> uploadAll());
+	}
+
+	// Delete a post
+	if(($data = $receiver -> receive("POST", "DelPost")) && $session -> get("logged")){
+		if($db -> update("Post", ["Status" => "Deleted"], "ID", $data["DelPost"])){
 			$template = new Template("{{each posts adminPost}}", ["posts" => getAllPosts()]);
 			echo $template -> compile();
 		}
-
 	}
+
+
 
 	// Return the information of a post when asked.
 	if(($data = $receiver -> receive("POST", "postinfo")) && $session -> get("logged")){
@@ -248,6 +270,33 @@
 		}
 	}
 
+	// Add a File to a Product
+	if(($data = $receiver -> receive("POST", "belong,pdf")) && $session -> get("logged")){
+
+		$upload = new Upload("pdf",  "lib/uploads/");
+
+		if($pdf = $upload -> upload()){
+			if($db -> update("Product", ["File" => str_replace("lib/uploads/", "", $pdf)], "ID", $data["belong"])){
+				$template = new Template("{{each fileItems fileOption}}", ["fileItems" => getFileStoreItems()]);
+				echo $template -> compile();
+			}
+
+		}
+	}
+
+	// Send a PDF to a buyer's mail
+	if(($data = $receiver -> receive("POST", "sitem,smail,smessage")) && $session -> get("logged")){
+		$mail = new PHPMailer();
+		$mail -> From = 'noreply@moco-comics.com';
+		$mail -> FromName = 'Moco Comics';
+		$mail -> addAddress($data["smail"]);
+		$mail -> addAttachment("lib/uploads/".$data["sitem"]);
+		$mail -> Subject = 'Tu compra en Moco Comics!';
+		$mail -> Body    = $data["smessage"];
+		if($mail -> send()){
+			echo "sent";
+		}
+	}
 
 	/**
 	* ==============================
@@ -255,8 +304,17 @@
 	* ==============================
 	*/
 
+	if(($data = $receiver -> receive("POST", "page-content,page-title,page-id", true)) && $session -> get("logged")){
+		$page = [
+			"Title" => $data["page-title"],
+			"Content" => $data["page-content"]
+		];
 
+		if($db -> update("Page", $page, "ID", $data["page-id"])){
 
-
+			$template = new Template("{{each pages adminPage}}", ["pages" => getPages()]);
+			echo $template -> compile();
+		}
+	}
 
 ?>

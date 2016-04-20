@@ -136,7 +136,7 @@ $(document).ready(function () {
                     $("[name='post-id']").val(data["ID"]);
                     $("[data-post='date']").text(data["Date"]);
                     $("[data-post='date']").attr("datetime", data["Date"]);
-                    $("[name='post-category']").val(data["Category"]);
+                    $("[name='post-category']").val(data["CategoryID"]);
                     $(".image-preview").attr("src", data["Image"]);
 
                     $(".new-post").hasClass("active") ? $(".new-post").removeClass("active") : $(".new-post").addClass("active");
@@ -155,7 +155,7 @@ $(document).ready(function () {
         event.preventDefault();
         $("[alt='new-image']").each(function(){
 
-            var newName="img/Posts/" + Text.tofriendlyURl($(this).data("name"));
+            var newName = "img/Posts/" + $(this).data("name").replace(/[#:íóúáéÍÓÚÁÉ]/g, "").replace(/[ñÑ]/,"n").replace(/[ _]/g,"-");
             $(this).attr("src", newName);
             $(this).attr("alt", $(this).data("name"));
         });
@@ -173,7 +173,7 @@ $(document).ready(function () {
                 $("[name='post-id']").val(0);
                 $("[data-post='date']").text("");
                 $("[data-post='date']").attr("datetime", "");
-                $("[name='post-category']").val("Random");
+                $("[name='post-category']").val(1);
                 $(".image-preview").attr("src", "img/admin/upload.png");
                 $("div[data-post='inputs']").html("");
 
@@ -183,9 +183,6 @@ $(document).ready(function () {
             }
         });
         return false;
-    });
-    $(".get-support").click(function(){
-        window.location.replace("mailto:soporte@codify.mx");
     });
 
     $(".logout").click(function(){
@@ -245,7 +242,7 @@ $(document).ready(function () {
                 $("[name='post-id']").val(0);
                 $("[data-post='date']").text("");
                 $("[data-post='date']").attr("datetime", "");
-                $("[name='post-category']").val("Random");
+                $("[name='post-category']").val(1);
                 $(".image-preview").attr("src", "");
                 $("div[data-post='inputs']").html("");
 
@@ -348,7 +345,7 @@ $(document).ready(function () {
     $(".double form").submit(function(event) {
         event.preventDefault();
         $.ajax({ type: "POST", data: new FormData(this),
-            url: "lib/deploy.php",
+            url: "deploy.php",
             processData: false,
             contentType: false,
             cache: false,
@@ -358,7 +355,7 @@ $(document).ready(function () {
 	            		this.reset();
             		});
             		$("#so").html(data);
-					}
+				}
 
             }
 
@@ -385,7 +382,7 @@ $(document).ready(function () {
 
     $(".posts-wrapper").on("click","[data-action='deletep']",function(){
         if(confirm("¿Seguro que quieres eliminar este post?")){
-            $.ajax({ type: "POST", url: "lib/deploy.php",data: {"DelPost":$(this).data("id")},
+            $.ajax({ type: "POST", url: "deploy.php",data: {"DelPost":$(this).data("id")},
                     success: function(data){
                         $(".posts-wrapper").html(data);
                     }
@@ -416,14 +413,10 @@ $(document).ready(function () {
 
 
 
-    $(".pages-wrapper").on("submit",".additional-page",function(event) {
+    $(".pages-wrapper").on("submit", ".additional-page",function(event) {
 	 	event.preventDefault();
         	var temp = $(this);
-        	var da = temp.find("textarea");
-        	if(da.val().trim() == ""){
-        		da.val("[EMPTY]");
-        	}
-		$.ajax({ type: "POST", url: "lib/deploy.php", data: temp.serialize(),
+		$.ajax({ type: "POST", url: "deploy.php", data: {"page-title": temp.find("h5").text(), "page-content": temp.find("[name='adescription']").html(), "page-id": temp.find("[name='page-id']").val()},
 				success: function(data){
                     $(".pages-wrapper").html(data.trim());
                     $(".store-button[data-id='"+temp.data("id")+"']").val("Guardado!");
@@ -436,24 +429,6 @@ $(document).ready(function () {
 		return false;
     });
 
-    $(".pages-wrapper").on("submit","#aboutform",function(event) {
-        event.preventDefault();
-        $.ajax({ type: "POST", data: new FormData(this),
-            url: "lib/deploy.php",
-            processData: false,
-            contentType: false,
-            cache: false,
-            success: function(data){
-                $(".pages-wrapper").html(data);
-                $('[data-color]').each(function(){
-                    var color = $(this).data('color');
-                    $(this).css({background: color});
-                });
-                $(".about-button").val("Guardado!");
-            }
-        });
-        return false;
-    });
 
    	$('.add-post, button.cancel').click(function(){
 	   	$(".modal-window.new-post").hasClass("active") ? $(".modal-window.new-post").removeClass("active") : $(".modal-window.new-post").addClass("active")
@@ -463,7 +438,7 @@ $(document).ready(function () {
                 $("[name='post-id']").val(0);
                 $("[data-post='date']").text("");
                 $("[data-post='date']").attr("datetime", "");
-                $("[name='post-category']").val("Random");
+                $("[name='post-category']").val(1);
                 $(".image-preview").attr("src", "");
                 $("div[data-post='inputs']").html("");
    	})
