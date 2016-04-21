@@ -53,7 +53,12 @@
 		        break;
 		}
 
-		echo $error;
+		$mail = new Mail();
+		$mail -> addRecipient("hyuchia@gmail.com");
+		//$mail -> addRecipient("saavedra.f12@gmail.com");
+		$mail -> addHeader("From: Moco Comics Error Handler <noreply@moco-comics.com>");
+		$mail -> setSubject("Error Report");
+		$mail -> setBody($error);
     	return true;
 	}
 
@@ -69,7 +74,12 @@
 	function shutDownFunction() {
 	    $error = error_get_last();
 	    if ($error['type'] == 1) {
-			echo '['.$error["type"].'] '.$error["message"].'\nFatal error on line '.$error["line"].' in file '.$error["file"].'\nPHP ' . PHP_VERSION . ' (' . PHP_OS . ')';
+		    $mail = new Mail();
+			$mail -> addRecipient("hyuchia@gmail.com");
+			//$mail -> addRecipient("saavedra.f12@gmail.com");
+			$mail -> addHeader("From: Moco Comics Error Handler <noreply@moco-comics.com>");
+			$mail -> setSubject("Error Report");
+			$mail -> setBody('['.$error["type"].'] '.$error["message"].'\nFatal error on line '.$error["line"].' in file '.$error["file"].'\nPHP ' . PHP_VERSION . ' (' . PHP_OS . ')');
 			return true;
 	    }
 	}

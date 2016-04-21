@@ -2,12 +2,12 @@
 
 	/* Place Your Functions in here */
 
-	//$db = new Database("moco_comics", "3+3=Aocho", "mococomics", "mysql.moco-comics.com");
-	$db = new Database("root", "", "MocoComics3");
+	//$db = new Database("moco_comics", "3+3=Aocho", "mococomicsdb3", "mysql.moco-comics.com");
+	$db = new Database("root", "", "MocoComics4");
 
 	function getAllPosts(){
 		global $db;
-		$posts = $db -> query("SELECT * FROM `Post` WHERE `Status` = 'Published' OR `Status` = 'Draft' ORDER BY DATE(`Date`) DESC");
+		$posts = $db -> query("SELECT * FROM `Posts` WHERE `Status` = 'Published' OR `Status` = 'Draft' ORDER BY DATE(`Date`) DESC");
 		foreach($posts as $index => $post){
 			$posts[$index]["nice_date"] = dateToNiceDate($post["Date"]);
 		}
@@ -17,12 +17,12 @@
 
 	function getAllPublishedPosts(){
 		global $db;
-		return $db -> query("SELECT * FROM `Post` WHERE `Status` = 'Published' ORDER BY Date(`Date`) DESC");
+		return $db -> query("SELECT * FROM `Posts` WHERE `Status` = 'Published' ORDER BY Date(`Date`) DESC");
 	}
 
 	function countPosts(){
 		global $db;
-		$count = $db -> query("SELECT COUNT(`ID`) AS `Count` FROM `Post` WHERE `Status` = 'Published'");
+		$count = $db -> query("SELECT COUNT(`ID`) AS `Count` FROM `Posts` WHERE `Status` = 'Published'");
 
 		if(!empty($count)){
 			return $count[0]["Count"];
@@ -33,7 +33,7 @@
 
 	function getLatestPost(){
 		global $db;
-		$post = $db -> query("SELECT * FROM `Post` WHERE `Date`IN (SELECT MAX(`Date`) FROM `Post` WHERE `Status` = 'Published')")[0];
+		$post = $db -> query("SELECT * FROM `Posts` WHERE `Date`IN (SELECT MAX(`Date`) FROM `Posts` WHERE `Status` = 'Published')")[0];
 		$post["nice_date"] = dateToNiceDate($post["Date"]);
 		$post["Category"] = categoryToName($post["CategoryID"]);
 		return $post;
@@ -41,7 +41,7 @@
 
 	function getPostsForPage($page){
 		global $db;
-		$query = $db -> query("SELECT * FROM `Post` WHERE `Status` = 'Published' AND `Date` NOT IN (SELECT MAX(`Date`) FROM `Post` WHERE `Status` = 'Published')  ORDER BY Date(`Date`) DESC");
+		$query = $db -> query("SELECT * FROM `Posts` WHERE `Status` = 'Published' AND `Date` NOT IN (SELECT MAX(`Date`) FROM `Posts` WHERE `Status` = 'Published')  ORDER BY Date(`Date`) DESC");
 
 		foreach($query as $index => $post){
 			$query[$index]["nice_date"] = dateToNiceDate($post["Date"]);
@@ -54,12 +54,12 @@
 
 	function categoryToName($id){
 		global $db;
-		return  $db -> query("SELECT `Name` FROM `Category` WHERE `ID` = ?", [$id])[0]["Name"];
+		return  $db -> query("SELECT `Name` FROM `Categories` WHERE `ID` = ?", [$id])[0]["Name"];
 	}
 
 	function getCharacterDirectory($id){
 		global $db;
-		$character = $db -> query("SELECT `Directory` FROM `Character` WHERE `CategoryID` = ?", [$id]);
+		$character = $db -> query("SELECT `Directory` FROM `Characters` WHERE `CategoryID` = ?", [$id]);
 		if(!empty($character)){
 			$character = $character[0]["Directory"];
 		}else{
@@ -75,17 +75,22 @@
 
 	function getSettingsValue($name){
 		global $db;
-		return $db -> query("SELECT `Value` FROM `Setting` WHERE `Name` = ?", [$name])[0]["Value"];
+		return $db -> query("SELECT `Value` FROM `Settings` WHERE `Name` = ?", [$name])[0]["Value"];
 	}
 
 	function getPages(){
 		global $db;
-		return $query = $db -> query("SELECT * FROM `Page`");
+		return $query = $db -> query("SELECT * FROM `Pages`");
+	}
+
+	function getSettings(){
+		global $db;
+		return $query = $db -> query("SELECT * FROM `Settings`");
 	}
 
 	function countComments(){
 		global $db;
-		$count = $db -> query("SELECT COUNT(`ID`) AS `Count` FROM `Comment` WHERE `Mail` NOT IN (SELECT `Mail` FROM `Admin`)");
+		$count = $db -> query("SELECT COUNT(`ID`) AS `Count` FROM `Comments` WHERE `Mail` NOT IN (SELECT `Mail` FROM `Admin`)");
 		if(!empty($count)){
 			return $count[0]["Count"];
 		}else{
@@ -95,7 +100,7 @@
 
 	function getTopCommenter(){
 		global $db;
-		$count = $db -> query("SELECT `Name`, COUNT(`Name`) AS `Ocurrence` FROM `Comment` WHERE MONTH(`Date`) = ? AND YEAR(`Date`)= ? AND `Mail` != 'tamalito@gmail.com' GROUP BY `Name` ORDER BY `Ocurrence` DESC LIMIT 1", [date("m"), date("Y")]);
+		$count = $db -> query("SELECT `Name`, COUNT(`Name`) AS `Ocurrence` FROM `Comments` WHERE MONTH(`Date`) = ? AND YEAR(`Date`)= ? AND `Mail` != 'tamalito@gmail.com' GROUP BY `Name` ORDER BY `Ocurrence` DESC LIMIT 1", [date("m"), date("Y")]);
 		if(!empty($count)){
 			$count = $count[0];
 			if($count["Ocurrence"] > 0){
@@ -110,37 +115,37 @@
 
 	function getCharacters(){
 		global $db;
-		return $db -> selectAllFrom("Character");
+		return $db -> selectAllFrom("Characters");
 	}
 
 	function getProducts(){
 		global $db;
-		return $query = $db -> query("SELECT * FROM `Product`");
+		return $query = $db -> query("SELECT * FROM `Products`");
 	}
 
 	function getStoreItems(){
 		global $db;
-		return $db -> selectAllFrom("Product");
+		return $db -> selectAllFrom("Products");
 	}
 
 	function getFileStoreItems(){
 		global $db;
-		return $db -> query("SELECT * FROM `Product` WHERE `File` IS NOT NULL AND `FILE` != ''");
+		return $db -> query("SELECT * FROM `Products` WHERE `File` IS NOT NULL AND `FILE` != ''");
 	}
 
 	function getNotifications(){
 		global $db;
-		return $db -> query("SELECT * FROM `Notification` WHERE `Status` = 'New' ORDER BY DATE(`Date`) DESC LIMIT 25");
+		return $db -> query("SELECT * FROM `Notifications` WHERE `Status` = 'New' ORDER BY DATE(`Date`) DESC LIMIT 25");
 	}
 
 	function getCategories(){
 		global $db;
-		return $db -> query("SELECT * FROM `Category`");
+		return $db -> query("SELECT * FROM `Categories`");
 	}
 
 	function getPost($url){
 		global $db;
-		$post = $db -> query("SELECT * FROM `Post` WHERE `Url` = ?", [$url]);
+		$post = $db -> query("SELECT * FROM `Posts` WHERE `Url` = ?", [$url]);
 		if(!empty($post)){
 			$post = $post[0];
 			$post["nice_date"] = dateToNiceDate($post["Date"]);
@@ -153,7 +158,7 @@
 
 	function getCommentsFrom($id){
 		global $db;
-		$comments = $db -> query("SELECT * FROM `Comment` WHERE `PostID` = ? AND (`PARENT` IS NULL OR `Parent` = 4)", [$id]);
+		$comments = $db -> query("SELECT * FROM `Comments` WHERE `PostID` = ? AND (`PARENT` IS NULL OR `Parent` = 4)", [$id]);
 		$temp = [];
 		foreach($comments as $comment){
 			$comment["level"] = "main";
@@ -172,13 +177,13 @@
 
 	function getRepliesTo($id){
 		global $db;
-		return $db -> query("SELECT * FROM `Comment` WHERE `Parent` = ? ORDER BY DATE(`Date`) DESC", [$id]);
+		return $db -> query("SELECT * FROM `Comments` WHERE `Parent` = ? ORDER BY DATE(`Date`) DESC", [$id]);
 	}
 
 	function getComicsFromCategory($category){
 		global $db;
-		//$comics = $db -> query("SELECT * FROM `Post` WHERE `CategoryID` = ? ORDER BY DATE(`Date`) DESC", [$category]);
-		$comics = $db -> query("SELECT * FROM `Post`ORDER BY DATE(`Date`) DESC");
+		//$comics = $db -> query("SELECT * FROM `Posts` WHERE `CategoryID` = ? ORDER BY DATE(`Date`) DESC", [$category]);
+		$comics = $db -> query("SELECT * FROM `Posts`ORDER BY DATE(`Date`) DESC");
 		foreach($comics as $index => $comic){
 			$comics[$index]["nice_date"] = dateToNiceDate($comic["Date"]);
 			$comics[$index]["Category"] = explode(" ", categoryToName($comic["CategoryID"]))[0];
@@ -203,12 +208,12 @@
 
 	function getPostById($id){
 		global $db;
-		return $db -> selectAllWhere("Post", "ID", $id);
+		return $db -> selectAllWhere("Posts", "ID", $id);
 	}
 
 	function getMostCommentedPost(){
 		global $db;
-		$count = $db -> query("SELECT `PostID` , COUNT(`PostID`) AS `Ocurrence` FROM `Comment`  WHERE MONTH(`Date`) = ? AND YEAR(`Date`)=? GROUP BY `PostID` ORDER BY `Ocurrence` DESC LIMIT 1;", [date("m"), date("Y")]);
+		$count = $db -> query("SELECT `PostID` , COUNT(`PostID`) AS `Ocurrence` FROM `Comments`  WHERE MONTH(`Date`) = ? AND YEAR(`Date`)=? GROUP BY `PostID` ORDER BY `Ocurrence` DESC LIMIT 1;", [date("m"), date("Y")]);
 		if(!empty($count)){
 			$count = $count[0];
 			$post = $db -> query("SELECT `Title` FROM Post WHERE ID = ?", [$count["PostID"]]);

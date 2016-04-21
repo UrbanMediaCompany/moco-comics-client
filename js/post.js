@@ -20,7 +20,7 @@ $(document).ready(function(){
     var newPostForm= $('.new-comment');
     var newPostButton= $('.add-comment span');
 
-   	$('.add-comment, .respond').click(function(){
+   	$('.add-comment').click(function(){
 	   	if(!newPostForm.hasClass("active")){
 	   		newPostForm.addClass("active");
 	   		newPostButton.attr("class", "fa fa-close");
@@ -31,6 +31,13 @@ $(document).ready(function(){
    	})
 
    $(".comments-wrapper").on("click", ".respond", function(){
+	   	if(!newPostForm.hasClass("active")){
+	   		newPostForm.addClass("active");
+	   		newPostButton.attr("class", "fa fa-close");
+	   	}else{
+		   	newPostForm.removeClass("active");
+		   	newPostButton.attr("class", "fa fa-plus");
+	   	}
         $("input[name='rep']").val($(this).data('parent'));
     });
 

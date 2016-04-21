@@ -40,15 +40,18 @@
 
 				if(copy($this -> details["Route"], $path.$this -> details["File"])){
 		            if($this -> details["Hash"] == md5_file($this -> details["File"])){
-		                $zip = new ZipArchive;
-		                if($zip -> open($data["File"]) === true){
-		                    $zip -> extractTo($path);
-		                    $zip -> close();
-		                    unlink($data["File"]);
-		                    return true;
-		                }else{
-		                    return false;
+		                $zip = new ZipArchive();
+		                if ($zip->setPassword("MySecretPassword")){
+			                if($zip -> open($data["File"]) === true){
+			                    $zip -> extractTo($path);
+			                    $zip -> close();
+			                    unlink($data["File"]);
+			                    return true;
+			                }else{
+			                    return false;
+			                }
 		                }
+
 		            }else{
 		                return false;
 		            }

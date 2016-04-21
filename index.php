@@ -46,7 +46,7 @@
 
         if(!empty($posts)){
 	       $router -> registerRoute("/page/" . $routeParts[2], new View("main", [
-				"header" => ["message" => getSettingsValue("Message")],
+				"header" => ["message" => getSettingsValue("Anuncio")],
 				"featured" => getLatestPost(),
 				"posts" => $posts,
 				"footer" => ["year" => $meta["year"]],
@@ -63,7 +63,7 @@
 
 
 	$router -> registerRoute("/", new View("main", [
-		"header" => ["message" => getSettingsValue("Message")],
+		"header" => ["message" => getSettingsValue("Anuncio")],
 		"featured" => getLatestPost(),
 		"posts" => getPostsForPage($page),
 		"footer" => ["year" => $meta["year"]],
@@ -80,7 +80,7 @@
 					"numberOfPosts" => countPosts(),
 					"numberOfComments" => countComments(),
 					"topCommenter" => getTopCommenter(),
-					"message" => getSettingsValue("Message")
+					"message" => getSettingsValue("Anuncio")
 
 				],
 				"notification"  => getNotifications(),
@@ -88,6 +88,7 @@
 				"posts" => getAllPosts(),
 				"storeItems" => getStoreItems(),
 				"pages" => getPages(),
+				"settings" => getSettings(),
 				"fileItems" => getFileStoreItems(),
 				"categories" => getCategories()
 
@@ -102,7 +103,7 @@
 
 	$router -> registerRoute("/archivo-de-comics", new View("comics",
 		[
-			"header"  => ["message" => getSettingsValue("Message")],
+			"header"  => ["message" => getSettingsValue("Anuncio")],
 			"items" => getCharacters(),
 			"comic" => getComicsFromCategory(2),
 			"footer" => ["year" => $meta["year"]]
@@ -117,7 +118,7 @@
 		"store"  => [
 			"title" => "Tienda"
 		],
-		"header" => ["message" => getSettingsValue("Message")],
+		"header" => ["message" => getSettingsValue("Anuncio")],
 		"products" => getProducts(),
 		"footer" => ["year" => $meta["year"]]
 	], $meta));
@@ -132,7 +133,7 @@
 		$meta["title"] = $page["Title"];
 		$router -> registerRoute("/".$page["Url"], new View("page", ["page"  => $page,
 			"extendedFooter" => ["year" => date("Y")],
-			"header" => ["message" => getSettingsValue("Message")],
+			"header" => ["message" => getSettingsValue("Anuncio")],
 			], $meta));
 	}
 
@@ -146,7 +147,7 @@
 			$router -> registerRoute($router -> getRoute(), new View("fullPost",
 				[
 					"fullPost"  => $post,
-					"header" => ["message" => getSettingsValue("Message")],
+					"header" => ["message" => getSettingsValue("Anuncio")],
 					"comments" => getCommentsFrom($post["ID"]),
 					"extendedFooter" => ["year" => date("Y")]
 				], $meta, "post.php"));

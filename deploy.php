@@ -56,14 +56,14 @@
 		if(!empty($post)){
 			$post = $post[0];
 
-			if($db -> insert("Comment", $comment)){
+			if($db -> insert("Comments", $comment)){
 				$notification = [
 					"Content" => $comment["Name"]. " (" . $comment["Mail"] .") comentó en " . $post["Title"],
 					"Url" => $post["Url"],
 					"Notifies" => $db -> getPdo() -> lastInsertId(),
 					"Status" => "New"
 				];
-				$db -> insert("Notification", $notification);
+				$db -> insert("Notifications", $notification);
 				$template = new Template("{{each comments comment}}", ["comments" => getCommentsFrom($comment["PostID"])]);
 				echo $template -> compile();
 			}
@@ -95,7 +95,7 @@
 			            "Name" => $data["nname"]
 		            ];
 
-		            if($db -> insert("Category", $category)){
+		            if($db -> insert("Categories", $category)){
 			            $character = [
 							"Name" => $data["nname"],
 							"Color" => $data["new-color"],
@@ -104,7 +104,7 @@
 							"CategoryID" => $db -> getPdo() -> lastInsertId()
 						];
 
-						if($db -> insert("Character", $character)){
+						if($db -> insert("Characters", $character)){
 							$template = new Template("{{each characters characterForm}}\r\n{{> newCharacterForm}}", ["characters" => getCharacters()]);
 							echo $template -> compile();
 						}
@@ -132,12 +132,12 @@
 			}
 		}
 
-        if($db -> update("Character", $character, "ID", $data["cid"])){
+        if($db -> update("Characters", $character, "ID", $data["cid"])){
 			$category = [
 	            "Name" => $data["name"]
 	        ];
 
-	        if($db -> update("Category", $category, "ID", $data["caid"])){
+	        if($db -> update("Categories", $category, "ID", $data["caid"])){
 		        $template = new Template("{{each characters characterForm}}\r\n{{> newCharacterForm}}", ["characters" => getCharacters()]);
 				echo $template -> compile();
 		    }
@@ -181,12 +181,12 @@
 		}
 
 		if($data["post-id"] == "0" || $data["post-id"] == 0){
-			if($db -> insert("Post", $post)){
+			if($db -> insert("Posts", $post)){
 				$template = new Template("{{each posts adminPost}}", ["posts" => getAllPosts()]);
 				echo $template -> compile();
 			}
 		}else{
-			if($db -> update("Post", $post, "ID", $data["post-id"])){
+			if($db -> update("Posts", $post, "ID", $data["post-id"])){
 				$template = new Template("{{each posts adminPost}}", ["posts" => getAllPosts()]);
 				echo $template -> compile();
 			}
@@ -201,7 +201,7 @@
 
 	// Delete a post
 	if(($data = $receiver -> receive("POST", "DelPost")) && $session -> get("logged")){
-		if($db -> update("Post", ["Status" => "Deleted"], "ID", $data["DelPost"])){
+		if($db -> update("Posts", ["Status" => "Deleted"], "ID", $data["DelPost"])){
 			$template = new Template("{{each posts adminPost}}", ["posts" => getAllPosts()]);
 			echo $template -> compile();
 		}
@@ -240,7 +240,7 @@
 
 			];
 
-			if($db -> insert("Product", $product)){
+			if($db -> insert("Products", $product)){
 				$template = new Template("{{each storeItems adminStoreItem}}\r\n{{> newStoreItemForm}}", ["storeItems" => getStoreItems()]);
 				echo $template -> compile();
 			}
@@ -266,7 +266,7 @@
 
 		}
 
-		if($db -> update("Product", $product, "ID", $data["sid"])){
+		if($db -> update("Products", $product, "ID", $data["sid"])){
 			$template = new Template("{{each storeItems adminStoreItem}}\r\n{{> newStoreItemForm}}", ["storeItems" => getStoreItems()]);
 			echo $template -> compile();
 		}
@@ -275,7 +275,7 @@
 
 	// Delete a product
 	if(($data = $receiver -> receive("POST", "DelStore")) && $session -> get("logged")){
-		if($db -> delete("Product", "ID", $data["DelStore"])){
+		if($db -> delete("Products", "ID", $data["DelStore"])){
 			$template = new Template("{{each storeItems adminStoreItem}}\r\n{{> newStoreItemForm}}", ["storeItems" => getStoreItems()]);
 			echo $template -> compile();
 		}
@@ -287,7 +287,7 @@
 		$upload = new Upload("pdf",  "lib/uploads/");
 
 		if($pdf = $upload -> upload()){
-			if($db -> update("Product", ["File" => str_replace("lib/uploads/", "", $pdf)], "ID", $data["belong"])){
+			if($db -> update("Products", ["File" => str_replace("lib/uploads/", "", $pdf)], "ID", $data["belong"])){
 				$template = new Template("{{each fileItems fileOption}}", ["fileItems" => getFileStoreItems()]);
 				echo $template -> compile();
 			}
@@ -322,9 +322,29 @@
 			"Content" => $data["page-content"]
 		];
 
-		if($db -> update("Page", $page, "ID", $data["page-id"])){
+		if($db -> update("Pages", $page, "ID", $data["page-id"])){
 
-			$template = new Template("{{each pages adminPage}}", ["pages" => getPages()]);
+			$template = new Template("{{each pages adminPage}}\r\n{{each settings adminSetting}}", ["pages" => getPages(), "settings" => getSettings()]);
+			echo $template -> compile();
+		}
+	}
+
+	/**
+	* ==============================
+	* Settings Operations
+	* ==============================
+	*/
+
+	// Update a page information
+	if(($data = $receiver -> receive("POST", "setting-value,setting-name,setting-id", true)) && $session -> get("logged")){
+		$setting = [
+			"Name" => $data["setting-name"],
+			"Value" => $data["setting-value"]
+		];
+
+		if($db -> update("Settings", $setting, "ID", $data["setting-id"])){
+
+			$template = new Template("{{each pages adminPage}}\r\n{{each settings adminSetting}}", ["pages" => getPages(), "settings" => getSettings()]);
 			echo $template -> compile();
 		}
 	}
@@ -337,7 +357,7 @@
 
 	// Save the main message
 	if(($data = $receiver -> receive("POST", "main-message", true, true)) && $session -> get("logged")){
-		if($db -> update("Setting", ["Value" => $data["main-message"]], "Name", "Message")){
+		if($db -> update("Settings", ["Value" => $data["main-message"]], "Name", "Message")){
 
 		}
 	}

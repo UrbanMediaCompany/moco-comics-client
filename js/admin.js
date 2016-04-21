@@ -226,6 +226,12 @@ $(document).ready(function () {
         return false;
     });
 
+    $(".modify-settings").click(function(){
+	    $(".settings-modal").addClass("active");
+    });
+
+
+
 
     $("[data-update='install']").click(function(){
         $.ajax({ type: "POST", data: {"install":"update"},
@@ -446,6 +452,23 @@ $(document).ready(function () {
 				success: function(data){
                     $(".pages-wrapper").html(data.trim());
                     $(".store-button[data-id='"+temp.data("id")+"']").val("Guardado!");
+                    $('[data-color]').each(function(){
+                        var color = $(this).data('color');
+                        $(this).css({background: color});
+                    });
+				}
+		});
+		return false;
+    });
+
+    $(".pages-wrapper").on("submit", ".setting-form",function(event) {
+	 	event.preventDefault();
+        	var temp = $(this);
+		$.ajax({ type: "POST", url: "deploy.php", data: {"setting-name": temp.find("h5").text(), "setting-value": temp.find("[name='value']").text(), "setting-id": temp.find("[name='setting-id']").val()},
+				success: function(data){
+					 $(".store-button[data-id='"+temp.data("id")+"']").val("Guardado!");
+                    $(".pages-wrapper").html(data.trim());
+
                     $('[data-color]').each(function(){
                         var color = $(this).data('color');
                         $(this).css({background: color});

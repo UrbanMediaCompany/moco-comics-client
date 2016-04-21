@@ -1,11 +1,11 @@
 <header class="clearfix">
 			<div class="container">
-				<h1>Moco-Comics</h1>
+				<h1>Moco-Comics </h1>
 				<div class="user-settings">
 					<img src="img/admin/juanele.jpeg" class="user-avatar">
 					<nav class="settings">
 						<ul>
-							<li><button class="get-support">¿Problemas?</button></li>
+							<!--<li><button class="modify-settings">Configuración</button></li>-->
 							<li><button class="logout">Cerrar sesión</button></li>
 						</ul>
 					</nav>
@@ -59,6 +59,27 @@
 				</div>
 			</div>
 		</section>
+
+		<section class="modal-window settings-modal">
+			<div class="post-class">
+				<div class="form-action clearfix">
+					<button class="cancel pull-left-f"><span class="fa fa-close"></span>Cancelar</button>
+				</div>
+				<div class="modal-content">
+					<h3 data-update="title">Configuración</h3>
+					<div class="configSetting">
+						<h4>Mensaje:</h4>
+						<form id="messageForm" method="post">
+							<input type="text" name="main-message" value="{{message}}">
+							<input type="submit" value="Guardar">
+						</form>
+					</div>
+
+
+				</div>
+			</div>
+		</section>
+
 		<section class="modal-window new-post">
 			<div class="post-class">
 				<div class="form-action clearfix">
@@ -174,13 +195,6 @@
 						</div>
 
 					</div>
-					<div class="message-wrapper">
-						<h4>Mensaje:</h4>
-						<form id="messageForm" method="post">
-							<input type="text" name="main-message" value="{{message}}">
-							<input type="submit" value="Guardar">
-						</form>
-					</div>
 					<div class="notification-wrapper clearfix">
                         {{each notification notification}}
 					</div>
@@ -230,6 +244,7 @@
 				<section data-site="pages">
 					<div class="pages-wrapper">
 						{{each pages adminPage}}
+						{{each settings adminSetting}}
 					</div>
 				</section>
 
