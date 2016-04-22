@@ -40,7 +40,7 @@
 
 		<!-- build:scripts -->
 		<script src="js/aegis.js"></script>
-		<script src="//code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>
+		<script src="//code.jquery.com/jquery-2.2.3.min.js"></script>
 		<script src="js/plugins.js"></script>
 		<script src="js/jquery.fitvids.js"></script>
 		<script src="js/jquery.lazyload.min.js"></script>

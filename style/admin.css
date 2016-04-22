@@ -450,7 +450,7 @@ header{
 	margin:1em auto;
 	cursor: pointer;
 }
-.notification[data-status="new"]::before{
+.notification[data-status="New"]::before{
 	content:'';
 	width:7px;
 	height:7px;

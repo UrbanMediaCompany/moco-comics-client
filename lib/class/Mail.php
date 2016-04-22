@@ -27,7 +27,7 @@
 	    }
 
 	    public function addHeader($header){
-		    if(!in_array($this -> headers, $header)){
+		    if(!in_array($header, $this -> headers)){
 			    array_push($this -> headers, $header."\r\n");
 		    }
 	    }
@@ -43,7 +43,7 @@
 		public function send(){
 			$header = join("", $this -> headers);
 			foreach($this -> recipients as $recipient){
-				mail($recipient, $subject, $body, $header);
+				mail($recipient, $this -> subject, $this -> body, $header);
 			}
 		}
 	}

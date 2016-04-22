@@ -59,6 +59,7 @@
 		$mail -> addHeader("From: Moco Comics Error Handler <noreply@moco-comics.com>");
 		$mail -> setSubject("Error Report");
 		$mail -> setBody($error);
+		$mail -> send();
     	return true;
 	}
 
@@ -80,6 +81,7 @@
 			$mail -> addHeader("From: Moco Comics Error Handler <noreply@moco-comics.com>");
 			$mail -> setSubject("Error Report");
 			$mail -> setBody('['.$error["type"].'] '.$error["message"].'\nFatal error on line '.$error["line"].' in file '.$error["file"].'\nPHP ' . PHP_VERSION . ' (' . PHP_OS . ')');
+			$mail -> send();
 			return true;
 	    }
 	}

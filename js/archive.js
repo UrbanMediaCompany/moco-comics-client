@@ -20,8 +20,8 @@ $(document).ready(function(){
 
    	$('.archive nav a').each(function(){
 	   	var color = $(this).data('color');
-	   	$(this).css({background: color});
-   	})
+	   	$(this).css({"background": color});
+   	});
 
    	var displaying = "Patote";
 
@@ -41,7 +41,7 @@ $(document).ready(function(){
 		   changeComics(newC);
 		   displaying = newC;
 	   	}
-   	})
+   	});
 
     $("#store").submit(function(event) {
 	 	event.preventDefault();

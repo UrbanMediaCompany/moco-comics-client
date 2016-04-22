@@ -5,7 +5,6 @@
 
 	$receiver = new DataReceiver();
 
-
 	/**
 	* ==============================
 	* Login Operations
@@ -57,13 +56,35 @@
 			$post = $post[0];
 
 			if($db -> insert("Comments", $comment)){
-				$notification = [
-					"Content" => $comment["Name"]. " (" . $comment["Mail"] .") comentó en " . $post["Title"],
-					"Url" => $post["Url"],
-					"Notifies" => $db -> getPdo() -> lastInsertId(),
-					"Status" => "New"
-				];
-				$db -> insert("Notifications", $notification);
+				if($data["email"] != "tamalito@gmail.com"){
+					$notification = [
+						"Content" => $comment["Name"]. " (" . $comment["Mail"] .") comentó en " . $post["Title"],
+						"Url" => $post["Url"],
+						"Notifies" => $db -> getPdo() -> lastInsertId(),
+						"Status" => "New"
+					];
+					$db -> insert("Notifications", $notification);
+
+					$mail = new Mail();
+					$mail -> addRecipient("tamalito@gmail.com");
+					$mail -> setSubject($notification["Content"]);
+					$mail -> setBody($notification["Content"]."\nPuedes ver su comentario siguiendo este link: http://www.moco-comics.com/".$post["Url"]);
+					$mail -> addHeader("From: Moco Comics <noreply@moco-comics.com>");
+					$mail -> send();
+
+					if($comment["Parent"] !== 4){
+						$email = getEmailFromComment($comment["Parent"]);
+						if($email != $data["email"]){
+							$mail2 = new Mail();
+							$mail2 -> addRecipient($email);
+							$mail2 -> setSubject($data["name"] . " respondió a tu comentario en " . $post["Title"]);
+							$mail2 -> setBody($notification["Content"]."\nPuedes ver su respuesta siguiendo este link: http://www.moco-comics.com/".$post["Url"]);
+							$mail2 -> addHeader("From: Moco Comics <noreply@moco-comics.com>");
+							$mail2 -> send();
+						}
+					}
+				}
+
 				$template = new Template("{{each comments comment}}", ["comments" => getCommentsFrom($comment["PostID"])]);
 				echo $template -> compile();
 			}
@@ -170,7 +191,6 @@
 			"Keywords" => "",
 			"Status" => "Published",
 			"Content" => $data["post-content"],
-			"Url" => Text::toFriendlyUrl($data["post-title"]),
 			"CategoryID" => $data["post-category"]
 		];
 
@@ -181,6 +201,7 @@
 		}
 
 		if($data["post-id"] == "0" || $data["post-id"] == 0){
+			$post["Url"] = Text::toFriendlyUrl($data["post-title"]);
 			if($db -> insert("Posts", $post)){
 				$template = new Template("{{each posts adminPost}}", ["posts" => getAllPosts()]);
 				echo $template -> compile();
@@ -206,8 +227,6 @@
 			echo $template -> compile();
 		}
 	}
-
-
 
 	// Return the information of a post when asked.
 	if(($data = $receiver -> receive("POST", "postinfo")) && $session -> get("logged")){
@@ -336,15 +355,27 @@
 	*/
 
 	// Update a page information
-	if(($data = $receiver -> receive("POST", "setting-value,setting-name,setting-id", true)) && $session -> get("logged")){
+	if(($data = $receiver -> receive("POST", "setting-value,setting-id", true)) && $session -> get("logged")){
 		$setting = [
-			"Name" => $data["setting-name"],
 			"Value" => $data["setting-value"]
 		];
 
 		if($db -> update("Settings", $setting, "ID", $data["setting-id"])){
 
 			$template = new Template("{{each pages adminPage}}\r\n{{each settings adminSetting}}", ["pages" => getPages(), "settings" => getSettings()]);
+			echo $template -> compile();
+		}
+	}
+
+	/**
+	* ==============================
+	* Notification Operations
+	* ==============================
+	*/
+
+	if(($data = $receiver -> receive("POST", "Notifiying")) && $session -> get("logged")){
+		if($db -> update("Notifications", ["Status" => "Read"], "ID", $data["Notifiying"])){
+			$template = new Template("{{each notification notification}}", ["notification"  => getNotifications()]);
 			echo $template -> compile();
 		}
 	}

@@ -425,11 +425,11 @@ $(document).ready(function () {
     });
 
     $(".notification-wrapper").on("click",".notification",function(){
-        var ur= $(this).data("url");
+        var ur = $(this).data("url");
         var di = $(this).data("id");
-        $(this).data("status","read");
+        $(this).data("status", "Read");
         if(di){
-            $.ajax({ type: "POST", url: "lib/deploy.php", data: {"Notifiying":di},
+            $.ajax({ type: "POST", url: "deploy.php", data: {"Notifiying":di},
 				success: function(data){
                     if(ur){
                         window.open(ur);
@@ -464,7 +464,7 @@ $(document).ready(function () {
     $(".pages-wrapper").on("submit", ".setting-form",function(event) {
 	 	event.preventDefault();
         	var temp = $(this);
-		$.ajax({ type: "POST", url: "deploy.php", data: {"setting-name": temp.find("h5").text(), "setting-value": temp.find("[name='value']").text(), "setting-id": temp.find("[name='setting-id']").val()},
+		$.ajax({ type: "POST", url: "deploy.php", data: {"setting-value": temp.find("[name='value']").text(), "setting-id": temp.find("[name='setting-id']").val()},
 				success: function(data){
 					 $(".store-button[data-id='"+temp.data("id")+"']").val("Guardado!");
                     $(".pages-wrapper").html(data.trim());

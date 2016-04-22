@@ -13,8 +13,7 @@
 	include("lib/aegis.php");
 	$session = new Session();
 
-
-	$router = new Router("localhost/MocoComics");
+	$router = new Router("www.moco-comics.com");
 
 	$meta = [
 		"title" => "Moco-Comics - Monitos de Juanele",
@@ -29,9 +28,7 @@
 		"shareimage" => ""
 	];
 
-
 	$routeParts = explode("/", $router -> getRoute());
-
 
 	$totalPosts = countPosts() - 1;
 
@@ -86,7 +83,7 @@
 				"notification"  => getNotifications(),
 				"characters" => getCharacters(),
 				"posts" => getAllPosts(),
-				"storeItems" => getStoreItems(),
+				"storeItems" => getProducts(),
 				"pages" => getPages(),
 				"settings" => getSettings(),
 				"fileItems" => getFileStoreItems(),
@@ -110,22 +107,15 @@
 
 		], $meta, "archive.php"));
 
-
-	// TODO: Quitar esta y remplazarla por la dínamica de Page (Issue #1)
-
-
 	$router -> registerRoute("/tienda", new View("store", [
 		"store"  => [
-			"title" => "Tienda"
+			"title" => "Tienda",
+			"storeMessage" => getSettingsValue("Tienda")
 		],
 		"header" => ["message" => getSettingsValue("Anuncio")],
 		"products" => getProducts(),
 		"footer" => ["year" => $meta["year"]]
 	], $meta));
-
-
-	// TODO: Registrar las rutas de la tabla Page de la base de datos
-	// Y mandar su información, para lograr
 
 	$pages = getPages();
 
@@ -144,6 +134,7 @@
 		if(!empty($post)){
 			$meta["title"] = $post["Title"];
 			$meta["shareimage"] = $post["Image"];
+			$meta["description"] = $post["Description"];
 			$router -> registerRoute($router -> getRoute(), new View("fullPost",
 				[
 					"fullPost"  => $post,
@@ -161,6 +152,5 @@
 		header('Content-Type: application/xml; charset=utf-8');
 		$router -> registerRoute("/feed", new View(null, ["item" => getFeed()], $meta, "feed.php"));
 	}
-
 	$router -> listen();
 ?>

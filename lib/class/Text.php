@@ -123,7 +123,7 @@
 		    ];
 
 			foreach($expressions as $regex => $replacement){
-				$text = preg_replace("/$regex/", $replacement, $text);
+				$text = preg_replace("/$regex/u", $replacement, $text);
 			}
 
 			return $text;

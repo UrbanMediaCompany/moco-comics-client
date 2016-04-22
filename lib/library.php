@@ -2,8 +2,7 @@
 
 	/* Place Your Functions in here */
 
-	//$db = new Database("moco_comics", "3+3=Aocho", "mococomicsdb3", "mysql.moco-comics.com");
-	$db = new Database("root", "", "MocoComics4");
+	$db = new Database("root", "", "mococomicsdb");
 
 	function getAllPosts(){
 		global $db;
@@ -120,12 +119,7 @@
 
 	function getProducts(){
 		global $db;
-		return $query = $db -> query("SELECT * FROM `Products`");
-	}
-
-	function getStoreItems(){
-		global $db;
-		return $db -> selectAllFrom("Products");
+		return $db -> query("SELECT * FROM `Products` ORDER BY `ID` DESC");
 	}
 
 	function getFileStoreItems(){
@@ -151,6 +145,12 @@
 			$post["nice_date"] = dateToNiceDate($post["Date"]);
 			$post["Category"] = categoryToName($post["CategoryID"]);
 			$post["title_code"] = strtolower(Text::toFriendlyUrl($post["Title"]));
+			$length = strlen($post["Content"]);
+			if($length > 150){
+                $post["Description"]= strip_tags (substr($post["Content"], 0, 150));
+            }else{
+                $post["Description"] = strip_tags ($post["Content"]);
+            }
 		}
 
 		return $post;
@@ -193,8 +193,12 @@
 
 	function getFeed(){
 		global $db;
-		$posts = getPostsForPage(0);
+		$posts = $db -> query("SELECT * FROM `Posts` WHERE `Status` = 'Published' ORDER BY Date(`Date`) DESC");
+		$posts = array_slice($posts, 0, 5);
 		foreach($posts as $index => $post){
+			$posts[$index]["nice_date"] = dateToNiceDate($post["Date"]);
+			$posts[$index]["Category"] = categoryToName($post["CategoryID"]);
+			$posts[$index]["title_code"] = strtolower(Text::toFriendlyUrl($post["Title"]));
 			$length = strlen($post["Content"]);
             if($length > 200){
                 $posts[$index]["Description"]= substr($post["Content"], 0, $length/2);
@@ -216,7 +220,7 @@
 		$count = $db -> query("SELECT `PostID` , COUNT(`PostID`) AS `Ocurrence` FROM `Comments`  WHERE MONTH(`Date`) = ? AND YEAR(`Date`)=? GROUP BY `PostID` ORDER BY `Ocurrence` DESC LIMIT 1;", [date("m"), date("Y")]);
 		if(!empty($count)){
 			$count = $count[0];
-			$post = $db -> query("SELECT `Title` FROM Post WHERE ID = ?", [$count["PostID"]]);
+			$post = $db -> query("SELECT `Title` FROM `Posts` WHERE ID = ?", [$count["PostID"]]);
 			if(!empty($post)){
 				$post = $post[0];
 				return $post["Title"];
@@ -228,8 +232,14 @@
 		}
 	}
 
-	function getUpdate(){
+	function getEmailFromComment($id){
+		global $db;
+		$result = $db -> query("SELECT `Mail` FROM `Comments` WHERE `ID` = ?", [$id]);
+		if(!empty($result)){
+			return $result[0]["Mail"];
+		}else{
+			return "";
+		}
 
 	}
-
 ?>
