@@ -173,7 +173,7 @@
 	*/
 
 	// Create or update a post
-	if(($data = $receiver -> receive("POST", "post-id,post-category,post-title,post-content,image-input,post-next,post-previous", true, true)) && $session -> get("logged")){
+	if(($data = $receiver -> receive("POST", "post-id,post-category,post-title,post-content,image-input", true, true)) && $session -> get("logged")){
 
 		$directory = getCharacterDirectory($data["post-category"]);
 
@@ -184,8 +184,6 @@
 		}
 
 		$post = [
-			"Next" => $data["post-next"],
-			"Previous" => $data["post-previous"],
 			"Title" => $data["post-title"],
 			"Description" => "",
 			"Keywords" => "",

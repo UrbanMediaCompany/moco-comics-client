@@ -31,7 +31,11 @@ class Visitor {
 	}
 
 	public static function getUserAgent(){
-		return $_SERVER['HTTP_USER_AGENT'];
+		if(empty($_SERVER['HTTP_USER_AGENT'])){
+			return "";
+		}else{
+			return $_SERVER['HTTP_USER_AGENT'];
+		}
 	}
 
 	public function validateType($item,$type){
