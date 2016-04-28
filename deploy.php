@@ -199,7 +199,12 @@
 		}
 
 		if($data["post-id"] == "0" || $data["post-id"] == 0){
-			$post["Url"] = Text::toFriendlyUrl($data["post-title"]);
+			if($directory != ""){
+				$post["Url"] = "comic/".Text::toFriendlyUrl($data["post-title"]);
+			}else{
+				$post["Url"] = Text::toFriendlyUrl($data["post-title"]);
+			}
+
 			if($db -> insert("Posts", $post)){
 				$template = new Template("{{each posts adminPost}}", ["posts" => getAllPosts()]);
 				echo $template -> compile();
@@ -258,7 +263,7 @@
 			];
 
 			if($db -> insert("Products", $product)){
-				$template = new Template("{{each storeItems adminStoreItem}}\r\n{{> newStoreItemForm}}", ["storeItems" => getStoreItems()]);
+				$template = new Template("{{each storeItems adminStoreItem}}\r\n{{> newStoreItemForm}}", ["storeItems" => getProducts()]);
 				echo $template -> compile();
 			}
 
@@ -284,7 +289,7 @@
 		}
 
 		if($db -> update("Products", $product, "ID", $data["sid"])){
-			$template = new Template("{{each storeItems adminStoreItem}}\r\n{{> newStoreItemForm}}", ["storeItems" => getStoreItems()]);
+			$template = new Template("{{each storeItems adminStoreItem}}\r\n{{> newStoreItemForm}}", ["storeItems" => getProducts()]);
 			echo $template -> compile();
 		}
 
@@ -293,7 +298,7 @@
 	// Delete a product
 	if(($data = $receiver -> receive("POST", "DelStore")) && $session -> get("logged")){
 		if($db -> delete("Products", "ID", $data["DelStore"])){
-			$template = new Template("{{each storeItems adminStoreItem}}\r\n{{> newStoreItemForm}}", ["storeItems" => getStoreItems()]);
+			$template = new Template("{{each storeItems adminStoreItem}}\r\n{{> newStoreItemForm}}", ["storeItems" => getProducts()]);
 			echo $template -> compile();
 		}
 	}

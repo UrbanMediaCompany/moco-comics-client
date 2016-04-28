@@ -2,7 +2,7 @@
 
 	/* Place Your Functions in here */
 
-	$db = new Database("root", "", "mococomicsdb");
+	$db = new Database("moco_comics", "M0c0C0m1c2D4t4323", "MocoComics");
 
 	function getAllPosts(){
 		global $db;

@@ -13,7 +13,7 @@
 	include("lib/aegis.php");
 	$session = new Session();
 
-	$router = new Router("www.moco-comics.com");
+	$router = new Router("localhost/MocoComics");
 
 	$meta = [
 		"title" => "Moco-Comics - Monitos de Juanele",
