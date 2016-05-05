@@ -7,8 +7,7 @@
 	 * ==============================
 	 */
 
- 	// Uncomment on Production
-    //error_reporting(0);
+    error_reporting(0);
 
 	include("lib/aegis.php");
 	$session = new Session();

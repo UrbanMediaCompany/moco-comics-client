@@ -9,7 +9,7 @@
 		<title>{{title}}</title><!--Up to 60-70 Characters. Optimal Format: Primary Keyword - Secondary Keyword | Brand Name-->
 
 		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
 		<meta name="description" content="{{description}}"><!--Page description. No longer than 155 characters.-->
 		<meta name="keywords" content="{{keywords}}">
 		<meta name="author" content="{{author}}"><!--Name of the author.-->
