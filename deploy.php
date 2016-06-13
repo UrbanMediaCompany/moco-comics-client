@@ -249,7 +249,7 @@
 	*/
 
 	// Create a new product
-	if(($data = $receiver -> receive("POST", "nsimage,nname,pp,nprice")) && $session -> get("logged")){
+	if(($data = $receiver -> receive("POST", "nsimage,nname,pp,nprice", true)) && $session -> get("logged")){
 
 		$upload = new Upload("nsimage",  "img/store/");
 
@@ -271,7 +271,7 @@
 	}
 
 	// Update a product
-	if(($data = $receiver -> receive("POST", "sid,simage,name,pp,price")) && $session -> get("logged")){
+	if(($data = $receiver -> receive("POST", "sid,simage,name,pp,price", true)) && $session -> get("logged")){
 
 		$upload = new Upload("simage",  "img/store/");
 
