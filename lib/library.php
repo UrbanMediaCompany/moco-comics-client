@@ -187,6 +187,7 @@
 		foreach($comics as $index => $comic){
 			$comics[$index]["nice_date"] = dateToNiceDate($comic["Date"]);
 			$comics[$index]["Category"] = explode(" ", categoryToName($comic["CategoryID"]))[0];
+			$comics[$index]["Directory"] = explode(" ", getCharacterDirectory($comic["CategoryID"]))[0];
 		}
 		return $comics;
 	}
