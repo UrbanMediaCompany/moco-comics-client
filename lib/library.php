@@ -183,10 +183,11 @@
 	function getComicsFromCategory($category){
 		global $db;
 		//$comics = $db -> query("SELECT * FROM `Posts` WHERE `CategoryID` = ? ORDER BY DATE(`Date`) DESC", [$category]);
-		$comics = $db -> query("SELECT * FROM `Posts`ORDER BY DATE(`Date`) DESC");
+		$comics = $db -> query("SELECT * FROM `Posts` WHERE `Status` = 'Published' ORDER BY DATE(`Date`) DESC");
 		foreach($comics as $index => $comic){
 			$comics[$index]["nice_date"] = dateToNiceDate($comic["Date"]);
 			$comics[$index]["Category"] = explode(" ", categoryToName($comic["CategoryID"]))[0];
+			$comics[$index]["Directory"] = explode(" ", getCharacterDirectory($comic["CategoryID"]))[0];
 		}
 		return $comics;
 	}

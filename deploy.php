@@ -107,7 +107,7 @@
 
 		if(!file_exists("img/comics/$directory")){
 
-            if(mkdir("img/comics/$directory", 0744)){
+            if(mkdir("img/comics/$directory", 0755)){
 	            $upload = new Upload("nimage",  "img/");
 
 	            if($image = $upload -> upload()){
