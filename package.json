@@ -1,0 +1,22 @@
+{
+  "private": "true",
+  "name": "moco-comics",
+  "version": "4.0.0",
+  "repository": "git@gitlab.com:Codify/moco-comics.git",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "client": "yarn workspace client develop",
+    "server": "yarn workspace server develop",
+    "dev": "concurrently 'yarn server' 'yarn client' --names '📡,🔮' --prefix name"
+  },
+  "volta": {
+    "node": "14.15.0"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "concurrently": "^5.3.0"
+  }
+}
