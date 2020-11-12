@@ -4,24 +4,36 @@
   "version": "1.0.0",
   "description": "A Strapi application",
   "scripts": {
-    "develop": "strapi develop",
+    "dev": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",
-    "strapi": "strapi"
+    "strapi": "strapi",
+    "lint": "eslint . --ignore-path .gitignore",
+    "prettier": "prettier . --ignore-path .gitignore",
+    "check-format": "yarn prettier --list-different",
+    "format": "yarn prettier --write",
+    "validate": "yarn check-format && yarn lint"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.13.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-import": "^2.22.1",
+    "prettier": "^2.1.2"
+  },
   "dependencies": {
+    "knex": "<0.20.0",
+    "sqlite3": "latest",
     "strapi": "3.3.2",
     "strapi-admin": "3.3.2",
-    "strapi-utils": "3.3.2",
-    "strapi-plugin-content-type-builder": "3.3.2",
+    "strapi-connector-bookshelf": "3.3.2",
     "strapi-plugin-content-manager": "3.3.2",
-    "strapi-plugin-users-permissions": "3.3.2",
+    "strapi-plugin-content-type-builder": "3.3.2",
     "strapi-plugin-email": "3.3.2",
     "strapi-plugin-upload": "3.3.2",
-    "strapi-connector-bookshelf": "3.3.2",
-    "knex": "<0.20.0",
-    "sqlite3": "latest"
+    "strapi-plugin-users-permissions": "3.3.2",
+    "strapi-utils": "3.3.2"
   },
   "author": {
     "name": "A Strapi developer"

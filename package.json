@@ -8,9 +8,10 @@
     "packages/*"
   ],
   "scripts": {
-    "client": "yarn workspace client develop",
-    "server": "yarn workspace server develop",
-    "dev": "concurrently 'yarn server' 'yarn client' --names '📡,🔮' --prefix name"
+    "client": "yarn workspace @moco-comics/client dev",
+    "server": "yarn workspace @moco-comics/server dev",
+    "dev": "concurrently 'yarn server' 'yarn client' --names '📡,🔮' --prefix name",
+    "validate": "concurrently 'yarn workspace @moco-comics/server validate' 'yarn workspace @moco-comics/client validate' --names '📡,🔮' --prefix name"
   },
   "volta": {
     "node": "14.15.0"

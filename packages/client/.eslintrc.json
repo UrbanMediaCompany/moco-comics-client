@@ -1,0 +1,29 @@
+{
+  "parser": "vue-eslint-parser",
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "extends": ["plugin:vue/essential", "airbnb-base", "prettier"],
+  "parserOptions": {
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": ["vue", "gridsome"],
+  "rules": {
+    "max-len": ["error", { "code": 120 }],
+    "import/no-unresolved": "warn"
+  },
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [
+          ["~", "./src/"],
+          ["@", "./src/"]
+        ],
+        "extensions": [".vue", ".js"]
+      }
+    }
+  }
+}

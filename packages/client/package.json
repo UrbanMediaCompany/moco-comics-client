@@ -4,10 +4,26 @@
   "version": "1.0.0",
   "scripts": {
     "build": "gridsome build",
-    "develop": "gridsome develop",
-    "explore": "gridsome explore"
+    "dev": "gridsome develop",
+    "explore": "gridsome explore",
+    "lint": "eslint . --ignore-path .gitignore",
+    "prettier": "prettier . --ignore-path .gitignore",
+    "check-format": "yarn prettier --list-different",
+    "format": "yarn prettier --write",
+    "validate": "yarn check-format && yarn lint"
   },
   "dependencies": {
     "gridsome": "^0.7.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.13.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-gridsome": "^1.5.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-vue": "^7.1.0",
+    "prettier": "^2.1.2",
+    "vue-eslint-parser": "^7.1.1"
   }
 }
