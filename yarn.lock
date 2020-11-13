@@ -13667,6 +13667,21 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
+typeface-assistant@^1.1.13:
+  version "1.1.13"
+  resolved "https://registry.yarnpkg.com/typeface-assistant/-/typeface-assistant-1.1.13.tgz#8ca69a4f91082e649ed4e3efcbb7fe2d69e412f4"
+  integrity sha512-jdaHKxTA+8OgGq1dUPWgaNZGFIc0/O4EoL7+407b7mJ2lI9/TD+mxJ9g8PUcLdPm6iQtpFD2TLG+sXPlLYKaPA==
+
+typeface-luckiest-guy@^1.1.13:
+  version "1.1.13"
+  resolved "https://registry.yarnpkg.com/typeface-luckiest-guy/-/typeface-luckiest-guy-1.1.13.tgz#309d9776c3779dc4ae3a413386c9e1559d858c49"
+  integrity sha512-P2Pv6qYCCgpNk3X171px53l3o0fQ0fOk91AD9f6+T7py1ioDJsHsSLbfaOoqa4E4UN6xvb8gb0hlAR5N8jredg==
+
+typeface-paytone-one@^1.1.13:
+  version "1.1.13"
+  resolved "https://registry.yarnpkg.com/typeface-paytone-one/-/typeface-paytone-one-1.1.13.tgz#cfa379a154bd6d9ca56be675c29937a854c659d9"
+  integrity sha512-DbJUz2C45Q6vOoR5VSjmslKWTcovruOZ8vMoePYcI1UYJVQMdd6BxzaFhdDVmJ2YnCWiguX0JcNlQ9zP7Ye+rQ==
+
 ua-parser-js@^0.7.18:
   version "0.7.22"
   resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.22.tgz#960df60a5f911ea8f1c818f3747b99c6e177eae3"

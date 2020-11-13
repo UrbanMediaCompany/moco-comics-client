@@ -14,7 +14,10 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "gridsome": "^0.7.0"
+    "gridsome": "^0.7.0",
+    "typeface-assistant": "^1.1.13",
+    "typeface-luckiest-guy": "^1.1.13",
+    "typeface-paytone-one": "^1.1.13"
   },
   "devDependencies": {
     "eslint": "^7.13.0",
