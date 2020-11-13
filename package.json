@@ -11,13 +11,20 @@
     "client": "yarn workspace @moco-comics/client dev",
     "server": "yarn workspace @moco-comics/server dev",
     "dev": "concurrently 'yarn server' 'yarn client' --names '📡,🔮' --prefix name",
-    "validate": "concurrently 'yarn workspace @moco-comics/server validate' 'yarn workspace @moco-comics/client validate' --names '📡,🔮' --prefix name"
+    "validate": "concurrently 'yarn workspace @moco-comics/server validate' 'yarn workspace @moco-comics/client validate' --names '📡,🔮' --prefix name",
+    "precommit": "concurrently 'yarn workspace @moco-comics/server precommit' 'yarn workspace @moco-comics/client precommit' --names '📡,🔮' --prefix name"
   },
   "volta": {
     "node": "14.15.0"
   },
   "dependencies": {},
   "devDependencies": {
-    "concurrently": "^5.3.0"
+    "concurrently": "^5.3.0",
+    "husky": "^4.3.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn precommit"
+    }
   }
 }

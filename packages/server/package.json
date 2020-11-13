@@ -12,7 +12,8 @@
     "prettier": "prettier . --ignore-path .gitignore",
     "check-format": "yarn prettier --list-different",
     "format": "yarn prettier --write",
-    "validate": "yarn check-format && yarn lint"
+    "validate": "yarn check-format && yarn lint && yarn build",
+    "precommit": "lint-staged"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
@@ -20,6 +21,7 @@
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-import": "^2.22.1",
+    "lint-staged": "^10.5.1",
     "prettier": "^2.1.2"
   },
   "dependencies": {
@@ -45,5 +47,14 @@
     "node": ">=10.16.0 <=14.x.x",
     "npm": ">=6.0.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "lint-staged": {
+    "*.+(js|json)": [
+      "prettier --write",
+      "prettier --list-different"
+    ],
+    "*.js": [
+      "eslint"
+    ]
+  }
 }

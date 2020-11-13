@@ -10,7 +10,8 @@
     "prettier": "prettier . --ignore-path .gitignore",
     "check-format": "yarn prettier --list-different",
     "format": "yarn prettier --write",
-    "validate": "yarn check-format && yarn lint"
+    "validate": "yarn check-format && yarn lint && yarn build",
+    "precommit": "lint-staged"
   },
   "dependencies": {
     "gridsome": "^0.7.0"
@@ -23,7 +24,17 @@
     "eslint-plugin-gridsome": "^1.5.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-vue": "^7.1.0",
+    "lint-staged": "^10.5.1",
     "prettier": "^2.1.2",
     "vue-eslint-parser": "^7.1.1"
+  },
+  "lint-staged": {
+    "*.+(vue|js|json)": [
+      "prettier --write",
+      "prettier --list-different"
+    ],
+    "*.(vue|js)": [
+      "eslint"
+    ]
   }
 }
