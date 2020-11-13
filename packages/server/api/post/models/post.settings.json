@@ -11,19 +11,18 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "Title": {
+    "title": {
       "type": "string",
       "required": true
     },
-    "URL": {
+    "url": {
       "type": "uid",
-      "targetField": "Title",
       "required": true
     },
-    "Content": {
+    "content": {
       "type": "richtext"
     },
-    "Media": {
+    "media": {
       "collection": "file",
       "via": "related",
       "allowedTypes": ["images", "videos"],

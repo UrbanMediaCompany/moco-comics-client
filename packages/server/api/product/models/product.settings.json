@@ -11,27 +11,27 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "Name": {
+    "name": {
       "type": "string",
       "required": true,
       "unique": true
     },
-    "Price": {
+    "price": {
       "required": true,
       "type": "decimal",
       "min": 0
     },
-    "Media": {
+    "media": {
       "model": "file",
       "via": "related",
       "allowedTypes": ["images"],
       "plugin": "upload",
       "required": true
     },
-    "Description": {
+    "description": {
       "type": "text"
     },
-    "Files": {
+    "files": {
       "collection": "file",
       "via": "related",
       "allowedTypes": ["files", "images", "videos"],

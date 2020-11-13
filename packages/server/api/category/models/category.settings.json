@@ -11,19 +11,19 @@
     "draftAndPublish": false
   },
   "attributes": {
-    "Name": {
+    "name": {
       "type": "string",
       "required": true,
       "unique": true
     },
-    "Image": {
+    "image": {
       "model": "file",
       "via": "related",
       "allowedTypes": ["images"],
       "plugin": "upload",
       "required": true
     },
-    "Description": {
+    "description": {
       "type": "text"
     }
   }

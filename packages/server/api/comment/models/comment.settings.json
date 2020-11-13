@@ -11,19 +11,19 @@
     "draftAndPublish": false
   },
   "attributes": {
-    "Content": {
+    "content": {
       "type": "text",
       "required": true
     },
-    "Email": {
+    "email": {
       "type": "email",
       "required": true
     },
-    "Author": {
+    "author": {
       "type": "string",
       "required": true
     },
-    "WebSite": {
+    "website": {
       "type": "string"
     },
     "replies": {
