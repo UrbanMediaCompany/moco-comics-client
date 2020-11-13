@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "comments",
+  "info": {
+    "name": "Comment",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "Content": {
+      "type": "text",
+      "required": true
+    },
+    "Email": {
+      "type": "email",
+      "required": true
+    },
+    "Author": {
+      "type": "string",
+      "required": true
+    },
+    "WebSite": {
+      "type": "string"
+    },
+    "replies": {
+      "collection": "comment"
+    },
+    "post": {
+      "via": "comments",
+      "model": "post"
+    }
+  }
+}

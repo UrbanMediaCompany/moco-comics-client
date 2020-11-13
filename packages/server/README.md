@@ -1,3 +1,3 @@
-# Strapi application
+# Moco-Comics CMS Server
 
-A quick description of your strapi application
+A [Strapi](https://strapi.io) application powering the content management system for Moco-Comics
