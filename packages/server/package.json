@@ -25,6 +25,7 @@
     "prettier": "^2.1.2"
   },
   "dependencies": {
+    "aws-sdk": "^2.793.0",
     "knex": "<0.20.0",
     "pg": "^8.5.1",
     "sqlite3": "latest",
@@ -36,6 +37,7 @@
     "strapi-plugin-email": "3.3.2",
     "strapi-plugin-upload": "3.3.2",
     "strapi-plugin-users-permissions": "3.3.2",
+    "strapi-provider-upload-digital-ocean-spaces": "file:providers/strapi-provider-upload-digital-ocean-spaces",
     "strapi-utils": "3.3.2"
   },
   "author": {
