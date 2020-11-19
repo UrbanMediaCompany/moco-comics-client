@@ -11,7 +11,7 @@ module.exports = ({ env }) => ({
           Bucket: env('S3_BUCKET'),
         },
       },
-      customKey: ({ name, type }) => `${env('S3_KEY')}/${type}/${name}`,
+      customKey: ({ name, type }) => `${type}/${name}`,
     },
   },
 });
