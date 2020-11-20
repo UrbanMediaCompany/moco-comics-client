@@ -1,6 +1,6 @@
 {
   "kind": "collectionType",
-  "collectionName": "categories",
+  "collectionName": "category",
   "info": {
     "name": "Category",
     "description": ""
@@ -15,16 +15,6 @@
       "type": "string",
       "required": true,
       "unique": true
-    },
-    "image": {
-      "model": "file",
-      "via": "related",
-      "allowedTypes": ["images"],
-      "plugin": "upload",
-      "required": true
-    },
-    "description": {
-      "type": "text"
     }
   }
 }

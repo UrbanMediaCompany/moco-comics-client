@@ -1,14 +1,13 @@
 {
   "kind": "collectionType",
-  "collectionName": "product",
+  "collectionName": "character",
   "info": {
-    "name": "Product",
-    "description": ""
+    "name": "Character"
   },
   "options": {
     "increments": true,
     "timestamps": true,
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "attributes": {
     "name": {
@@ -16,12 +15,7 @@
       "required": true,
       "unique": true
     },
-    "price": {
-      "required": true,
-      "type": "decimal",
-      "min": 0
-    },
-    "media": {
+    "image": {
       "model": "file",
       "via": "related",
       "allowedTypes": [
@@ -32,17 +26,6 @@
     },
     "description": {
       "type": "text"
-    },
-    "files": {
-      "collection": "file",
-      "via": "related",
-      "allowedTypes": [
-        "files",
-        "images",
-        "videos"
-      ],
-      "plugin": "upload",
-      "required": false
     }
   }
 }

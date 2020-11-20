@@ -1,6 +1,6 @@
 {
   "kind": "collectionType",
-  "collectionName": "comments",
+  "collectionName": "comment",
   "info": {
     "name": "Comment",
     "description": ""
@@ -26,12 +26,24 @@
     "website": {
       "type": "string"
     },
-    "replies": {
-      "collection": "comment"
+    "replies_to": {
+      "model": "comment"
     },
     "post": {
-      "via": "comments",
       "model": "post"
+    },
+    "gravatar": {
+      "type": "string"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "approved",
+        "not_approved",
+        "deleted"
+      ],
+      "default": "approved",
+      "required": true
     }
   }
 }
