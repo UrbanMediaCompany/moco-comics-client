@@ -8,7 +8,7 @@
   "options": {
     "increments": true,
     "timestamps": true,
-    "draftAndPublish": false
+    "draftAndPublish": true
   },
   "attributes": {
     "content": {
@@ -37,11 +37,7 @@
     },
     "status": {
       "type": "enumeration",
-      "enum": [
-        "approved",
-        "not_approved",
-        "deleted"
-      ],
+      "enum": ["approved", "not_approved", "deleted"],
       "default": "approved",
       "required": true
     }

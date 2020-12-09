@@ -1,7 +1,7 @@
 const AWS = require('aws-sdk');
 
 const resolveFileType = (ext) => {
-  if (['.jpg', '.png', '.gif', '.svg', '.tiff', '.ico', '.dvu'].includes(ext)) return 'image';
+  if (['.jpg', '.jpeg', '.png', '.gif', '.svg', '.tiff', '.ico', '.dvu'].includes(ext)) return 'image';
 
   if (['.mpeg', '.mp4', '.qt', '.wmv', '.avi', '.flv'].includes(ext)) return 'video';
 
