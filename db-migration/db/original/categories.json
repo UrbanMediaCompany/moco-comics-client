@@ -1,0 +1,58 @@
+[
+  {
+    "ID": 1,
+    "Name": "Patote",
+    "Color": "rgb(121,188,50)",
+    "Image": "patote.png",
+    "CategoryID": 2,
+    "Directory": "Patote"
+  },
+  {
+    "ID": 2,
+    "Name": "Borola Y Chocolomo",
+    "Color": "#D5573B",
+    "Image": "chocolomo.png",
+    "CategoryID": 3,
+    "Directory": "Borola"
+  },
+  {
+    "ID": 3,
+    "Name": "Abuela Karateca",
+    "Color": "#DA627D",
+    "Image": "abuela.png",
+    "CategoryID": 4,
+    "Directory": "Abuela"
+  },
+  {
+    "ID": 4,
+    "Name": "Tilinia La Pulga Dentista",
+    "Color": "#3685B5",
+    "Image": "Tilinia-PNG.png",
+    "CategoryID": 5,
+    "Directory": "Tilinia"
+  },
+  {
+    "ID": 5,
+    "Name": "Varios",
+    "Color": "#E6AF2E",
+    "Image": "icon.png",
+    "CategoryID": 6,
+    "Directory": "Varios"
+  },
+  {
+    "ID": 6,
+    "Name": "Extras",
+    "Color": "rgb(57,169,219)",
+    "Image": "Avatar.png",
+    "CategoryID": 7,
+    "Directory": "Extras"
+  },
+  {
+    "ID": 7,
+    "Name": "Chancho",
+    "Color": "rgb(218,98,125)",
+    "Image": "chancho-perfil.png",
+    "CategoryID": 8,
+    "Directory": "Chancho"
+  }
+]

@@ -1,0 +1,82 @@
+[
+  {
+    "ID": 3,
+    "Name": "Alquimista Improvisado (2012)",
+    "Price": 40,
+    "Image": "store/alquimista-portada-chico.jpg",
+    "Paypal": "<form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\" target=\"_top\"> <input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\"> <input type=\"hidden\" name=\"hosted_button_id\" value=\"CMV24V33SGX9N\"> <input type=\"image\" src=\"https://www.paypalobjects.com/en_US/MX/i/btn/btn_buynowCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal - The safer, easier way to pay online!\"> <img alt=\"\" border=\"0\" src=\"https://www.paypalobjects.com/en_US/i/scr/pixel.gif\" width=\"1\" height=\"1\"> </form>",
+    "File": null
+  },
+  {
+    "ID": 4,
+    "Name": "Los Juegos Del Alambre (2013)",
+    "Price": 160,
+    "Image": "store/portada-JPG-chico.jpg",
+    "Paypal": "<form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\" target=\"_top\"> <input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\"> <input type=\"hidden\" name=\"hosted_button_id\" value=\"U43BW2RS9W2RJ\"> <input type=\"image\" src=\"https://www.paypalobjects.com/en_US/MX/i/btn/btn_buynowCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal - The safer, easier way to pay online!\"> <img alt=\"\" border=\"0\" src=\"https://www.paypalobjects.com/en_US/i/scr/pixel.gif\" width=\"1\" height=\"1\"> </form>",
+    "File": null
+  },
+  {
+    "ID": 5,
+    "Name": "La Abuelita Karateka (2014)",
+    "Price": 160,
+    "Image": "store/abueloita-portada-chico.jpg",
+    "Paypal": "<form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\" target=\"_top\"> <input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\"> <input type=\"hidden\" name=\"hosted_button_id\" value=\"6KB7BA54YGWWA\"> <input type=\"image\" src=\"https://www.paypalobjects.com/en_US/MX/i/btn/btn_buynowCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal - The safer, easier way to pay online!\"> <img alt=\"\" border=\"0\" src=\"https://www.paypalobjects.com/en_US/i/scr/pixel.gif\" width=\"1\" height=\"1\"> </form>",
+    "File": null
+  },
+  {
+    "ID": 7,
+    "Name": "De Senilidad (digital Pdf)",
+    "Price": 25,
+    "Image": "store/portada-comic-de-senilidad-CHICO-3.jpg",
+    "Paypal": "<form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\" target=\"_top\"> <input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\"> <input type=\"hidden\" name=\"hosted_button_id\" value=\"F8EWFMR6H2UKY\"> <input type=\"image\" src=\"https://www.paypalobjects.com/en_US/MX/i/btn/btn_buynowCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal - The safer, easier way to pay online!\"> <img alt=\"\" border=\"0\" src=\"https://www.paypalobjects.com/en_US/i/scr/pixel.gif\" width=\"1\" height=\"1\"> </form>",
+    "File": "AbuelitaKarateka-DeSenilidad-2009.pdf"
+  },
+  {
+    "ID": 9,
+    "Name": "Mascotas Chenchas (2016)",
+    "Price": 160,
+    "Image": "store/Portada-chico.jpg",
+    "Paypal": "<form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\" target=\"_top\"> <input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\"> <input type=\"hidden\" name=\"hosted_button_id\" value=\"SYS22YLS5MGPQ\"> <input type=\"image\" src=\"https://www.paypalobjects.com/en_US/MX/i/btn/btn_buynowCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal - The safer, easier way to pay online!\"> <img alt=\"\" border=\"0\" src=\"https://www.paypalobjects.com/en_US/i/scr/pixel.gif\" width=\"1\" height=\"1\"> </form>",
+    "File": null
+  },
+  {
+    "ID": 10,
+    "Name": "Patote (2013)",
+    "Price": 160,
+    "Image": "store/Portada-patote-2013-chico.jpg",
+    "Paypal": "<form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\" target=\"_top\"> <input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\"> <input type=\"hidden\" name=\"hosted_button_id\" value=\"NEDUHU3D8B7JW\"> <input type=\"image\" src=\"https://www.paypalobjects.com/en_US/MX/i/btn/btn_buynowCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal - The safer, easier way to pay online!\"> <img alt=\"\" border=\"0\" src=\"https://www.paypalobjects.com/en_US/i/scr/pixel.gif\" width=\"1\" height=\"1\"> </form>",
+    "File": null
+  },
+  {
+    "ID": 11,
+    "Name": "¡Paquete de 5! (rebajado de $640) ",
+    "Price": 500,
+    "Image": "store/cinco-comics.jpg",
+    "Paypal": "<form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\" target=\"_top\"> <input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\"> <input type=\"hidden\" name=\"hosted_button_id\" value=\"KTXJGNWB84DXS\"> <input type=\"image\" src=\"https://www.paypalobjects.com/en_US/MX/i/btn/btn_buynowCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal - The safer, easier way to pay online!\"> <img alt=\"\" border=\"0\" src=\"https://www.paypalobjects.com/en_US/i/scr/pixel.gif\" width=\"1\" height=\"1\"> </form>",
+    "File": null
+  },
+  {
+    "ID": 12,
+    "Name": " Banquete Familiar (2017)",
+    "Price": 160,
+    "Image": "store/2017-BanqueteFamiliar-chico.jpg",
+    "Paypal": "<form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\" target=\"_top\"> <input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\"> <input type=\"hidden\" name=\"hosted_button_id\" value=\"JLN3YTGVP6WJ8\"> <input type=\"image\" src=\"https://www.paypalobjects.com/en_US/MX/i/btn/btn_buynowCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal - The safer, easier way to pay online!\"> <img alt=\"\" border=\"0\" src=\"https://www.paypalobjects.com/en_US/i/scr/pixel.gif\" width=\"1\" height=\"1\"> </form>",
+    "File": null
+  },
+  {
+    "ID": 13,
+    "Name": "Moquito (2018)",
+    "Price": 160,
+    "Image": "store/2018-Moquito-leyenda-colonial-chico.jpg",
+    "Paypal": "<form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\" target=\"_top\"> <input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\"> <input type=\"hidden\" name=\"hosted_button_id\" value=\"28RLCGCFLRPDS\"> <input type=\"image\" src=\"https://www.paypalobjects.com/en_US/MX/i/btn/btn_buynowCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal - The safer, easier way to pay online!\"> <img alt=\"\" border=\"0\" src=\"https://www.paypalobjects.com/en_US/i/scr/pixel.gif\" width=\"1\" height=\"1\"> </form>",
+    "File": null
+  },
+  {
+    "ID": 14,
+    "Name": "¡Nuevo! El que tranza avanza (2019)",
+    "Price": 160,
+    "Image": "store/Patote-2019-chico.jpg",
+    "Paypal": "<form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\" target=\"_top\"> <input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\"> <input type=\"hidden\" name=\"hosted_button_id\" value=\"K4JAY8X4DPJJU\"> <input type=\"image\" src=\"https://www.paypalobjects.com/en_US/MX/i/btn/btn_buynowCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal - The safer, easier way to pay online!\"> <img alt=\"\" border=\"0\" src=\"https://www.paypalobjects.com/en_US/i/scr/pixel.gif\" width=\"1\" height=\"1\"> </form>",
+    "File": null
+  }
+]

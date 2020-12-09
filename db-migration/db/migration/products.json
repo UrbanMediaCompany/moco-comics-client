@@ -1,0 +1,72 @@
+[
+  {
+    "id": 3,
+    "name": "Alquimista Improvisado (2012)",
+    "price": 40,
+    "media": [96],
+    "files": null
+  },
+  {
+    "id": 4,
+    "name": "Los Juegos Del Alambre (2013)",
+    "price": 160,
+    "media": [25],
+    "files": null
+  },
+  {
+    "id": 5,
+    "name": "La Abuelita Karateka (2014)",
+    "price": 160,
+    "media": [6],
+    "files": null
+  },
+  {
+    "id": 7,
+    "name": "De Senilidad (digital Pdf)",
+    "price": 25,
+    "media": [26],
+    "files": null
+  },
+  {
+    "id": 9,
+    "name": "Mascotas Chenchas (2016)",
+    "price": 160,
+    "media": [24],
+    "files": null
+  },
+  {
+    "id": 10,
+    "name": "Patote (2013)",
+    "price": 160,
+    "media": [16],
+    "files": null
+  },
+  {
+    "id": 11,
+    "name": "¡Paquete de 5! (rebajado de $640) ",
+    "price": 500,
+    "media": [74],
+    "files": null
+  },
+  {
+    "id": 12,
+    "name": " Banquete Familiar (2017)",
+    "price": 160,
+    "media": [153],
+    "files": null
+  },
+  {
+    "id": 13,
+    "name": "Moquito (2018)",
+    "price": 160,
+    "media": [138],
+    "files": null
+  },
+  {
+    "id": 14,
+    "name": "¡Nuevo! El que tranza avanza (2019)",
+    "price": 160,
+    "media": [40],
+    "files": null
+  }
+]
