@@ -1,43 +1,61 @@
 <template>
-  <div class="layout">
-    <header class="header">
-      <strong>
-        <g-link to="/">{{ $static.metadata.siteName }}</g-link>
-      </strong>
-      <nav class="nav">
-        <g-link class="nav__link" to="/">Home</g-link>
-        <g-link class="nav__link" to="/about/">About</g-link>
-      </nav>
-    </header>
+  <div class="bg-mc-grey-100 min-w-full min-h-screen">
+    <nav
+      class="fixed bottom-2 left-2 right-2 rounded-lg bg-white py-1.5 px-3 shadow-sm max-w-screen-xl md:absolute md:bottom-auto md:top-4 md:left-4 md:right-4 md:mx-auto md:bg-transparent md:shadow-none md:flex md:flex-row md:flex-nowrap md:justify-between md:items-center"
+    >
+      <g-link to="/" class="hidden md:block">
+        <g-image src="~/assets/images/logo.png" width="60" immediate quality="100" />
+      </g-link>
+
+      <ul class="flex flex-row flex-nowrap justify-evenly items-center">
+        <li class="md:mr-8">
+          <g-link
+            to="/"
+            class="md:hidden font-display text-sm text-gray-400 hover:text-gray-900 transition-colors duration-300 flex flex-col flex-nowrap items-center md:flex-row md:text-white md:transform md:hover:-rotate-6 md:transition-all"
+            active-class="text-gray-900 hover:text-gray-600 md:text-mc-red"
+          >
+            <HomeIcon />
+            <span class="mt-1 md:mt-0 md:ml-3 md:text-lg">Inicio</span>
+          </g-link>
+        </li>
+        <li class="md:mr-8">
+          <g-link
+            to="/buscar"
+            class="font-display text-sm text-gray-400 hover:text-gray-900 transition-colors duration-300 flex flex-col flex-nowrap items-center md:flex-row md:text-white md:transform md:hover:-rotate-6 md:transition-all"
+            active-class="text-gray-900 hover:text-gray-600 md:text-mc-red"
+          >
+            <SearchIcon />
+            <span class="mt-1 md:mt-0 md:ml-3 md:text-lg">Buscar</span>
+          </g-link>
+        </li>
+        <li>
+          <g-link
+            to="/tienda"
+            class="font-display text-sm text-gray-400 hover:text-gray-900 transition-colors duration-300 flex flex-col flex-nowrap items-center md:flex-row md:text-white md:transform md:hover:-rotate-6 md:transition-all"
+            active-class="text-gray-900 hover:text-gray-600 md:text-mc-red"
+          >
+            <ShopIcon />
+            <span class="mt-1 md:mt-0 md:ml-3 md:text-lg">Tienda</span>
+          </g-link>
+        </li>
+      </ul>
+    </nav>
     <slot />
   </div>
 </template>
 
-<static-query>
-query {
-  metadata {
-    siteName
-  }
-}
-</static-query>
+<script>
+import HomeIcon from '~/assets/icons/home.svg';
+import SearchIcon from '~/assets/icons/search.svg';
+import ShopIcon from '~/assets/icons/shopping-bag.svg';
 
-<style>
-.layout {
-  max-width: 760px;
-  margin: 0 auto;
-  padding-left: 20px;
-  padding-right: 20px;
-}
+export default {
+  components: {
+    HomeIcon,
+    SearchIcon,
+    ShopIcon,
+  },
+};
+</script>
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  height: 80px;
-}
-
-.nav__link {
-  margin-left: 20px;
-}
-</style>
+<style></style>

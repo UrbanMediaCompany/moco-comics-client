@@ -1,25 +1,28 @@
 const plugin = require('tailwindcss/plugin');
+const colors = require('tailwindcss/colors');
 
 module.exports = {
   purge: [],
   darkMode: false,
   theme: {
-    colors: {
-      yellow: {
-        DEFAULT: '#FFC12D',
-        dark: '#EEAA07',
-      },
-      red: {
-        DEFAULT: '#FF695B',
-        dark: '#D84739',
-      },
-    },
     fontFamily: {
       display: '"Paytone One"',
       body: 'Assistant, sans-serif',
       logo: '"Luckiest Guy"',
     },
-    extend: {},
+    extend: {
+      colors: {
+        'mc-yellow': {
+          DEFAULT: '#FFC12D',
+          500: '#EEAA07',
+        },
+        'mc-red': {
+          DEFAULT: '#FF695B',
+          500: '#D84739',
+        },
+        'mc-grey': colors.blueGray,
+      },
+    },
   },
   variants: {
     extend: {},

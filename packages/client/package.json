@@ -33,7 +33,8 @@
     "lint-staged": "^10.5.1",
     "postcss": "^7",
     "prettier": "^2.1.2",
-    "vue-eslint-parser": "^7.1.1"
+    "vue-eslint-parser": "^7.1.1",
+    "vue-svg-loader": "^0.16.0"
   },
   "lint-staged": {
     "*.+(vue|js|json)": [

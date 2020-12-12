@@ -12,7 +12,6 @@
   },
   "plugins": ["vue", "gridsome"],
   "rules": {
-    "max-len": ["error", { "code": 120 }],
     "import/no-unresolved": "warn"
   },
   "settings": {
