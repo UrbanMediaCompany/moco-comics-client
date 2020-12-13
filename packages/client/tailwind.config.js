@@ -8,7 +8,7 @@ module.exports = {
     fontFamily: {
       display: '"Paytone One"',
       body: 'Assistant, sans-serif',
-      logo: '"Luckiest Guy"',
+      cartoon: '"Luckiest Guy"',
     },
     extend: {
       colors: {
@@ -21,6 +21,9 @@ module.exports = {
           500: '#D84739',
         },
         'mc-grey': colors.blueGray,
+      },
+      borderWidth: {
+        6: '6px',
       },
     },
   },
