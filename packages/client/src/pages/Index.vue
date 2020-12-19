@@ -38,13 +38,46 @@
       <h1 class="title font-display opacity-95 uppercase text-white text-7xl mb-6">Moco-Comics</h1>
       <p class="font-cartoon opacity-90 text-white text-xl">Monitos de Juanele</p>
     </header>
+
+    <main
+      class="px-constrained pb-20 -mt-6 relative grid grid-cols-1 gap-20 md:grid-cols-blog justify-items-center justify-evenly"
+    >
+      <Post v-for="post in $page.allStrapiPosts.posts" :key="post.node.id" v-bind="post.node" class="md:col-start-1" />
+    </main>
   </Layout>
 </template>
 
+<page-query>
+  query {
+    allStrapiPosts (sortBy: "published_at", order: DESC, perPage: 10) {
+      totalCount
+      posts: edges {
+        node {
+          id
+          title
+          publishedDate: published_at
+          formattedPublishedDate: published_at(format: "MMMM D, YYYY", locale: "es-MX")
+          content
+          media {
+            id
+            url
+          }
+        }
+      }
+
+    }
+  }
+</page-query>
+
 <script>
+import Post from '~/components/Post';
+
 export default {
   metaInfo: {
     title: 'Moco-Comics | Monitos de Juanele',
+  },
+  components: {
+    Post,
   },
 };
 </script>
