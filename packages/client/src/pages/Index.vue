@@ -1,46 +1,46 @@
 <template>
   <Layout>
-    <header class="hero w-full bg-mc-yellow pt-20 pb-20 text-center md:pt-32">
-      <div class="flex flex-nowrap justify-evenly items-center relative mb-8 max-w-4xl mx-auto">
-        <div class="hidden flex-col flex-nowrap items-center pt-2 md:flex">
-          <div class="w-20 rounded-full border-6 border-white overflow-hidden mb-2">
+    <header class="hero relative w-full bg-mc-yellow pt-28 pb-32 px-constrained text-center overflow-hidden md:pt-44">
+      <div class="flex flex-nowrap justify-evenly items-center relative mb-12 max-w-7xl mx-auto">
+        <div class="hidden flex-col flex-nowrap items-center pt-6 md:flex">
+          <div class="w-40 rounded-full border-6 border-white overflow-hidden mb-4">
             <g-image src="~/assets/images/chocolomo.png" />
           </div>
           <p class="font-cartoon text-white">Chocolomo</p>
         </div>
 
-        <div class="flex flex-col flex-nowrap items-center pt-2">
-          <div class="w-20 rounded-full border-6 border-white overflow-hidden mb-2">
+        <div class="flex flex-col flex-nowrap items-center pt-6">
+          <div class="w-40 rounded-full border-6 border-white overflow-hidden mb-4">
             <g-image src="~/assets/images/patote.png" />
           </div>
           <p class="font-cartoon text-white">Patote</p>
         </div>
 
-        <div class="w-28 rounded-full border-6 border-white overflow-hidden">
+        <div class="w-60 rounded-full border-6 border-white mx-3 overflow-hidden">
           <g-image src="~/assets/images/juanele-cartoon.png" />
         </div>
 
-        <div class="flex flex-col flex-nowrap items-center pt-2">
-          <div class="w-20 rounded-full border-6 border-white overflow-hidden mb-2">
+        <div class="flex flex-col flex-nowrap items-center pt-6">
+          <div class="w-40 rounded-full border-6 border-white overflow-hidden mb-4">
             <g-image src="~/assets/images/cuco.png" />
           </div>
           <p class="font-cartoon text-white">Cuco</p>
         </div>
 
-        <div class="hidden flex-col flex-nowrap items-center pt-2 md:flex">
-          <div class="w-20 rounded-full border-6 border-white overflow-hidden mb-2">
+        <div class="hidden flex-col flex-nowrap items-center pt-6 md:flex">
+          <div class="w-40 rounded-full border-6 border-white overflow-hidden mb-4">
             <g-image src="~/assets/images/abuela.png" />
           </div>
           <p class="font-cartoon text-white">Abuela</p>
         </div>
       </div>
 
-      <h1 class="title font-display opacity-95 uppercase text-white text-7xl mb-6">Moco-Comics</h1>
-      <p class="font-cartoon opacity-90 text-white text-xl">Monitos de Juanele</p>
+      <h1 class="title font-display opacity-95 uppercase text-white text-4xl leading-none mb-12">Moco-Comics</h1>
+      <p class="font-cartoon opacity-90 text-white text-lg">Monitos de Juanele</p>
     </header>
 
     <main
-      class="px-constrained pb-20 -mt-6 relative grid grid-cols-1 gap-20 md:grid-cols-blog justify-items-center justify-evenly"
+      class="px-constrained pb-48 -mt-20 relative grid grid-cols-1 gap-36 md:grid-cols-blog justify-items-center justify-evenly"
     >
       <Post v-for="post in $page.allStrapiPosts.posts" :key="post.node.id" v-bind="post.node" class="md:col-start-1" />
     </main>
@@ -83,31 +83,27 @@ export default {
 </script>
 
 <style>
-.hero {
-  --horizontal-inset: 0.8rem;
-  --constrained-inset: calc((100vw - 1280px) / 2 + var(--horizontal-inset));
-
-  position: relative;
-  padding-left: max(var(--horizontal-inset), var(--constrained-inset));
-  padding-right: max(var(--horizontal-inset), var(--constrained-inset));
-  overflow: hidden;
-}
-
 .hero::before {
   content: '';
   display: block;
   position: absolute;
   top: 0;
-  left: 50%;
-  width: 50rem;
-  height: 50rem;
+  left: 32%;
+  width: max(50rem, 80vw);
+  height: max(80rem, 80vh);
   background-color: #ff695b;
-  transform: translateX(-60%) rotate(20deg);
+  transform: translateX(-50%) rotate(20deg);
   border-top-right-radius: 4rem;
   z-index: 0;
 }
 
 .title {
-  text-shadow: 5px 5px #00000024;
+  text-shadow: 5px 5px #00000042;
+}
+
+@media (min-width: 1280px) {
+  .hero::before {
+    left: 40%;
+  }
 }
 </style>

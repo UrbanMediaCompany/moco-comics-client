@@ -1,13 +1,13 @@
 <template>
   <article class="flex flex-col flex-nowrap items-center">
-    <div v-for="image in media" :key="image.id" class="px-3 mb-3">
-      <g-image :src="image.url" class="w-full max-w-xl border-4 border-black" />
+    <div v-for="image in media" :key="image.id" class="px-6 mb-8">
+      <g-image :src="image.url" class="w-full max-w-5xl border-4 border-black" />
     </div>
 
-    <div class="bg-white p-4 border-t-8 border-mc-grey-300 rounded-lg shadow-sm">
+    <div class="bg-white p-8 border-t-10 border-grey-300 rounded-lg shadow-sm">
       <header class="mb-8">
-        <h2 class="font-display text-3xl mb-2">{{ title }}</h2>
-        <time :datetime="publishedDate" class="font-display text-mc-grey-400">{{
+        <h2 class="font-display text-lg">{{ title }}</h2>
+        <time :datetime="publishedDate" class="font-display text-grey-400">{{
           capitalize(formattedPublishedDate)
         }}</time>
       </header>
