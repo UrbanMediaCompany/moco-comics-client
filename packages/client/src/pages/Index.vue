@@ -98,7 +98,7 @@ export default {
 }
 
 .title {
-  text-shadow: 5px 5px #00000042;
+  text-shadow: 5px 5px var(--mc-color-red-500);
 }
 
 @media (min-width: 1280px) {

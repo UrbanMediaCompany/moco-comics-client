@@ -36,6 +36,7 @@ module.exports = {
       borderWidth: {
         6: '6px',
         10: '10px',
+        14: '14px',
       },
       inset: {
         'sa-3': 'calc(0.75rem + max(env(safe-area-inset-left), env(safe-area-inset-bottom)))',
