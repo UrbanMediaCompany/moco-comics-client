@@ -1,5 +1,5 @@
 <template>
-  <Layout>
+  <SiteLayout>
     <header class="hero relative w-full bg-mc-yellow pt-28 pb-32 px-constrained text-center overflow-hidden md:pt-44">
       <div class="flex flex-nowrap justify-evenly items-center relative mb-12 max-w-7xl mx-auto">
         <div class="hidden flex-col flex-nowrap items-center pt-6 md:flex">
@@ -39,17 +39,15 @@
       <p class="font-cartoon opacity-90 text-white text-lg">Monitos de Juanele</p>
     </header>
 
-    <div
-      class="px-constrained gap-20 md:grid justify-items-center justify-evenly -mt-20 md:grid-cols-blog md:justify-items-start md:pb-64"
-    >
-      <main class="grid grid-cols-1 gap-36 pb-20 relative">
+    <MainLayout>
+      <section class="grid grid-cols-1 gap-36 pb-20 relative">
         <Post
           v-for="post in $page.allStrapiPosts.posts"
           :key="post.node.id"
           v-bind="post.node"
           class="md:col-start-1"
         />
-      </main>
+      </section>
 
       <aside class="pb-48 md:sticky md:-top-4 md:h-min">
         <nav class="mb-10">
@@ -58,7 +56,7 @@
               class="flex justify-center items-center rounded-full bg-mc-red text-white font-cartoon text-center border-b-10 border-mc-red-500 uppercase text-lg p-12 md:p-16"
             >
               Página <br />
-              1 de {{ Math.round($page.allStrapiPosts.totalCount / 5) }}
+              1 de {{ Math.round($page.allStrapiPosts.totalCount / postsPerPage) }}
             </p>
 
             <ul
@@ -118,8 +116,8 @@
           /></a>
         </nav>
       </aside>
-    </div>
-  </Layout>
+    </MainLayout>
+  </SiteLayout>
 </template>
 
 <page-query>
@@ -164,6 +162,11 @@ export default {
     FacebookIcon,
     TwitterIcon,
     InstagramIcon,
+  },
+  data() {
+    return {
+      postsPerPage: process.env.GRIDSOME_POSTS_PER_PAGE,
+    };
   },
 };
 </script>

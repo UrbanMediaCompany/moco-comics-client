@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-mc-grey min-w-full min-h-screen">
+  <div class="bg-mc-grey w-full min-h-screen">
     <nav
       class="fixed bottom-sa-3 left-4 right-4 rounded-lg bg-white py-3 shadow-md z-10 px-constrained md:absolute md:bottom-auto md:top-4 md:left-8 md:right-8 md:bg-transparent md:shadow-none md:flex md:flex-row md:flex-nowrap md:justify-between md:items-center"
     >
