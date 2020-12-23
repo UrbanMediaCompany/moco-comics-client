@@ -1,7 +1,7 @@
 <template>
   <div class="bg-mc-grey min-w-full min-h-screen">
     <nav
-      class="fixed bottom-sa-3 left-4 right-4 rounded-lg bg-white py-3 shadow-md z-10 px-constrained md:absolute md:bottom-auto md:top-8 md:left-8 md:right-8 md:bg-transparent md:shadow-none md:flex md:flex-row md:flex-nowrap md:justify-between md:items-center"
+      class="fixed bottom-sa-3 left-4 right-4 rounded-lg bg-white py-3 shadow-md z-10 px-constrained md:absolute md:bottom-auto md:top-4 md:left-8 md:right-8 md:bg-transparent md:shadow-none md:flex md:flex-row md:flex-nowrap md:justify-between md:items-center"
     >
       <g-link to="/" class="hidden md:block">
         <g-image src="~/assets/images/logo.png" immediate quality="100" class="w-24" />
@@ -44,7 +44,7 @@
     <slot />
 
     <footer class="text-center">
-      <div class="flex flex-col flex-nowrap justify-center items-center md:flex-row md:items-end px-3.5">
+      <div class="flex flex-col flex-nowrap justify-center items-center md:flex-row md:items-end px-3.5 md:pr-20">
         <div
           class="bubble relative w-11/12 max-w-prose bg-mc-red py-12 px-6 mb-10 border-b-10 border-mc-red-500 md:mb-8 md:ml-10"
         >

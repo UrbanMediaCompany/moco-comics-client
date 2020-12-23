@@ -23,6 +23,8 @@ module.exports = {
     extend: {
       colors: {
         'mc-yellow': {
+          100: 'var(--mc-color-yellow-100)',
+          200: 'var(--mc-color-yellow-200)',
           DEFAULT: 'var(--mc-color-yellow)',
           500: 'var(--mc-color-yellow-500)',
         },
@@ -32,6 +34,9 @@ module.exports = {
         },
         'mc-grey': 'var(--mc-color-grey)',
         grey: colors.blueGray,
+        facebook: 'var(--color-facebook)',
+        twitter: 'var(--color-twitter)',
+        instagram: 'var(--color-instagram)',
       },
       borderWidth: {
         6: '6px',
@@ -47,20 +52,33 @@ module.exports = {
       padding: {
         constrained: 'max(1rem, calc((100vw - var(--inline-size-constraint)) / 2 + 1rem))',
       },
+      height: {
+        min: 'min-content',
+      },
+      minWidth: {
+        120: '30rem',
+      },
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      borderWidth: ['last'],
+    },
   },
   plugins: [
     plugin(({ addBase, config }) => {
       addBase({
         ':root': {
+          '--mc-color-yellow-100': '#ffeec7',
+          '--mc-color-yellow-200': '#ffd87a',
           '--mc-color-yellow': '#ffc12d',
           '--mc-color-yellow-500': '#eeaa07',
           '--mc-color-red': '#ff695b',
           '--mc-color-red-500': '#d84739',
           '--mc-color-grey': '#f1f5f9',
+          '--color-facebook': '#415a93',
+          '--color-twitter': '#4aa0ec',
+          '--color-instagram': '#d0426d',
           '--font-family-display': '"Paytone One"',
           '--font-family-body': 'Assistant, sans-serif',
           '--font-family-cartoon': '"Luckiest Guy"',
@@ -87,7 +105,6 @@ module.exports = {
           fontSmoothing: config('theme.fontSmoothing.antialiased'),
           fontFamily: config('theme.fontFamily.body'),
           fontSize: config('theme.fontSize.base'),
-          overflowX: 'hidden',
         },
       });
     }),

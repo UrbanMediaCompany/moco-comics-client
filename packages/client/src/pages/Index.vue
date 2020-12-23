@@ -4,32 +4,32 @@
       <div class="flex flex-nowrap justify-evenly items-center relative mb-12 max-w-7xl mx-auto">
         <div class="hidden flex-col flex-nowrap items-center pt-6 md:flex">
           <div class="w-40 rounded-full border-6 border-white overflow-hidden mb-4">
-            <g-image src="~/assets/images/chocolomo.png" />
+            <g-image src="~/assets/images/chocolomo.png" immediate />
           </div>
           <p class="font-cartoon text-white">Chocolomo</p>
         </div>
 
         <div class="flex flex-col flex-nowrap items-center pt-6">
           <div class="w-40 rounded-full border-6 border-white overflow-hidden mb-4">
-            <g-image src="~/assets/images/patote.png" />
+            <g-image src="~/assets/images/patote.png" immediate />
           </div>
           <p class="font-cartoon text-white">Patote</p>
         </div>
 
         <div class="w-60 rounded-full border-6 border-white mx-3 overflow-hidden">
-          <g-image src="~/assets/images/juanele-cartoon.png" />
+          <g-image src="~/assets/images/juanele-cartoon.png" immediate />
         </div>
 
         <div class="flex flex-col flex-nowrap items-center pt-6">
           <div class="w-40 rounded-full border-6 border-white overflow-hidden mb-4">
-            <g-image src="~/assets/images/cuco.png" />
+            <g-image src="~/assets/images/cuco.png" immediate />
           </div>
           <p class="font-cartoon text-white">Cuco</p>
         </div>
 
         <div class="hidden flex-col flex-nowrap items-center pt-6 md:flex">
           <div class="w-40 rounded-full border-6 border-white overflow-hidden mb-4">
-            <g-image src="~/assets/images/abuela.png" />
+            <g-image src="~/assets/images/abuela.png" immediate />
           </div>
           <p class="font-cartoon text-white">Abuela</p>
         </div>
@@ -39,21 +39,97 @@
       <p class="font-cartoon opacity-90 text-white text-lg">Monitos de Juanele</p>
     </header>
 
-    <main
-      class="px-constrained pb-48 -mt-20 relative grid grid-cols-1 gap-36 md:grid-cols-blog justify-items-center justify-evenly"
+    <div
+      class="px-constrained gap-20 md:grid justify-items-center justify-evenly -mt-20 md:grid-cols-blog md:justify-items-start md:pb-64"
     >
-      <Post v-for="post in $page.allStrapiPosts.posts" :key="post.node.id" v-bind="post.node" class="md:col-start-1" />
-    </main>
+      <main class="grid grid-cols-1 gap-36 pb-20 relative">
+        <Post
+          v-for="post in $page.allStrapiPosts.posts"
+          :key="post.node.id"
+          v-bind="post.node"
+          class="md:col-start-1"
+        />
+      </main>
+
+      <aside class="pb-48 md:sticky md:-top-4 md:h-min">
+        <nav class="mb-10">
+          <div class="flex flex-row flex-nowrap items-center justify-center md:flex-col">
+            <p
+              class="flex justify-center items-center rounded-full bg-mc-red text-white font-cartoon text-center border-b-10 border-mc-red-500 uppercase text-lg p-12 md:p-16"
+            >
+              Página <br />
+              1 de {{ Math.round($page.allStrapiPosts.totalCount / 5) }}
+            </p>
+
+            <ul
+              class="flex flex-col flex-nowrap max-w-min -ml-4 md:flex-row md:ml-0 md:-mt-16 md:max-w-none md:w-full md:justify-center"
+            >
+              <li class="mb-4 md:mb-0 md:mr-12">
+                <g-link
+                  to="/"
+                  class="inline-block bg-mc-yellow text-white p-2 border-b-4 border-r-4 border-mc-yellow-500 transform rotate-6 scale-125 hover:-rotate-6 duration-300"
+                  disabled
+                  ><ChevronLeft
+                /></g-link>
+              </li>
+              <li>
+                <g-link
+                  to="/"
+                  class="inline-block bg-mc-yellow text-white p-2 border-b-4 border-l-4 border-mc-yellow-500 transform -rotate-6 scale-125 hover:-rotate-12 duration-300"
+                  ><ChevronRight
+                /></g-link>
+              </li>
+            </ul>
+          </div>
+
+          <ul class="min-w-120 px-8 py-3 bg-white rounded-xl mt-4 shadow-sm">
+            <li
+              class="font-display text-grey-400 hover:text-black transition-colors py-3 duration-300 border-b-2 border-dotted last:border-0"
+              v-for="post in $page.allStrapiPosts.posts"
+              :key="post.node.id"
+            >
+              <a :href="'#' + post.node.slug">{{ post.node.title }}</a>
+            </li>
+          </ul>
+        </nav>
+
+        <nav
+          class="flex flex-nowrap justify-evenly items-center bg-mc-yellow rounded-xl p-4 border-b-6 border-mc-yellow-500"
+        >
+          <a
+            href="https://facebook.com/MocoComics"
+            rel="noreferrer noopener"
+            class="text-facebook border-2 border-white bg-white rounded-full p-4 transform hover:rotate-12 transition-transform duration-300"
+            ><FacebookIcon
+          /></a>
+
+          <a
+            href="https://twitter.com/juanele_tamal"
+            rel="noreferrer noopener"
+            class="text-twitter border-2 border-white bg-white rounded-full p-4 transform hover:-rotate-12 transition-transform duration-300"
+            ><TwitterIcon
+          /></a>
+
+          <a
+            href="https://instagram.com/juaneletamal"
+            rel="noreferrer noopener"
+            class="text-instagram border-2 border-white bg-white rounded-full p-4 transform hover:rotate-12 transition-transform duration-300"
+            ><InstagramIcon
+          /></a>
+        </nav>
+      </aside>
+    </div>
   </Layout>
 </template>
 
 <page-query>
   query {
-    allStrapiPosts (sortBy: "published_at", order: DESC, perPage: 10) {
+    allStrapiPosts (sortBy: "published_at", order: DESC, perPage: 5) {
       totalCount
       posts: edges {
         node {
           id
+          slug
           title
           publishedDate: published_at
           formattedPublishedDate: published_at(format: "MMMM D, YYYY", locale: "es-MX")
@@ -71,6 +147,11 @@
 
 <script>
 import Post from '~/components/Post';
+import ChevronLeft from '~/assets/icons/chevron-left.svg';
+import ChevronRight from '~/assets/icons/chevron-right.svg';
+import FacebookIcon from '~/assets/icons/facebook.svg';
+import TwitterIcon from '~/assets/icons/twitter.svg';
+import InstagramIcon from '~/assets/icons/instagram.svg';
 
 export default {
   metaInfo: {
@@ -78,6 +159,11 @@ export default {
   },
   components: {
     Post,
+    ChevronLeft,
+    ChevronRight,
+    FacebookIcon,
+    TwitterIcon,
+    InstagramIcon,
   },
 };
 </script>
