@@ -56,7 +56,7 @@
               class="flex justify-center items-center rounded-full bg-mc-red text-white font-cartoon text-center border-b-10 border-mc-red-500 uppercase text-lg p-12 md:p-16"
             >
               Página <br />
-              1 de {{ Math.round($page.allStrapiPosts.totalCount / postsPerPage) }}
+              {{ $context.currentPage }} de {{ $context.totalPages }}
             </p>
 
             <ul
@@ -64,18 +64,34 @@
             >
               <li class="mb-4 md:mb-0 md:mr-12">
                 <g-link
-                  to="/"
+                  v-if="$context.previousPage"
+                  :to="$context.previousPage"
                   class="inline-block bg-mc-yellow text-white p-2 border-b-4 border-r-4 border-mc-yellow-500 transform rotate-6 scale-125 hover:-rotate-6 duration-300"
-                  disabled
-                  ><ChevronLeft
-                /></g-link>
+                >
+                  <ChevronLeft />
+                </g-link>
+
+                <span
+                  v-else
+                  class="inline-block bg-mc-yellow text-mc-yellow-500 p-2 border-b-4 border-r-4 border-mc-yellow-500 transform rotate-6 scale-125 duration-300 cursor-not-allowed"
+                >
+                  <ChevronLeft />
+                </span>
               </li>
               <li>
                 <g-link
-                  to="/"
+                  v-if="$context.nextPage"
+                  :to="$context.nextPage"
                   class="inline-block bg-mc-yellow text-white p-2 border-b-4 border-l-4 border-mc-yellow-500 transform -rotate-6 scale-125 hover:-rotate-12 duration-300"
                   ><ChevronRight
                 /></g-link>
+
+                <span
+                  v-else
+                  class="inline-block bg-mc-yellow text-mc-yellow-500 p-2 border-b-4 border-r-4 border-mc-yellow-500 transform rotate-6 scale-125 duration-300 cursor-not-allowed"
+                >
+                  <ChevronRight />
+                </span>
               </li>
             </ul>
           </div>
@@ -121,9 +137,8 @@
 </template>
 
 <page-query>
-  query {
-    allStrapiPosts (sortBy: "published_at", order: DESC, perPage: 5) {
-      totalCount
+  query ($currentPage: Int!, $postsPerPage: Int!) {
+    allStrapiPosts (sortBy: "published_at", perPage: $postsPerPage, page: $currentPage) {
       posts: edges {
         node {
           id
@@ -162,11 +177,6 @@ export default {
     FacebookIcon,
     TwitterIcon,
     InstagramIcon,
-  },
-  data() {
-    return {
-      postsPerPage: process.env.GRIDSOME_POSTS_PER_PAGE,
-    };
   },
 };
 </script>

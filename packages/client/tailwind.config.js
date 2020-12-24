@@ -23,8 +23,6 @@ module.exports = {
     extend: {
       colors: {
         'mc-yellow': {
-          100: 'var(--mc-color-yellow-100)',
-          200: 'var(--mc-color-yellow-200)',
           DEFAULT: 'var(--mc-color-yellow)',
           500: 'var(--mc-color-yellow-500)',
         },
@@ -69,8 +67,6 @@ module.exports = {
     plugin(({ addBase, config }) => {
       addBase({
         ':root': {
-          '--mc-color-yellow-100': '#ffeec7',
-          '--mc-color-yellow-200': '#ffd87a',
           '--mc-color-yellow': '#ffc12d',
           '--mc-color-yellow-500': '#eeaa07',
           '--mc-color-red': '#ff695b',
