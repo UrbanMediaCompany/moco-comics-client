@@ -1,5 +1,9 @@
 module.exports = {
   siteName: 'Gridsome',
+  siteUrl: 'https://moco-comics.com',
+  metadata: {
+    author: '@juaneletamal',
+  },
   plugins: [
     'gridsome-plugin-tailwindcss',
     {

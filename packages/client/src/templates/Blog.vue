@@ -147,6 +147,9 @@
           publishedDate: published_at
           formattedPublishedDate: published_at(format: "MMMM D, YYYY", locale: "es-MX")
           content
+          characters {
+            name
+          }
           media {
             id
             url
