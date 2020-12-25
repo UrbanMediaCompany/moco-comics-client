@@ -3,6 +3,9 @@ module.exports = {
   siteUrl: 'https://moco-comics.com',
   metadata: {
     author: '@juaneletamal',
+    facebookUrl: 'https://www.facebook.com/MocoComics/',
+    twitterUrl: 'https://twitter.com/JuaneleTamal',
+    instagramUrl: 'https://instagram.com/juaneletamal',
   },
   plugins: [
     'gridsome-plugin-tailwindcss',

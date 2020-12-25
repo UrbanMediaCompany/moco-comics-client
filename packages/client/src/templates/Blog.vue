@@ -111,21 +111,21 @@
           class="flex flex-nowrap justify-evenly items-center bg-mc-yellow rounded-xl p-4 border-b-6 border-mc-yellow-500"
         >
           <a
-            href="https://facebook.com/MocoComics"
+            :href="$page.metadata.facebookUrl"
             rel="noreferrer noopener"
             class="text-facebook border-2 border-white bg-white rounded-full p-4 transform hover:rotate-12 transition-transform duration-300"
             ><FacebookIcon
           /></a>
 
           <a
-            href="https://twitter.com/juanele_tamal"
+            :href="$page.metadata.twitterUrl"
             rel="noreferrer noopener"
             class="text-twitter border-2 border-white bg-white rounded-full p-4 transform hover:-rotate-12 transition-transform duration-300"
             ><TwitterIcon
           /></a>
 
           <a
-            href="https://instagram.com/juaneletamal"
+            :href="$page.metadata.instagramUrl"
             rel="noreferrer noopener"
             class="text-instagram border-2 border-white bg-white rounded-full p-4 transform hover:rotate-12 transition-transform duration-300"
             ><InstagramIcon
@@ -138,6 +138,12 @@
 
 <page-query>
   query ($currentPage: Int!, $postsPerPage: Int!) {
+    metadata {
+      facebookUrl
+      twitterUrl
+      instagramUrl
+    }
+
     allStrapiPosts (sortBy: "published_at", perPage: $postsPerPage, page: $currentPage) {
       posts: edges {
         node {
