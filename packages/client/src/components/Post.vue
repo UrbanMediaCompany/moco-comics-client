@@ -1,5 +1,5 @@
 <template>
-  <article class="flex flex-col flex-nowrap items-center" :id="slug">
+  <article class="flex flex-col flex-nowrap items-center" :data-uuid="id" :id="slug">
     <div v-for="image in media" :key="image.id" class="px-6 mb-8">
       <g-image :src="image.url" class="w-full max-w-5xl border-4 border-black" />
     </div>
@@ -88,6 +88,7 @@ export default {
     CheckIcon,
   },
   props: {
+    observer: IntersectionObserver,
     id: String,
     slug: String,
     title: String,
@@ -102,6 +103,9 @@ export default {
       isClipboardAvailable: Boolean(navigator.clipboard),
       copySuccess: false,
     };
+  },
+  mounted() {
+    this.observer.observe(this.$el);
   },
   methods: {
     capitalize,

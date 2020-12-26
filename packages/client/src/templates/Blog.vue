@@ -44,6 +44,7 @@
         <Post
           v-for="post in $page.allStrapiPosts.posts"
           :key="post.node.id"
+          :observer="observer"
           v-bind="post.node"
           class="md:col-start-1"
         />
@@ -102,7 +103,22 @@
               v-for="post in $page.allStrapiPosts.posts"
               :key="post.node.id"
             >
-              <a :href="'#' + post.node.slug">{{ post.node.title }}</a>
+              <a
+                :href="'#' + post.node.slug"
+                class="group flex flex-nowrap items-center"
+                :class="{ 'is-active': post.node.id === observedPost }"
+              >
+                <g-image
+                  :src="post.node.media[0].url"
+                  alt=""
+                  class="inline-block rounded-md w-16 h-16 object-cover mr-8 border-2 group-hover:border-mc-yellow"
+                  :class="post.node.id === observedPost ? 'border-mc-yellow' : 'border-grey-400'"
+                />
+
+                <span>
+                  {{ post.node.title }}
+                </span>
+              </a>
             </li>
           </ul>
         </nav>
@@ -187,6 +203,33 @@ export default {
     TwitterIcon,
     InstagramIcon,
   },
+  data() {
+    return {
+      observer: null,
+      observedPost: null,
+    };
+  },
+  created() {
+    if (!window.matchMedia) return;
+
+    const { matches } = window.matchMedia('(min-width: 768px)');
+
+    if (!matches) return;
+
+    this.observer = new IntersectionObserver(this.onElementObserved, { root: this.$el, threshold: 0.5 });
+  },
+  beforeDestroy() {
+    this.observer.disconnect();
+  },
+  methods: {
+    onElementObserved(entries) {
+      entries.forEach(({ isIntersecting, target }) => {
+        if (!isIntersecting) return;
+
+        this.observedPost = target.getAttribute('data-uuid');
+      });
+    },
+  },
 };
 </script>
 
@@ -207,6 +250,10 @@ export default {
 
 .title {
   text-shadow: 5px 5px var(--mc-color-red-500);
+}
+
+a.is-active {
+  color: #000;
 }
 
 @media (min-width: 1280px) {
