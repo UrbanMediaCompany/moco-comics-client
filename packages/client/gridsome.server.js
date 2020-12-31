@@ -1,6 +1,28 @@
+const fetch = require('node-fetch');
+
 module.exports = (api) => {
-  api.loadSource(() => {
-    // Use the Data Store API here: https://gridsome.org/docs/data-store-api/
+  api.loadSource(async ({ addCollection, store }) => {
+    const posts = addCollection({ typeName: 'StrapiPosts', dateField: 'created_at' });
+    const comments = addCollection({ typeName: 'StrapiComments', dateField: 'created_at' });
+
+    await fetch(`${process.env.STRAPI_URL}/posts?_limit=1000`)
+      .then((res) => res.json())
+      .then((docs) => docs.forEach((doc) => posts.addNode(doc)));
+
+    await fetch(`${process.env.STRAPI_URL}/comments?_limit=1000`)
+      .then((res) => res.json())
+      .then((docs) =>
+        docs.forEach((doc) => {
+          const node = {
+            ...doc,
+            post: store.createReference('StrapiPosts', doc.post.id),
+          };
+
+          if (doc.replies_to) node.replies_to = store.createReference('StrapiComments', doc.replies_to.id);
+
+          comments.addNode(node);
+        }),
+      );
   });
 
   api.createPages(async ({ graphql, createPage }) => {

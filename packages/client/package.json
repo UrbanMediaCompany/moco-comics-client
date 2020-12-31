@@ -14,11 +14,11 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "@gridsome/source-strapi": "^0.2.0",
     "fontsource-assistant": "^3.1.5",
     "fontsource-luckiest-guy": "^3.1.5",
     "fontsource-paytone-one": "^3.1.5",
     "gridsome": "^0.7.0",
+    "node-fetch": "^2.6.1",
     "showdown": "^1.9.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat"
   },

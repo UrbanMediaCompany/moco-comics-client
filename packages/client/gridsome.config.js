@@ -7,17 +7,7 @@ module.exports = {
     twitterUrl: 'https://twitter.com/JuaneleTamal',
     instagramUrl: 'https://instagram.com/juaneletamal',
   },
-  plugins: [
-    'gridsome-plugin-tailwindcss',
-    {
-      use: '@gridsome/source-strapi',
-      options: {
-        apiURL: process.env.STRAPI_URL,
-        queryLimit: 1000, // Defaults to 100
-        contentTypes: ['posts'],
-      },
-    },
-  ],
+  plugins: ['gridsome-plugin-tailwindcss'],
   chainWebpack: (config) => {
     const svgRule = config.module.rule('svg');
     svgRule.uses.clear();
