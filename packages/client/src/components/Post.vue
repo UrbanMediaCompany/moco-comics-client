@@ -12,7 +12,7 @@
         }}</time>
       </header>
 
-      <section v-html="toHTML(content)" class="text-gray-800 px-8 pb-8"></section>
+      <section v-html="toHTML(content)" class="rich-text text-gray-800 px-8 pb-8"></section>
 
       <section class="flex flex-npwrap justify-evenly items-center px-8 pt-8 pb-12 md:justify-end">
         <a
@@ -149,8 +149,21 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 article {
-  scroll-margin-top: 5rem;
+  scroll-margin-top: 20px;
+  scroll-snap-margin-top: 20px;
+}
+
+.rich-text a {
+  text-decoration: underline;
+  text-decoration-style: double;
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--mc-color-yellow);
+  transition: all 0.3s;
+}
+
+.rich-text p {
+  margin-bottom: 1.6rem;
 }
 </style>
