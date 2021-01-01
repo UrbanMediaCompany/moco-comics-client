@@ -4,7 +4,7 @@
       <g-image :src="image.url" class="w-full max-w-5xl border-4 border-black" />
     </div>
 
-    <div class="w-full bg-white border-t-10 border-grey-300 rounded-lg shadow-sm">
+    <div class="w-full bg-white border-t-10 border-grey-300 rounded-lg shadow-sm overflow-hidden">
       <header class="px-8 pt-8 mb-8">
         <h2 class="font-display text-lg">{{ title }}</h2>
         <time :datetime="publishedDate" class="font-display text-grey-400">{{
@@ -14,7 +14,7 @@
 
       <section v-html="toHTML(content)" class="text-gray-800 px-8 pb-8"></section>
 
-      <section class="flex flex-npwrap justify-evenly items-center px-8 py-8 md:justify-end">
+      <section class="flex flex-npwrap justify-evenly items-center px-8 pt-8 pb-12 md:justify-end">
         <a
           :href="twitterUrl"
           target="_blank"
@@ -58,6 +58,8 @@
           <span>¡Copiado!</span>
         </span>
       </section>
+
+      <CommentsWidget :comments="comments.edges" />
     </div>
   </article>
 </template>
@@ -78,6 +80,7 @@ import FacebookIcon from '~/assets/icons/facebook.svg';
 import TwitterIcon from '~/assets/icons/twitter.svg';
 import ClipboardIcon from '~/assets/icons/clipboard.svg';
 import CheckIcon from '~/assets/icons/check.svg';
+import CommentsWidget from './CommentsWidget';
 
 export default {
   name: 'Post',
@@ -86,6 +89,7 @@ export default {
     TwitterIcon,
     ClipboardIcon,
     CheckIcon,
+    CommentsWidget,
   },
   props: {
     observer: IntersectionObserver,
@@ -97,6 +101,7 @@ export default {
     content: String,
     characters: Array,
     media: Array,
+    comments: Object,
   },
   data() {
     return {
@@ -144,7 +149,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 article {
   scroll-margin-top: 5rem;
 }

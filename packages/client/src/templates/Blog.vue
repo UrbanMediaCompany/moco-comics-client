@@ -176,6 +176,37 @@
             id
             url
           }
+          comments: belongsTo {
+            edges {
+              node {
+                ... on StrapiComments {
+                  id
+                  author
+                  gravatar
+                  content
+                  publishedDate: published_at
+                  formattedPublishedDate: published_at(format: "MMMM D, YYYY", locale: "es-MX")
+                  parent: replies_to {
+                    id
+                  }
+                  replies: belongsTo {
+                    edges {
+                      node {
+                        ... on StrapiComments {
+                          id
+                          author
+                          gravatar
+                          content
+                          publishedDate: published_at
+                          formattedPublishedDate: published_at(format: "MMMM D, YYYY", locale: "es-MX")
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
 

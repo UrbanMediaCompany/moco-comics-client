@@ -31,6 +31,7 @@ module.exports = {
           500: 'var(--mc-color-red-500)',
         },
         'mc-grey': 'var(--mc-color-grey)',
+        'mc-blue': 'var(--mc-color-blue)',
         grey: colors.blueGray,
         facebook: 'var(--color-facebook)',
         twitter: 'var(--color-twitter)',
@@ -56,11 +57,15 @@ module.exports = {
       minWidth: {
         120: '30rem',
       },
+      screens: {
+        xs: '414px',
+      },
     },
   },
   variants: {
     extend: {
       borderWidth: ['last'],
+      margin: ['first'],
     },
   },
   plugins: [
@@ -72,6 +77,7 @@ module.exports = {
           '--mc-color-red': '#ff695b',
           '--mc-color-red-500': '#d84739',
           '--mc-color-grey': '#f1f5f9',
+          '--mc-color-blue': '#5295ff',
           '--color-facebook': '#415a93',
           '--color-twitter': '#4aa0ec',
           '--color-instagram': '#d0426d',
