@@ -149,6 +149,8 @@
         </nav>
       </aside>
     </MainLayout>
+
+    <CommentModal slot="modal" v-if="commentModal.isOpen" />
   </SiteLayout>
 </template>
 
@@ -216,6 +218,7 @@
 
 <script>
 import Post from '~/components/Post';
+import CommentModal from '~/components/CommentModal';
 import ChevronLeft from '~/assets/icons/chevron-left.svg';
 import ChevronRight from '~/assets/icons/chevron-right.svg';
 import FacebookIcon from '~/assets/icons/facebook.svg';
@@ -228,6 +231,7 @@ export default {
   },
   components: {
     Post,
+    CommentModal,
     ChevronLeft,
     ChevronRight,
     FacebookIcon,
@@ -239,6 +243,11 @@ export default {
       observer: null,
       observedPost: null,
     };
+  },
+  computed: {
+    commentModal() {
+      return this.$store.state.commentModal;
+    },
   },
   created() {
     if (!window.matchMedia) return;

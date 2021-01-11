@@ -10,7 +10,6 @@
   "scripts": {
     "client": "yarn workspace @moco-comics/client dev",
     "server": "yarn workspace @moco-comics/server dev",
-    "dev": "concurrently 'yarn server' 'yarn client' --names '📡,🔮' --prefix name",
     "validate": "concurrently 'yarn workspace @moco-comics/server validate' 'yarn workspace @moco-comics/client validate' --names '📡,🔮' --prefix name",
     "precommit": "concurrently 'yarn workspace @moco-comics/server precommit' 'yarn workspace @moco-comics/client precommit' --names '📡,🔮' --prefix name"
   },

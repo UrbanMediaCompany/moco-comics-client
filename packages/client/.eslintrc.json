@@ -12,7 +12,8 @@
   },
   "plugins": ["vue", "gridsome"],
   "rules": {
-    "import/no-unresolved": "warn"
+    "import/no-unresolved": "warn",
+    "no-param-reassign": "off"
   },
   "settings": {
     "import/resolver": {

@@ -105,6 +105,8 @@
         >
       </div>
     </footer>
+
+    <slot name="modal" />
   </div>
 </template>
 

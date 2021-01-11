@@ -49,6 +49,7 @@ module.exports = {
         blog: 'minmax(400px, 640px) min-content',
       },
       padding: {
+        'sa-3': 'calc(0.75rem + max(env(safe-area-inset-left), env(safe-area-inset-bottom)))',
         constrained: 'max(1rem, calc((100vw - var(--inline-size-constraint)) / 2 + 1rem))',
       },
       height: {
@@ -56,6 +57,9 @@ module.exports = {
       },
       minWidth: {
         120: '30rem',
+      },
+      minHeight: {
+        40: '10rem',
       },
       screens: {
         xs: '414px',
@@ -66,6 +70,11 @@ module.exports = {
     extend: {
       borderWidth: ['last'],
       margin: ['first'],
+      backgroundClip: ['hover', 'focus'],
+      backgroundColor: ['checked'],
+      backgroundOpacity: ['checked'],
+      borderColor: ['checked'],
+      borderStyle: ['hover', 'focus', 'focus-within'],
     },
   },
   plugins: [

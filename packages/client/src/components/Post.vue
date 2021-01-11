@@ -59,7 +59,7 @@
         </span>
       </section>
 
-      <CommentsWidget :comments="comments.edges" />
+      <CommentsList :post="{ id: id, title: title, media: media[0] }" :comments="comments.edges" />
     </div>
   </article>
 </template>
@@ -80,7 +80,7 @@ import FacebookIcon from '~/assets/icons/facebook.svg';
 import TwitterIcon from '~/assets/icons/twitter.svg';
 import ClipboardIcon from '~/assets/icons/clipboard.svg';
 import CheckIcon from '~/assets/icons/check.svg';
-import CommentsWidget from './CommentsWidget';
+import CommentsList from './CommentsList';
 
 export default {
   name: 'Post',
@@ -89,7 +89,7 @@ export default {
     TwitterIcon,
     ClipboardIcon,
     CheckIcon,
-    CommentsWidget,
+    CommentsList,
   },
   props: {
     observer: IntersectionObserver,

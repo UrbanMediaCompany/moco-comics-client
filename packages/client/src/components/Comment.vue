@@ -14,6 +14,7 @@
         <p class="col-span-2 text-sm mb-4 text-grey-700">{{ content }}</p>
 
         <button
+          @click="$emit('request-reply', { id: id, author: author, content: content })"
           type="button"
           class="row-start-3 col-start-2 place-self-end flex flex-nowrap items-center font-display text-grey-400 text-sm hover:text-mc-red transition-colors duration-100 xs:row-start-1 xs:self-center"
         >

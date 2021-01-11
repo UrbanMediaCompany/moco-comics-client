@@ -2,7 +2,7 @@
   <div class="px-6 pb-8">
     <!-- Comments banner -->
     <div
-      class="flex flex-col items-center md:flex-row md:items-center md:justify-evenly bg-mc-blue pt-6 pb-4 px-4 rounded-lg md:py-6"
+      class="flex flex-col items-center md:flex-row md:items-center md:justify-evenly bg-mc-blue pt-6 pb-4 px-4 rounded-lg relative md:py-6"
     >
       <div class="flex flex-nowrap justify-between items-start mb-6 md:mb-0">
         <g-image src="~/assets/images/juanele-cartoon.png" alt="" class="w-16 rounded-full bg-white mr-6" />
@@ -13,6 +13,7 @@
       </div>
 
       <button
+        @click="$store.dispatch({ type: 'openCommentModal', payload: { post: post } })"
         type="button"
         class="self-end flex flex-nowrap items-center font-display text-white px-4 rounded pb-1 text-sm transform hover:rotate-3 transition-transform duration-200 md:self-auto"
       >
@@ -21,9 +22,10 @@
       </button>
     </div>
 
-    <!-- Actual comments -->
+    <!-- Comments list -->
     <section>
       <Comment
+        @request-reply="$store.dispatch({ type: 'openCommentModal', payload: { post: post, comment: $event } })"
         v-for="comment in topLevelComments"
         v-bind="comment"
         :replies="comment.replies.edges"
@@ -38,12 +40,13 @@ import CommentIcon from '~/assets/icons/message-circle.svg';
 import Comment from './Comment';
 
 export default {
-  name: 'CommentsWidget',
+  name: 'CommentsList',
   components: {
     CommentIcon,
     Comment,
   },
   props: {
+    post: Object,
     comments: Array,
   },
   computed: {
@@ -53,3 +56,9 @@ export default {
   },
 };
 </script>
+
+<style>
+.checkbox:checked {
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='black' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
+}
+</style>

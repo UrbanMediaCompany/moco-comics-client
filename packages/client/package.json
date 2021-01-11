@@ -20,7 +20,8 @@
     "gridsome": "^0.7.0",
     "node-fetch": "^2.6.1",
     "showdown": "^1.9.1",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat"
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+    "vuex": "^3.6.0"
   },
   "devDependencies": {
     "autoprefixer": "^9",
