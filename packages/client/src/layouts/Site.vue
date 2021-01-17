@@ -32,7 +32,7 @@
           <g-link
             to="/tienda"
             class="font-display text-sm text-gray-400 hover:text-gray-900 transition-colors duration-300 flex flex-col flex-nowrap items-center md:flex-row md:text-white md:transform md:hover:-rotate-6 md:transition-all md:hover:text-white"
-            active-class="text-gray-900 hover:text-gray-600 md:text-mc-red"
+            active-class="text-gray-900 hover:text-gray-600"
           >
             <ShopIcon />
             <span class="mt-1 md:mt-0 md:ml-6 md:text-base">Tienda</span>

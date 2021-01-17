@@ -4,6 +4,7 @@ module.exports = (api) => {
   api.loadSource(async ({ addCollection, store }) => {
     const posts = addCollection({ typeName: 'StrapiPosts', dateField: 'created_at' });
     const comments = addCollection({ typeName: 'StrapiComments', dateField: 'created_at' });
+    const products = addCollection({ typeName: 'StrapiProducts', dateField: 'created_at' });
 
     await fetch(`${process.env.STRAPI_URL}/posts?_limit=1000`)
       .then((res) => res.json())
@@ -23,6 +24,10 @@ module.exports = (api) => {
           comments.addNode(node);
         }),
       );
+
+    await fetch(`${process.env.STRAPI_URL}/products?_limit=1000`)
+      .then((res) => res.json())
+      .then((docs) => docs.forEach((doc) => products.addNode(doc)));
   });
 
   api.createPages(async ({ graphql, createPage }) => {

@@ -39,7 +39,7 @@
       <p class="font-cartoon opacity-90 text-white text-lg">Monitos de Juanele</p>
     </header>
 
-    <MainLayout>
+    <main class="px-constrained gap-20 md:grid justify-evenly -mt-20 md:grid-cols-blog md:justify-items-start md:pb-64">
       <section class="grid grid-cols-1 gap-36 pb-20 relative">
         <Post
           v-for="post in $page.allStrapiPosts.posts"
@@ -123,32 +123,9 @@
           </ul>
         </nav>
 
-        <nav
-          class="flex flex-nowrap justify-evenly items-center bg-mc-yellow rounded-xl p-4 border-b-6 border-mc-yellow-500"
-        >
-          <a
-            :href="$page.metadata.facebookUrl"
-            rel="noreferrer noopener"
-            class="text-facebook border-2 border-white bg-white rounded-full p-4 transform hover:rotate-12 transition-transform duration-300"
-            ><FacebookIcon
-          /></a>
-
-          <a
-            :href="$page.metadata.twitterUrl"
-            rel="noreferrer noopener"
-            class="text-twitter border-2 border-white bg-white rounded-full p-4 transform hover:-rotate-12 transition-transform duration-300"
-            ><TwitterIcon
-          /></a>
-
-          <a
-            :href="$page.metadata.instagramUrl"
-            rel="noreferrer noopener"
-            class="text-instagram border-2 border-white bg-white rounded-full p-4 transform hover:rotate-12 transition-transform duration-300"
-            ><InstagramIcon
-          /></a>
-        </nav>
+        <SocialsNav />
       </aside>
-    </MainLayout>
+    </main>
 
     <CommentModal slot="modal" v-if="commentModal.isOpen" />
   </SiteLayout>
@@ -156,12 +133,6 @@
 
 <page-query>
   query ($currentPage: Int!, $postsPerPage: Int!) {
-    metadata {
-      facebookUrl
-      twitterUrl
-      instagramUrl
-    }
-
     allStrapiPosts (sortBy: "published_at", perPage: $postsPerPage, page: $currentPage) {
       posts: edges {
         node {
@@ -221,9 +192,7 @@ import Post from '~/components/Post';
 import CommentModal from '~/components/CommentModal';
 import ChevronLeft from '~/assets/icons/chevron-left.svg';
 import ChevronRight from '~/assets/icons/chevron-right.svg';
-import FacebookIcon from '~/assets/icons/facebook.svg';
-import TwitterIcon from '~/assets/icons/twitter.svg';
-import InstagramIcon from '~/assets/icons/instagram.svg';
+import SocialsNav from '~/components/SocialsNav';
 
 export default {
   metaInfo: {
@@ -234,9 +203,7 @@ export default {
     CommentModal,
     ChevronLeft,
     ChevronRight,
-    FacebookIcon,
-    TwitterIcon,
-    InstagramIcon,
+    SocialsNav,
   },
   data() {
     return {

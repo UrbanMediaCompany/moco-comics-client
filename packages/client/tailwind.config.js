@@ -46,11 +46,14 @@ module.exports = {
         'sa-3': 'calc(0.75rem + max(env(safe-area-inset-left), env(safe-area-inset-bottom)))',
       },
       gridTemplateColumns: {
-        blog: 'minmax(400px, 640px) min-content',
+        blog: 'minmax(460px, 640px) minmax(min-content, 320px)',
+        store: 'minmax(460px, 1fr) minmax(min-content, 320px)',
+        'store-sub-grid': 'repeat(auto-fit, minmax(320px, 1fr))',
+        'cart-item': 'repeat(3, minmax(0, 1fr)) 3rem',
       },
       padding: {
         'sa-3': 'calc(0.75rem + max(env(safe-area-inset-left), env(safe-area-inset-bottom)))',
-        constrained: 'max(1rem, calc((100vw - var(--inline-size-constraint)) / 2 + 1rem))',
+        constrained: 'max(1.6rem, calc((100vw - var(--inline-size-constraint)) / 2 + 1.6rem))',
       },
       height: {
         min: 'min-content',
@@ -75,6 +78,7 @@ module.exports = {
       backgroundOpacity: ['checked'],
       borderColor: ['checked'],
       borderStyle: ['hover', 'focus', 'focus-within'],
+      rotate: ['group-hover'],
     },
   },
   plugins: [
