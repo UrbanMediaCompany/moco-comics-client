@@ -51,7 +51,7 @@
             name="persist"
             v-model="wishesToPersist"
             value="yes"
-            class="checkbox appearance-none w-8 h-8 rounded-lg mr-4 border-2 border-mc-grey-500 bg-white checked:bg-white"
+            class="checkbox appearance-none w-8 h-8 rounded-lg mr-4 border-2 border-mc-grey-500 bg-white checked:bg-check-mark"
           />
           <span class="flex-1 font-display text-sm leading-none">Recuérdame en este navegador</span>
         </label>

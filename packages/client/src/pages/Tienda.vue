@@ -11,7 +11,7 @@
 
     <MainLayout class="md:grid-cols-store md:justify-around">
       <section class="w-full grid grid-cols-1 gap-16 pb-20 relative md:grid-cols-store-sub-grid">
-        <Product v-bind="product.node" v-for="product in $page.allStrapiProducts.products" :key="product.node.id" />
+        <Product v-bind="product" @add-to-cart="addToCart($event)" v-for="product in products" :key="product.id" />
       </section>
 
       <aside class="pb-48 md:sticky md:-top-4 md:h-min">
@@ -20,16 +20,22 @@
             class="flex justify-center items-center w-60 h-60 rounded-full bg-mc-red text-white font-cartoon text-center border-b-10 border-mc-red-500 uppercase text-lg p-12 md:p-16"
           >
             Total <br />
-            $0.00
+            {{ cartTotal }}
           </p>
 
-          <form class="min-w-120 px-8 pt-6 pb-8 bg-white rounded-xl -mt-12 shadow-sm">
+          <form @submit.prevent="checkout()" class="min-w-120 px-8 pt-6 pb-8 bg-white rounded-xl -mt-12 shadow-sm">
             <legend class="w-full font-display mb-8 text-center">Artículos en tu carrito</legend>
 
-            <div class="grid grid-cols-cart-item gap-4 items-center py-3 border-b-2 border-dotted">
+            <p v-show="cart.length === 0" class="text-sm text-center mb-8">No hay artículos en tu carrito :(</p>
+
+            <div
+              class="grid grid-cols-cart-item gap-4 items-center py-3 border-b-2 border-dotted"
+              v-for="item in cart"
+              :key="item.id"
+            >
               <p class="text-sm col-span-2">
-                <span>!Nuevo! El que tranza avanza (2019)</span>
-                <span>— $160</span>
+                <span>{{ normalizedProducts[item.id].name }}</span>
+                <span> — {{ formatMoney(normalizedProducts[item.id].price) }}</span>
               </p>
 
               <label
@@ -38,16 +44,17 @@
                 <span class="absolute bottom-2 left-2 text-grey-400 mr-2">x</span>
 
                 <input
+                  v-model="item.quantity"
                   type="number"
                   min="1"
                   max="10"
                   name="quantity"
-                  value="1"
                   class="w-full h-full pl-8 p-2 appearance-none"
                 />
               </label>
 
               <button
+                @click="removeFromCart(item.id)"
                 type="button"
                 class="justify-self-end hover:text-mc-red focus:text-mc-red transition-colors duration-200"
               >
@@ -55,21 +62,27 @@
               </button>
             </div>
 
+            <p v-show="isInternationalShipping" class="text-sm pt-8">
+              Se incluirán $10USD de gastos de envío al momento del pago ¯\_(ツ)_/¯
+            </p>
+
             <label
-              class="flex flex-nowrap justify-center items-center cursor-pointer border-2 border-transparent px-3 py-4 mt-2 mb-2 rounded-lg focus-within:border-mc-blue focus-within:border-dashed transition-all duration-200"
+              class="flex flex-nowrap justify-center items-center cursor-pointer border-2 border-transparent px-3 py-4 mt-2 mb-4 rounded-lg focus-within:border-mc-blue focus-within:border-dashed transition-all duration-200"
             >
               <input
                 type="checkbox"
-                name="persist"
+                name="international-shipping"
+                v-model="isInternationalShipping"
                 value="true"
-                class="checkbox appearance-none w-8 h-8 rounded-lg mr-4 border-2 border-mc-grey-500 bg-white checked:bg-white"
+                class="checkbox appearance-none w-8 h-8 rounded-lg mr-4 border-2 border-mc-grey-500 bg-white checked:bg-check-mark"
               />
               <span class="flex-1 font-display text-sm leading-none">Envío Internacional</span>
             </label>
 
             <button
               type="submit"
-              class="w-full flex flex-nowrap justify-center items-center bg-mc-blue text-white py-2 px-4 rounded-lg font-display border-2 border-dashed border-transparent focus:border-white transition-colors duration-200"
+              class="w-full flex flex-nowrap justify-center items-center bg-mc-blue text-white py-2 px-4 rounded-lg font-display border-2 border-dashed border-transparent focus:border-white transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-70"
+              :disabled="cart.length === 0"
             >
               <ShopIcon class="mr-4" />
               Pagar con PayPal
@@ -86,7 +99,7 @@
 <page-query>
 query {
   allStrapiProducts {
-    products: edges {
+    edges {
       node {
         id
         name
@@ -107,6 +120,7 @@ import Product from '~/components/Product';
 import SocialsNav from '~/components/SocialsNav';
 import TrashIcon from '~/assets/icons/trash.svg';
 import ShopIcon from '~/assets/icons/shopping-bag.svg';
+import formatMoney from '~/utils/format-money';
 
 export default {
   name: 'Tienda',
@@ -115,6 +129,49 @@ export default {
     SocialsNav,
     TrashIcon,
     ShopIcon,
+  },
+  data() {
+    return {
+      cart: [],
+      isInternationalShipping: false,
+    };
+  },
+  computed: {
+    products() {
+      return this.$page.allStrapiProducts.edges.map((p) => p.node);
+    },
+    normalizedProducts() {
+      return this.products.reduce((acc, p) => {
+        acc[p.id] = p;
+        return acc;
+      }, {});
+    },
+    cartTotal() {
+      const total = this.cart.reduce((acc, item) => {
+        return acc + this.normalizedProducts[item.id].price * item.quantity;
+      }, 0);
+
+      return formatMoney(total);
+    },
+  },
+  methods: {
+    formatMoney,
+    addToCart(item) {
+      const cartMatch = this.cart.find((i) => i.id === item);
+
+      if (!cartMatch) {
+        this.cart = [...this.cart, { id: item, quantity: 1 }];
+        return;
+      }
+
+      this.cart = this.cart.map((i) => (i.id === item ? { id: item, quantity: i.quantity + 1 } : i));
+    },
+    removeFromCart(item) {
+      this.cart = this.cart.filter((i) => i.id !== item);
+    },
+    checkout() {
+      console.log(`Wanna buy stuff:`, this.cart);
+    },
   },
 };
 </script>

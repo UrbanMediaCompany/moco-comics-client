@@ -19,11 +19,13 @@
       </header>
 
       <button
+        @click="addToCart()"
         type="button"
-        class="group w-full max-w-xl mx-auto flex justify-center items-center bg-mc-blue text-center text-sm text-white py-2 px-4 rounded-lg font-display"
+        class="group w-full max-w-xl mx-auto flex justify-center items-center bg-mc-blue text-center text-sm text-white py-2 px-4 rounded-lg font-display disabled:opacity-70 disabled:cursor-not-allowed"
+        :disabled="showConfirmation"
       >
         <ShopIcon class="mr-4 transform origin-top group-hover:rotate-12 transition-transform duration-200" />
-        ¡Lo quiero!
+        {{ showConfirmation ? '¡Agregado al carrito!' : '¡Lo quiero!' }}
       </button>
     </div>
   </article>
@@ -32,6 +34,7 @@
 <script>
 import ShopIcon from '~/assets/icons/shopping-bag.svg';
 import capitalize from '~/utils/capitalize';
+import formatMoney from '~/utils/format-money';
 
 export default {
   name: 'Product',
@@ -46,20 +49,26 @@ export default {
     publishedDate: String,
     formattedPublishedDate: String,
   },
+  data() {
+    return {
+      showConfirmation: false,
+    };
+  },
   computed: {
     formattedPrice() {
-      const formatter = new Intl.NumberFormat('es-MX', {
-        style: 'currency',
-        currency: 'MXN',
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 0,
-      });
-
-      return formatter.format(this.price);
+      return formatMoney(this.price);
     },
   },
   methods: {
     capitalize,
+    addToCart() {
+      this.$emit('add-to-cart', this.id);
+      this.showConfirmation = true;
+
+      setTimeout(() => {
+        this.showConfirmation = false;
+      }, 2000);
+    },
   },
 };
 </script>
