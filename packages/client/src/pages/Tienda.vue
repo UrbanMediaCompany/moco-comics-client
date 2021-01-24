@@ -9,8 +9,8 @@
       </div>
     </header>
 
-    <MainLayout class="md:grid-cols-store md:justify-around">
-      <section class="w-full grid grid-cols-1 gap-16 pb-20 relative md:grid-cols-store-sub-grid">
+    <main class="px-constrained -mt-20 md:pb-64">
+      <section class="shelf w-full grid grid-cols-1 gap-16 pb-20 relative">
         <Product v-bind="product" @add-to-cart="addToCart($event)" v-for="product in products" :key="product.id" />
       </section>
 
@@ -23,7 +23,7 @@
             {{ cartTotal }}
           </p>
 
-          <form @submit.prevent="checkout()" class="min-w-120 px-8 pt-6 pb-8 bg-white rounded-xl -mt-12 shadow-sm">
+          <form @submit.prevent="checkout()" class="w-full px-8 pt-6 pb-8 bg-white rounded-xl -mt-12 shadow-sm">
             <legend class="w-full font-display mb-8 text-center">Artículos en tu carrito</legend>
 
             <p v-show="cart.length === 0" class="text-sm text-center mb-8">No hay artículos en tu carrito :(</p>
@@ -92,7 +92,7 @@
 
         <SocialsNav />
       </aside>
-    </MainLayout>
+    </main>
   </SiteLayout>
 </template>
 
@@ -195,8 +195,29 @@ export default {
   text-shadow: 5px 5px var(--mc-color-red-500);
 }
 
-a.is-active {
-  color: #000;
+main {
+  display: grid;
+  grid-gap: 5rem;
+}
+
+@media (min-width: 768px) {
+  main {
+    grid-template-columns: minmax(384px, 640px) 300px;
+    justify-content: space-around;
+    column-gap: 2rem;
+  }
+
+  .shelf {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  main {
+    grid-template-columns: minmax(460px, 1fr) 320px;
+    justify-content: space-around;
+    column-gap: 5rem;
+  }
 }
 
 @media (min-width: 1280px) {

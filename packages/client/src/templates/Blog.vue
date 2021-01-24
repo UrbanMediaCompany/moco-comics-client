@@ -39,7 +39,7 @@
       <p class="font-cartoon opacity-90 text-white text-lg">Monitos de Juanele</p>
     </header>
 
-    <main class="px-constrained gap-20 md:grid justify-evenly -mt-20 md:grid-cols-blog md:justify-items-start md:pb-64">
+    <main class="px-constrained -mt-20 md:pb-64">
       <section class="grid grid-cols-1 gap-36 pb-20 relative">
         <Post
           v-for="post in $page.allStrapiPosts.posts"
@@ -261,6 +261,25 @@ export default {
 
 a.is-active {
   color: #000;
+}
+
+main {
+  display: grid;
+  gap: 5rem;
+  justify-content: space-evenly;
+}
+
+@media (min-width: 768px) {
+  main {
+    grid-template-columns: minmax(384px, 640px) 300px;
+    column-gap: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  main {
+    grid-template-columns: minmax(460px, 680px) 320px;
+  }
 }
 
 @media (min-width: 1280px) {

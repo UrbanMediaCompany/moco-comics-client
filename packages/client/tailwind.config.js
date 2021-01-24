@@ -46,9 +46,6 @@ module.exports = {
         'sa-3': 'calc(0.75rem + max(env(safe-area-inset-left), env(safe-area-inset-bottom)))',
       },
       gridTemplateColumns: {
-        blog: 'minmax(460px, 640px) minmax(min-content, 320px)',
-        store: 'minmax(460px, 1fr) minmax(min-content, 320px)',
-        'store-sub-grid': 'repeat(auto-fit, minmax(320px, 1fr))',
         'cart-item': 'repeat(3, minmax(0, 1fr)) 3rem',
       },
       padding: {
