@@ -7,6 +7,14 @@ module.exports = {
     twitterUrl: 'https://twitter.com/JuaneleTamal',
     instagramUrl: 'https://instagram.com/juaneletamal',
   },
+  templates: {
+    StrapiPosts: [
+      {
+        path: `/blog/:slug`,
+        component: `./src/templates/Post.vue`,
+      },
+    ],
+  },
   plugins: ['gridsome-plugin-tailwindcss'],
   chainWebpack: (config) => {
     const svgRule = config.module.rule('svg');

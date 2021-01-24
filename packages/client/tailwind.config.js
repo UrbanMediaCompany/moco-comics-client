@@ -57,6 +57,7 @@ module.exports = {
       },
       height: {
         min: 'min-content',
+        128: '32rem',
       },
       minWidth: {
         120: '30rem',
