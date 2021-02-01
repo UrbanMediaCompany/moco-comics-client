@@ -6,11 +6,24 @@ module.exports = (api) => {
     const comments = addCollection({ typeName: 'StrapiComments', dateField: 'created_at' });
     const products = addCollection({ typeName: 'StrapiProducts', dateField: 'created_at' });
 
-    await fetch(`${process.env.STRAPI_URL}/posts?_limit=1000`)
+    const [error, { jwt }] = await fetch(`${process.env.STRAPI_URL}/auth/local`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ identifier: process.env.STRAPI_IDENTIFIER, password: process.env.STRAPI_PASSWORD }),
+    })
+      .then((res) => res.json())
+      .then((data) => [null, data])
+      .catch((err) => [err]);
+
+    if (error || !jwt) throw new Error(`Failed to authenticate with Strapi ${error}`);
+
+    await fetch(`${process.env.STRAPI_URL}/posts?_limit=1000`, { headers: { Authorization: `Bearer ${jwt}` } })
       .then((res) => res.json())
       .then((docs) => docs.forEach((doc) => posts.addNode(doc)));
 
-    await fetch(`${process.env.STRAPI_URL}/comments?_limit=1000`)
+    await fetch(`${process.env.STRAPI_URL}/comments?_limit=1000`, { headers: { Authorization: `Bearer ${jwt}` } })
       .then((res) => res.json())
       .then((docs) =>
         docs.forEach((doc) => {
@@ -25,7 +38,7 @@ module.exports = (api) => {
         }),
       );
 
-    await fetch(`${process.env.STRAPI_URL}/products?_limit=1000`)
+    await fetch(`${process.env.STRAPI_URL}/products?_limit=1000`, { headers: { Authorization: `Bearer ${jwt}` } })
       .then((res) => res.json())
       .then((docs) => docs.forEach((doc) => products.addNode(doc)));
   });
