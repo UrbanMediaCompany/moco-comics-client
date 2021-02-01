@@ -92,9 +92,29 @@ export default {
       this.visitor = null;
       this.hasIdentified = false;
     },
+    encodeFormData(data) {
+      return Object.keys(data)
+        .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
+        .join('&');
+    },
     submitComment(comment) {
-      console.log('[SUBMIT COMMENT]', { comment, visitor: this.visitor });
-      this.$store.dispatch('closeCommentModal');
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: this.encodeFormData({
+          'form-name': 'new-comment',
+          comment,
+          ...this.visitor,
+          post: this.post?.id,
+          parent: this.repliesTo,
+        }),
+      })
+        .then(async (response) => {
+          const data = await response.json();
+
+          if (response.ok && data) this.$store.dispatch('closeCommentModal');
+        })
+        .catch(console.error);
     },
   },
 };

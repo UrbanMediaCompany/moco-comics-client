@@ -1,0 +1,10 @@
+[build]
+  base = "packages/client/"
+  functions = "functions/"
+
+[dev]
+  framework = "#custom"
+  command = "yarn client"
+  targetPort = 8080
+  port = 8888
+  publish = "packages/client/dist"

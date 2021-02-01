@@ -1,5 +1,13 @@
 <template>
-  <form @submit.prevent="submitComment" class="flex flex-col items-stretch px-6 pt-8 pb-6">
+  <form
+    @submit.prevent="submitComment"
+    class="flex flex-col items-stretch px-6 pt-8 pb-6"
+    name="new-comment"
+    method="POST"
+    data-netlify="true"
+  >
+    <input type="hidden" name="form-name" value="new-comment" />
+
     <textarea
       class="w-full max-w-xl min-h-40 mx-auto px-3 py-1 bg-white focus:bg-clip-padding hover:bg-clip-padding rounded-lg placeholder-opacity-80 border-2 border-mc-grey-500 hover:border-white hover:border-dashed focus:border-dashed hover:border-mc-blue focus:border-mc-blue focus:border-white transition-all duration-200 appearance-none resize-y mb-12 md:max-w-none md:mb-6"
       name="content"
