@@ -23,7 +23,7 @@
             {{ cartTotal }}
           </p>
 
-          <form @submit.prevent="checkout()" class="w-full px-8 pt-6 pb-8 bg-white rounded-xl -mt-12 shadow-sm">
+          <form class="w-full px-8 pt-6 bg-white rounded-xl -mt-12 shadow-sm">
             <legend class="w-full font-display mb-8 text-center">Artículos en tu carrito</legend>
 
             <p v-show="cart.length === 0" class="text-sm text-center mb-8">No hay artículos en tu carrito :(</p>
@@ -79,14 +79,7 @@
               <span class="flex-1 font-display text-sm leading-none">Envío Internacional</span>
             </label>
 
-            <button
-              type="submit"
-              class="w-full flex flex-nowrap justify-center items-center bg-mc-blue text-white py-2 px-4 rounded-lg font-display border-2 border-dashed border-transparent focus:border-white transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-70"
-              :disabled="cart.length === 0"
-            >
-              <ShopIcon class="mr-4" />
-              Pagar con PayPal
-            </button>
+            <div :class="{ 'opacity-50': !cart.length }" id="paypal-buttons" />
           </form>
         </div>
 
@@ -119,22 +112,46 @@ query {
 import Product from '~/components/Product';
 import SocialsNav from '~/components/SocialsNav';
 import TrashIcon from '~/assets/icons/trash.svg';
-import ShopIcon from '~/assets/icons/shopping-bag.svg';
 import formatMoney from '~/utils/format-money';
+import loadPaypalSKD from '~/utils/load-paypal-sdk';
 
 export default {
   name: 'Tienda',
+  metaInfo: {
+    title: 'Tienda — Moco-Comics',
+  },
   components: {
     Product,
     SocialsNav,
     TrashIcon,
-    ShopIcon,
+  },
+  mounted() {
+    loadPaypalSKD()
+      .then(() => {
+        window.paypal
+          .Buttons({
+            style: { label: 'pay' },
+            onInit: (_, actions) => {
+              actions.disable();
+
+              this.enablePayPalButtons = actions.enable;
+            },
+          })
+          .render('#paypal-buttons');
+      })
+      .catch(console.error);
   },
   data() {
     return {
       cart: [],
       isInternationalShipping: false,
+      enablePayPalButtons: () => {},
     };
+  },
+  watch: {
+    cart(items) {
+      if (items.length) this.enablePayPalButtons();
+    },
   },
   computed: {
     products() {
@@ -168,9 +185,6 @@ export default {
     },
     removeFromCart(item) {
       this.cart = this.cart.filter((i) => i.id !== item);
-    },
-    checkout() {
-      console.log(`Wanna buy stuff:`, this.cart);
     },
   },
 };
