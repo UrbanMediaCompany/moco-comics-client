@@ -26,7 +26,7 @@
           <form class="w-full px-8 pt-6 bg-white rounded-xl -mt-12 shadow-sm">
             <legend class="w-full font-display mb-8 text-center">Artículos en tu carrito</legend>
 
-            <p v-show="cart.length === 0" class="text-sm text-center mb-8">No hay artículos en tu carrito :(</p>
+            <p v-show="cart.length === 0" class="text-sm text-center mb-8">No hay artículos en tu carrito...</p>
 
             <div
               class="grid grid-cols-cart-item gap-4 items-center py-3 border-b-2 border-dotted"
@@ -62,10 +62,6 @@
               </button>
             </div>
 
-            <p v-show="isInternationalShipping" class="text-sm pt-8">
-              Se incluirán $10USD de gastos de envío al momento del pago ¯\_(ツ)_/¯
-            </p>
-
             <label
               class="flex flex-nowrap justify-center items-center cursor-pointer border-2 border-transparent px-3 py-4 mt-2 mb-4 rounded-lg focus-within:border-mc-blue focus-within:border-dashed transition-all duration-200"
             >
@@ -79,8 +75,32 @@
               <span class="flex-1 font-display text-sm leading-none">Envío Internacional</span>
             </label>
 
-            <div :class="{ 'opacity-50': !cart.length }" id="paypal-buttons" />
+            <p v-show="isInternationalShipping" class="text-sm pl-4 mb-8">
+              Se incluirán $10USD de gastos de envío al momento del pago ¯\_(ツ)_/¯
+            </p>
+
+            <div v-show="!didPurchase" :class="{ 'opacity-50': !cart.length }" id="paypal-buttons" />
           </form>
+
+          <section
+            v-show="didPurchase"
+            class="w-full px-8 py-6 mt-10 bg-mc-blue rounded-xl text-white shadow-sm border-b-6 border-black border-opacity-20"
+          >
+            <div class="flex flex-col flex-nowrap items-center mb-6">
+              <g-image
+                src="~/assets/images/juanele-cartoon.png"
+                alt=""
+                class="w-20 rounded-full bg-white mr-6 bg-mc-blue border-2 border-white mb-2"
+              />
+
+              <p class="font-display mb-2">¡Gracias por tu compra!</p>
+              <p class="text-sm text-center">Recibirás un correo cuando tu pedido este en camino</p>
+            </div>
+
+            <p class="text-sm text-center">
+              ¡No olvides darle like a mis redes para que más gente me dé dinero ah no... este shi!
+            </p>
+          </section>
         </div>
 
         <SocialsNav />
@@ -125,32 +145,39 @@ export default {
     SocialsNav,
     TrashIcon,
   },
-  mounted() {
-    loadPaypalSKD()
-      .then(() => {
-        window.paypal
-          .Buttons({
-            style: { label: 'pay' },
-            onInit: (_, actions) => {
-              actions.disable();
+  async mounted() {
+    await loadPaypalSKD();
 
-              this.enablePayPalButtons = actions.enable;
-            },
-          })
-          .render('#paypal-buttons');
+    window.paypal
+      .Buttons({
+        style: { label: 'pay' },
+        onInit: (_, actions) => {
+          actions.disable();
+
+          this.disablePayPalButtons = actions.disable;
+          this.enablePayPalButtons = actions.enable;
+        },
+        createOrder: this.checkout,
+        onApprove: this.handlePurchaseSuccess,
+        onError: this.handlePurchaseError,
       })
-      .catch(console.error);
+      .render('#paypal-buttons');
   },
   data() {
     return {
       cart: [],
       isInternationalShipping: false,
+      disablePayPalButtons: () => {},
       enablePayPalButtons: () => {},
+      didPurchase: false,
+      purchaseDidFail: false,
+      payer: '',
     };
   },
   watch: {
     cart(items) {
-      if (items.length) this.enablePayPalButtons();
+      if (items.length > 0) this.enablePayPalButtons();
+      if (items.length === 0) this.disablePayPalButtons();
     },
   },
   computed: {
@@ -186,6 +213,28 @@ export default {
     removeFromCart(item) {
       this.cart = this.cart.filter((i) => i.id !== item);
     },
+    checkout() {
+      return fetch('/.netlify/functions/checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ cart: this.cart, isInternationalShipping: this.isInternationalShipping }),
+      })
+        .then((res) => res.json())
+        .then(({ order }) => order)
+        .catch((err) => [err]);
+    },
+    handlePurchaseSuccess(data, actions) {
+      this.didPurchase = true;
+
+      return actions.order.capture().then(({ payer: { name } }) => {
+        this.payer = `${name.given_name} ${name.surname}`;
+      });
+    },
+    handlePurchaseError(error) {
+      console.log('Error ::', error);
+    },
   },
 };
 </script>
@@ -212,6 +261,11 @@ export default {
 main {
   display: grid;
   grid-gap: 5rem;
+}
+
+#paypal-buttons {
+  max-height: 40rem;
+  overflow: hidden;
 }
 
 @media (min-width: 768px) {
