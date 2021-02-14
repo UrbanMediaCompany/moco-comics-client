@@ -9,99 +9,18 @@
       </div>
     </header>
 
-    <main class="px-constrained -mt-20 md:pb-64">
+    <main class="px-constrained -mt-20 grid gap-20 md:pb-64">
       <section class="shelf w-full grid grid-cols-1 gap-16 pb-20 relative">
         <Product v-bind="product" @add-to-cart="addToCart($event)" v-for="product in products" :key="product.id" />
       </section>
 
-      <aside class="pb-48 md:sticky md:-top-4 md:h-min">
-        <div class="flex flex-col items-center mb-10">
-          <p
-            class="flex justify-center items-center w-60 h-60 rounded-full bg-mc-red text-white font-cartoon text-center border-b-10 border-mc-red-500 uppercase text-lg p-12 md:p-16"
-          >
-            Total <br />
-            {{ cartTotal }}
-          </p>
-
-          <form class="w-full px-8 pt-6 bg-white rounded-xl -mt-12 shadow-sm">
-            <legend class="w-full font-display mb-8 text-center">Artículos en tu carrito</legend>
-
-            <p v-show="cart.length === 0" class="text-sm text-center mb-8">No hay artículos en tu carrito...</p>
-
-            <div
-              class="grid grid-cols-cart-item gap-4 items-center py-3 border-b-2 border-dotted"
-              v-for="item in cart"
-              :key="item.id"
-            >
-              <p class="text-sm col-span-2">
-                <span>{{ normalizedProducts[item.id].name }}</span>
-                <span> — {{ formatMoney(normalizedProducts[item.id].price) }}</span>
-              </p>
-
-              <label
-                class="relative font-display text-sm border-2 border-gray-200 rounded-lg hover:border-mc-yellow focus-within:border-mc-yellow transition-colors duration-200"
-              >
-                <span class="absolute bottom-2 left-2 text-grey-400 mr-2">x</span>
-
-                <input
-                  v-model="item.quantity"
-                  type="number"
-                  min="1"
-                  max="10"
-                  name="quantity"
-                  class="w-full h-full pl-8 p-2 appearance-none"
-                />
-              </label>
-
-              <button
-                @click="removeFromCart(item.id)"
-                type="button"
-                class="justify-self-end hover:text-mc-red focus:text-mc-red transition-colors duration-200"
-              >
-                <TrashIcon class="w-8 h-8" />
-              </button>
-            </div>
-
-            <label
-              class="flex flex-nowrap justify-center items-center cursor-pointer border-2 border-transparent px-3 py-4 mt-2 mb-4 rounded-lg focus-within:border-mc-blue focus-within:border-dashed transition-all duration-200"
-            >
-              <input
-                type="checkbox"
-                name="international-shipping"
-                v-model="isInternationalShipping"
-                value="true"
-                class="checkbox appearance-none w-8 h-8 rounded-lg mr-4 border-2 border-mc-grey-500 bg-white checked:bg-check-mark"
-              />
-              <span class="flex-1 font-display text-sm leading-none">Envío Internacional</span>
-            </label>
-
-            <p v-show="isInternationalShipping" class="text-sm pl-4 mb-8">
-              Se incluirán $10USD de gastos de envío al momento del pago ¯\_(ツ)_/¯
-            </p>
-
-            <div v-show="!didPurchase" :class="{ 'opacity-50': !cart.length }" id="paypal-buttons" />
-          </form>
-
-          <section
-            v-show="didPurchase"
-            class="w-full px-8 py-6 mt-10 bg-mc-blue rounded-xl text-white shadow-sm border-b-6 border-black border-opacity-20"
-          >
-            <div class="flex flex-col flex-nowrap items-center mb-6">
-              <g-image
-                src="~/assets/images/juanele-cartoon.png"
-                alt=""
-                class="w-20 rounded-full bg-white mr-6 bg-mc-blue border-2 border-white mb-2"
-              />
-
-              <p class="font-display mb-2">¡Gracias por tu compra!</p>
-              <p class="text-sm text-center">Recibirás un correo cuando tu pedido este en camino</p>
-            </div>
-
-            <p class="text-sm text-center">
-              ¡No olvides darle like a mis redes para que más gente me dé dinero ah no... este shi!
-            </p>
-          </section>
-        </div>
+      <aside class="pb-48 md:-top-4 md:h-min" :class="intentToPayWithCard ? 'md:relative' : 'md:sticky'">
+        <ShoppingCart
+          :items="cart"
+          :products="normalizedProducts"
+          :removeFromCart="removeFromCart"
+          @purchase-method-intent="adaptLayoutToPaymentMethod"
+        />
 
         <SocialsNav />
       </aside>
@@ -130,10 +49,8 @@ query {
 
 <script>
 import Product from '~/components/Product';
+import ShoppingCart from '~/components/ShoppingCart';
 import SocialsNav from '~/components/SocialsNav';
-import TrashIcon from '~/assets/icons/trash.svg';
-import formatMoney from '~/utils/format-money';
-import loadPaypalSKD from '~/utils/load-paypal-sdk';
 
 export default {
   name: 'Tienda',
@@ -142,43 +59,14 @@ export default {
   },
   components: {
     Product,
+    ShoppingCart,
     SocialsNav,
-    TrashIcon,
-  },
-  async mounted() {
-    await loadPaypalSKD();
-
-    window.paypal
-      .Buttons({
-        style: { label: 'pay' },
-        onInit: (_, actions) => {
-          actions.disable();
-
-          this.disablePayPalButtons = actions.disable;
-          this.enablePayPalButtons = actions.enable;
-        },
-        createOrder: this.checkout,
-        onApprove: this.handlePurchaseSuccess,
-        onError: this.handlePurchaseError,
-      })
-      .render('#paypal-buttons');
   },
   data() {
     return {
       cart: [],
-      isInternationalShipping: false,
-      disablePayPalButtons: () => {},
-      enablePayPalButtons: () => {},
-      didPurchase: false,
-      purchaseDidFail: false,
-      payer: '',
+      intentToPayWithCard: false,
     };
-  },
-  watch: {
-    cart(items) {
-      if (items.length > 0) this.enablePayPalButtons();
-      if (items.length === 0) this.disablePayPalButtons();
-    },
   },
   computed: {
     products() {
@@ -190,16 +78,8 @@ export default {
         return acc;
       }, {});
     },
-    cartTotal() {
-      const total = this.cart.reduce((acc, item) => {
-        return acc + this.normalizedProducts[item.id].price * item.quantity;
-      }, 0);
-
-      return formatMoney(total);
-    },
   },
   methods: {
-    formatMoney,
     addToCart(item) {
       const cartMatch = this.cart.find((i) => i.id === item);
 
@@ -213,27 +93,16 @@ export default {
     removeFromCart(item) {
       this.cart = this.cart.filter((i) => i.id !== item);
     },
-    checkout() {
-      return fetch('/.netlify/functions/checkout', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ cart: this.cart, isInternationalShipping: this.isInternationalShipping }),
-      })
-        .then((res) => res.json())
-        .then(({ order }) => order)
-        .catch((err) => [err]);
-    },
-    handlePurchaseSuccess(data, actions) {
-      this.didPurchase = true;
+    adaptLayoutToPaymentMethod(method) {
+      this.intentToPayWithCard = method === 'card';
+      const { matches: isMediumViewport } = window.matchMedia('(min-width: 768px)');
 
-      return actions.order.capture().then(({ payer: { name } }) => {
-        this.payer = `${name.given_name} ${name.surname}`;
+      if (!this.intentToPayWithCard || !isMediumViewport) return;
+
+      window.scrollTo({
+        top: 280,
+        left: 0,
       });
-    },
-    handlePurchaseError(error) {
-      console.log('Error ::', error);
     },
   },
 };
@@ -256,16 +125,6 @@ export default {
 
 .title {
   text-shadow: 5px 5px var(--mc-color-red-500);
-}
-
-main {
-  display: grid;
-  grid-gap: 5rem;
-}
-
-#paypal-buttons {
-  max-height: 40rem;
-  overflow: hidden;
 }
 
 @media (min-width: 768px) {
