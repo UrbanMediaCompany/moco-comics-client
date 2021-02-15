@@ -1,5 +1,5 @@
 <template>
-  <article class="flex flex-nowrap flex-col items-center" :id="slug">
+  <article class="flex flex-nowrap flex-col items-center" :data-uuid="id" :id="slug">
     <div v-for="image in media" :key="image.id" class="px-6 mb-8">
       <g-image :src="image.url" class="w-full max-w-5xl border-4 mx-auto border-black" />
     </div>

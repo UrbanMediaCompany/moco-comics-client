@@ -219,9 +219,9 @@ export default {
   created() {
     if (!window.matchMedia) return;
 
-    const { matches } = window.matchMedia('(min-width: 768px)');
+    const { matches: isMediumViewport } = window.matchMedia('(min-width: 768px)');
 
-    if (!matches) return;
+    if (!isMediumViewport) return;
 
     this.observer = new IntersectionObserver(this.onElementObserved, { root: this.$el, threshold: 0.5 });
   },
