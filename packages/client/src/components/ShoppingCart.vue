@@ -1,8 +1,8 @@
 <template>
   <!-- Fullscreen overlay -->
   <div
-    class="fixed bottom-32 left-0 right-0 flex flex-col items-stretch justify-end px-constrained z-20 transition-all duration-200 md:static md:px-0 md:mb-10 md:z-auto"
-    :class="isLayoutOpened ? 'top-0 left-0 right-0 bottom-0 h-screen pt-16 bg-black bg-opacity-30' : ''"
+    class="container fixed left-0 right-0 flex flex-col items-stretch justify-end px-constrained z-20 transition-all duration-200 md:static md:px-0 md:mb-10 md:z-auto"
+    :class="isLayoutOpened ? 'top-0 left-0 right-0 bottom-sa-3 h-screen pt-16 pb-sa-3 bg-black bg-opacity-50' : ''"
   >
     <!-- Mobile over-tab-bar widget -->
     <div
@@ -256,3 +256,9 @@ export default {
   },
 };
 </script>
+
+<style>
+.container {
+  bottom: calc(9rem + env(safe-area-inset-bottom));
+}
+</style>
