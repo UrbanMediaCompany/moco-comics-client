@@ -82,7 +82,7 @@ module.exports = {
       borderStyle: ['hover', 'focus', 'focus-within'],
       rotate: ['group-hover'],
       cursor: ['disabled'],
-      opacity: ['disabled'],
+      opacity: ['disabled', 'hover'],
     },
   },
   plugins: [

@@ -1,7 +1,7 @@
 <template>
   <div class="bg-mc-grey w-full min-h-screen">
     <nav
-      class="fixed bottom-sa-3 left-4 right-4 rounded-lg bg-white py-3 shadow-md z-10 px-constrained md:absolute md:bottom-auto md:top-4 md:left-8 md:right-8 md:bg-transparent md:shadow-none md:flex md:flex-row md:flex-nowrap md:justify-between md:items-center"
+      class="fixed bottom-sa-3 left-4 right-4 rounded-lg bg-mc-blue py-3 shadow-lg z-10 px-constrained border-b-6 border-black border-opacity-20 md:absolute md:bottom-auto md:top-4 md:left-8 md:right-8 md:bg-transparent md:shadow-none md:border-0 md:flex md:flex-row md:flex-nowrap md:justify-between md:items-center"
     >
       <g-link to="/" class="hidden md:block">
         <g-image src="~/assets/images/logo.png" immediate quality="100" class="w-24" />
@@ -11,28 +11,29 @@
         <li class="md:mr-14">
           <g-link
             to="/"
-            class="md:hidden font-display text-sm text-gray-400 hover:text-gray-900 transition-colors duration-300 flex flex-col flex-nowrap items-center md:flex-row md:text-white md:transform md:hover:-rotate-6 md:transition-all"
-            active-class="text-gray-900 hover:text-gray-600 md:text-mc-red"
+            exact
+            class="md:hidden font-display text-sm text-white opacity-60 hover:opacity-100 transition-opacity duration-300 flex flex-col flex-nowrap items-center md:flex-row md:opacity-100 md:transform md:hover:-rotate-6 md:transition-all"
+            exact-active-class="opacity-100 hover:opacity-60 md:text-mc-red"
           >
             <HomeIcon />
             <span class="mt-1 md:mt-0 md:ml-6 md:text-base">Inicio</span>
           </g-link>
         </li>
-        <li class="md:mr-14">
+        <!-- <li class="md:mr-14">
           <g-link
             to="/buscar"
-            class="font-display text-sm text-gray-400 hover:text-gray-900 transition-colors duration-300 flex flex-col flex-nowrap items-center md:flex-row md:text-white md:transform md:hover:rotate-6 md:transition-all md:hover:text-white"
-            active-class="text-gray-900 hover:text-gray-600 md:text-mc-red"
+            class="font-display text-sm text-white opacity-60 hover:opacity-100 transition-opacity duration-300 flex flex-col flex-nowrap items-center md:flex-row md:opacity-100 md:transform md:hover:rotate-6 md:transition-all md:hover:text-white"
+            active-class="opacity-100 hover:opacity-60 md:text-mc-red"
           >
             <SearchIcon />
             <span class="mt-1 md:mt-0 md:ml-6 md:text-base">Buscar</span>
           </g-link>
-        </li>
+        </li> -->
         <li>
           <g-link
             to="/tienda"
-            class="font-display text-sm text-gray-400 hover:text-gray-900 transition-colors duration-300 flex flex-col flex-nowrap items-center md:flex-row md:text-white md:transform md:hover:-rotate-6 md:transition-all md:hover:text-white"
-            active-class="text-gray-900 hover:text-gray-600"
+            class="font-display text-sm text-white opacity-60 hover:opacity-100 transition-opacity duration-300 flex flex-col flex-nowrap items-center md:flex-row md:opacity-100 md:transform md:hover:-rotate-6 md:transition-all md:hover:text-white"
+            exact-active-class="opacity-100 hover:opacity-60"
           >
             <ShopIcon />
             <span class="mt-1 md:mt-0 md:ml-6 md:text-base">Tienda</span>
@@ -70,12 +71,12 @@
 
         <nav class="max-w-4xl mx-auto mb-10">
           <ul class="flex flex-wrap justify-evenly items-center">
-            <li
+            <!-- <li
               class="flex flex-nowrap items-center text-white font-display transform hover:-rotate-6 transition-all mb-8"
             >
               <SearchIcon />
               <g-link class="ml-3" to="/buscar">Buscar</g-link>
-            </li>
+            </li> -->
 
             <li
               class="flex flex-nowrap items-center text-white font-display transform hover:rotate-6 transition-all mb-8"
