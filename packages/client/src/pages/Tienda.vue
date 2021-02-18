@@ -30,6 +30,13 @@
 
 <page-query>
 query {
+  metadata {
+    siteName
+    siteUrl
+    siteDescription
+    author
+  }
+
   allStrapiProducts {
     edges {
       node {
@@ -54,8 +61,37 @@ import SocialsNav from '~/components/SocialsNav';
 
 export default {
   name: 'Tienda',
-  metaInfo: {
-    title: 'Tienda — Moco-Comics',
+  metaInfo() {
+    const { siteName, siteUrl, siteDescription, author } = this.$page.metadata;
+
+    const title = 'Tienda | Moco-Comics';
+    const canonicalUrl = `${siteUrl}${this.$route.path}`;
+
+    return {
+      title,
+      meta: [
+        { property: 'og:type', content: 'website' },
+        { property: 'og:site_name', content: siteName },
+        { property: 'og:title', content: title },
+        { property: 'og:description', content: siteDescription },
+        { property: 'og:image', content: '' },
+        { property: 'og:image:type', content: 'image/png' },
+        { property: 'og:image:width', content: '1200' },
+        { property: 'og:image:height', content: '630' },
+        { property: 'og:image:alt', content: '' },
+        { property: 'og:url', content: canonicalUrl },
+        { property: 'og:locale', content: 'es_MX' },
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:site:id', content: author },
+        { name: 'twitter:creator', content: author },
+        { name: 'twitter:title', content: title },
+        { name: 'twitter:description', content: siteDescription },
+        { name: 'twitter:image', content: '' },
+        { name: 'twitter:image_alt', content: '' },
+        { name: 'twitter:url', content: canonicalUrl },
+      ],
+      link: [{ rel: 'canonical', href: canonicalUrl }],
+    };
   },
   components: {
     Product,

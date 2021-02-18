@@ -5,9 +5,11 @@ import 'fontsource-assistant';
 import 'fontsource-paytone-one/400-normal.css';
 import 'fontsource-luckiest-guy/400-normal.css';
 
-export default function (Vue, { appOptions }) {
+export default function (Vue, { head, appOptions }) {
   // Set default layout as a global component
   Vue.component('SiteLayout', SiteLayout);
+
+  head.htmlAttrs = { lang: 'es', dir: 'ltr' };
 
   Vue.use(Vuex);
 

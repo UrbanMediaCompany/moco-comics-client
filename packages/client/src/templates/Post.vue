@@ -32,7 +32,7 @@
       </section>
 
       <div class="w-full bg-white border-t-10 border-grey-300 rounded-lg shadow-sm overflow-hidden mb-16">
-        <section v-html="toHTML(post.content)" class="rich-text text-gray-800 p-8"></section>
+        <section v-html="content" class="rich-text text-gray-800 p-8"></section>
 
         <ShareButtons :slug="post.slug" :characters="post.characters" />
 
@@ -49,6 +49,13 @@
 
 <page-query>
 query($id: ID!) {
+  metadata {
+    siteName
+    siteUrl
+    siteDescription
+    author
+  }
+
   strapiPosts(id: $id) {
     title
     publishedDate: published_at
@@ -108,6 +115,44 @@ import CommentModal from '~/components/CommentModal';
 
 export default {
   name: 'PostDetail',
+  metaInfo() {
+    const { siteName, siteUrl, author } = this.$page.metadata;
+    const { title, publishedDate, content, characters = [] } = this.$page.strapiPosts;
+
+    const canonicalUrl = `${siteUrl}${this.$route.path}`;
+    const description = content.length < 140 ? content : `${content.slice(0, 137)}...`;
+
+    return {
+      title,
+      meta: [
+        { name: 'description', content: description },
+        { property: 'og:type', content: 'article' },
+        { property: 'og:site_name', content: siteName },
+        { property: 'og:title', content: title },
+        { property: 'og:description', content: description },
+        { property: 'og:image', content: '' },
+        { property: 'og:image:type', content: 'image/png' },
+        { property: 'og:image:width', content: '1200' },
+        { property: 'og:image:height', content: '630' },
+        { property: 'og:image:alt', content: '' },
+        { property: 'og:url', content: canonicalUrl },
+        { property: 'og:locale', content: 'es_MX' },
+        { property: 'article:published_time', content: publishedDate },
+        { property: 'article:author', content: author },
+        { property: 'article:section', content: 'Comics' },
+        { property: 'article:tag', content: characters.join(', ') },
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:site:id', content: author },
+        { name: 'twitter:creator', content: author },
+        { name: 'twitter:title', content: title },
+        { name: 'twitter:description', content: description },
+        { name: 'twitter:image', content: '' },
+        { name: 'twitter:image_alt', content: '' },
+        { name: 'twitter:url', content: canonicalUrl },
+      ],
+      link: [{ rel: 'canonical', href: canonicalUrl }],
+    };
+  },
   components: {
     ShareButtons,
     CommentsList,
@@ -116,6 +161,9 @@ export default {
   computed: {
     post() {
       return this.$page.strapiPosts;
+    },
+    content() {
+      return toHTML(this.post.content);
     },
     commentModal() {
       return this.$store.state.commentModal;

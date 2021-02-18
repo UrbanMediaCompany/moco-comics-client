@@ -1,6 +1,8 @@
 module.exports = {
-  siteName: 'Gridsome',
+  siteName: 'Moco-Comics',
   siteUrl: 'https://moco-comics.com',
+  siteDescription:
+    'Toda mi vida me ha gustado hacer comics. Intento que cada librito que hago sea único, con identidad propia y mejor que el anterior, tratando de mejorar cada vez. Se ven bonitos todos juntos, ¡Cómprenmen comics!',
   metadata: {
     author: '@juaneletamal',
     facebookUrl: 'https://www.facebook.com/MocoComics/',
