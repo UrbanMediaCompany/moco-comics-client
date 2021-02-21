@@ -19,11 +19,11 @@ module.exports = (api) => {
 
     if (error || !jwt) throw new Error(`Failed to authenticate with Strapi ${error}`);
 
-    await fetch(`${process.env.STRAPI_URL}/posts?_limit=1000`, { headers: { Authorization: `Bearer ${jwt}` } })
+    await fetch(`${process.env.STRAPI_URL}/posts?_limit=-1`, { headers: { Authorization: `Bearer ${jwt}` } })
       .then((res) => res.json())
       .then((docs) => docs.forEach((doc) => posts.addNode(doc)));
 
-    await fetch(`${process.env.STRAPI_URL}/comments?_limit=1000`, { headers: { Authorization: `Bearer ${jwt}` } })
+    await fetch(`${process.env.STRAPI_URL}/comments?_limit=-1`, { headers: { Authorization: `Bearer ${jwt}` } })
       .then((res) => res.json())
       .then((docs) =>
         docs.forEach((doc) => {
@@ -38,7 +38,7 @@ module.exports = (api) => {
         }),
       );
 
-    await fetch(`${process.env.STRAPI_URL}/products?_limit=1000`, { headers: { Authorization: `Bearer ${jwt}` } })
+    await fetch(`${process.env.STRAPI_URL}/products?_limit=-1`, { headers: { Authorization: `Bearer ${jwt}` } })
       .then((res) => res.json())
       .then((docs) => docs.forEach((doc) => products.addNode(doc)));
   });
