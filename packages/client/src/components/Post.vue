@@ -16,7 +16,7 @@
 
       <ShareButtons :slug="slug" :characters="characters" />
 
-      <CommentsList :post="{ id: id, title: title, media: media[0] }" :comments="comments.edges" />
+      <CommentsList :post="{ id: id, title: title, media: media[0] }" :comments="comments" />
     </div>
   </article>
 </template>

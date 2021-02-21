@@ -42,7 +42,7 @@
     <main class="px-constrained -mt-20 md:pb-64">
       <section class="grid grid-cols-1 gap-36 pb-20 relative">
         <Post
-          v-for="post in $page.allStrapiPosts.posts"
+          v-for="post in $page.posts.edges"
           :key="post.node.id"
           :observer="observer"
           v-bind="post.node"
@@ -100,7 +100,7 @@
           <ul class="min-w-120 px-8 py-3 bg-white rounded-xl mt-4 shadow-sm">
             <li
               class="font-display text-grey-400 hover:text-black transition-colors py-3 duration-300 border-b-2 border-dotted last:border-0"
-              v-for="post in $page.allStrapiPosts.posts"
+              v-for="post in $page.posts.edges"
               :key="post.node.id"
             >
               <a
@@ -130,54 +130,48 @@
 </template>
 
 <page-query>
-  query ($currentPage: Int!, $postsPerPage: Int!) {
-    metadata {
-      siteName
-      siteUrl
-      siteDescription
-      author
-    }
+query ($currentPage: Int!, $postsPerPage: Int!) {
+  metadata {
+    siteName
+    siteUrl
+    siteDescription
+    author
+  }
 
-    allStrapiPosts (sortBy: "published_at", perPage: $postsPerPage, page: $currentPage) {
-      posts: edges {
-        node {
+  posts: allStrapiPosts (sortBy: "published_at", perPage: $postsPerPage, page: $currentPage) {
+    edges {
+      node {
+        id
+        slug
+        title
+        publishedDate: published_at
+        formattedPublishedDate: published_at(format: "MMMM D, YYYY", locale: "es-MX")
+        content
+        characters {
+          name
+        }
+        media {
           id
-          slug
-          title
-          publishedDate: published_at
-          formattedPublishedDate: published_at(format: "MMMM D, YYYY", locale: "es-MX")
-          content
-          characters {
-            name
-          }
-          media {
-            id
-            url
-          }
-          comments: belongsTo {
-            edges {
-              node {
-                ... on StrapiComments {
+          url
+        }
+        comments: belongsTo {
+          edges {
+            node {
+              ... on StrapiComments {
+                id
+                author
+                gravatar
+                content
+                publishedDate: published_at
+                formattedPublishedDate: published_at(format: "MMMM D, YYYY", locale: "es-MX")
+                replies_to {
                   id
-                  author
-                  gravatar
-                  content
-                  publishedDate: published_at
-                  formattedPublishedDate: published_at(format: "MMMM D, YYYY", locale: "es-MX")
-                  parent: replies_to {
-                    id
-                  }
-                  replies: belongsTo {
-                    edges {
-                      node {
-                        ... on StrapiComments {
-                          id
-                          author
-                          gravatar
-                          content
-                          publishedDate: published_at
-                          formattedPublishedDate: published_at(format: "MMMM D, YYYY", locale: "es-MX")
-                        }
+                }
+                replies: belongsTo {
+                  edges {
+                    node {
+                      ... on StrapiComments {
+                        id
                       }
                     }
                   }
@@ -187,9 +181,9 @@
           }
         }
       }
-
     }
   }
+}
 </page-query>
 
 <script>

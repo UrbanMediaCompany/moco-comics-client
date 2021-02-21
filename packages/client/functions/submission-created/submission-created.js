@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const fetch = require('node-fetch');
 const md5 = require('crypto-js/md5');
 
@@ -31,14 +32,14 @@ exports.handler = async ({ body }) => {
   // 2. Generate Gravatar URL
   const {
     payload: {
-      data: { name: author, email, website, comment: content, post, parent },
+      data: { name: author, email, website, comment: content, post, replies_to = null },
     },
   } = JSON.parse(body);
   const hash = md5(email.trim().toLowerCase()).toString();
   const gravatar = `http://www.gravatar.com/avatar/${hash}`;
 
   // 3. Submit comment to Strapi
-  const comment = { author, email, website, gravatar, content, post, parent };
+  const comment = { author, email, website, gravatar, content, post, replies_to };
 
   const [err, response] = await asyncFetch(
     fetch(`${process.env.STRAPI_URL}/comments`, {

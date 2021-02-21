@@ -14,7 +14,7 @@
         <p class="col-span-2 text-sm mb-4 text-grey-700">{{ content }}</p>
 
         <button
-          @click="$emit('request-reply', { id: id, author: author, content: content })"
+          @click="onReplyButtonClick"
           type="button"
           class="row-start-3 col-start-2 place-self-end flex flex-nowrap items-center font-display text-grey-400 text-sm hover:text-mc-red transition-colors duration-100 xs:row-start-1 xs:self-center"
         >
@@ -27,22 +27,18 @@
 
     <!-- Replies -->
     <section class="pl-2" v-if="replies.length">
-      <article
-        v-for="reply in replies"
-        class="is-reply relative flex flex-row justify-between py-6"
-        :key="reply.node.id"
-      >
-        <g-image :src="reply.node.gravatar" class="relative w-12 h-12 rounded-full mr-16 md:mr-24 lg:mr-36" alt="" />
+      <article v-for="reply in replies" class="is-reply relative flex flex-row justify-between py-6" :key="reply.id">
+        <g-image :src="reply.gravatar" class="relative w-12 h-12 rounded-full mr-16 md:mr-24 lg:mr-36" alt="" />
 
         <div class="flex-1 grid grid-cols-2">
           <header>
-            <h3 class="font-display text-sm mb-0">{{ reply.node.author }}</h3>
-            <time :datetime="reply.node.publishedDate" class="block font-display text-grey-400 text-sm mb-4">{{
-              capitalize(reply.node.formattedPublishedDate)
+            <h3 class="font-display text-sm mb-0">{{ reply.author }}</h3>
+            <time :datetime="reply.publishedDate" class="block font-display text-grey-400 text-sm mb-4">{{
+              capitalize(reply.formattedPublishedDate)
             }}</time>
           </header>
 
-          <p class="col-span-2 text-sm mb-4 text-grey-700">{{ reply.node.content }}</p>
+          <p class="col-span-2 text-sm mb-4 text-grey-700">{{ reply.content }}</p>
         </div>
       </article>
     </section>
@@ -69,6 +65,9 @@ export default {
   },
   methods: {
     capitalize,
+    onReplyButtonClick() {
+      this.$emit('reply-button-click', this.id);
+    },
   },
 };
 </script>
