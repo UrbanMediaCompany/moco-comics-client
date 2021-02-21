@@ -3,8 +3,8 @@
     <header
       class="hero relative w-full min-h-40 bg-mc-yellow pt-28 pb-32 px-constrained text-left overflow-hidden md:pt-44"
     >
-      <div class="flex flex-col flex-nowrap items-start relative mb-12 max-w-7xl mx-auto">
-        <h1 class="title font-display opacity-95 text-white text-2xl leading-none mb-8">
+      <div class="flex flex-col flex-nowrap items-center relative mb-12 max-w-7xl mx-auto">
+        <h1 class="title font-display opacity-95 text-white text-4xl leading-none mb-8">
           {{ post.title }}
         </h1>
 
@@ -36,10 +36,7 @@
 
         <ShareButtons :slug="post.slug" :characters="post.characters" />
 
-        <CommentsList
-          :post="{ id: post.id, title: post.title, media: post.media[0] }"
-          :comments="post.comments.edges"
-        />
+        <CommentsList :post="{ id: post.id, title: post.title, media: post.media[0] }" :comments="post.comments" />
       </div>
     </main>
   </SiteLayout>
@@ -87,11 +84,6 @@ query($id: ID!) {
                 node {
                   ... on StrapiComments {
                     id
-                    author
-                    gravatar
-                    content
-                    publishedDate: published_at
-                    formattedPublishedDate: published_at(format: "MMMM D, YYYY", locale: "es-MX")
                   }
                 }
               }

@@ -1,7 +1,7 @@
 <template>
   <article class="max-w-3xl mx-auto relative py-4 first:mt-6">
     <div class="flex flex-row justify-between">
-      <g-image :src="gravatar" class="relative w-16 h-16 rounded-full mr-4 md:mr-12" alt="" />
+      <g-image :src="gravatar" class="relative w-16 h-16 rounded-full mr-4 md:mr-8" alt="" />
 
       <div class="flex-1 grid grid-cols-2">
         <header>
@@ -28,9 +28,9 @@
     <!-- Replies -->
     <section class="pl-2" v-if="replies.length">
       <article v-for="reply in replies" class="is-reply relative flex flex-row justify-between py-6" :key="reply.id">
-        <g-image :src="reply.gravatar" class="relative w-12 h-12 rounded-full mr-16 md:mr-24 lg:mr-36" alt="" />
+        <g-image :src="reply.gravatar" class="relative w-12 h-12 rounded-full mr-12 md:mr-24 lg:mr-24" alt="" />
 
-        <div class="flex-1 grid grid-cols-2">
+        <div class="flex-1">
           <header>
             <h3 class="font-display text-sm mb-0">{{ reply.author }}</h3>
             <time :datetime="reply.publishedDate" class="block font-display text-grey-400 text-sm mb-4">{{
@@ -38,7 +38,7 @@
             }}</time>
           </header>
 
-          <p class="col-span-2 text-sm mb-4 text-grey-700">{{ reply.content }}</p>
+          <p class="text-sm mb-4 text-grey-700">{{ reply.content }}</p>
         </div>
       </article>
     </section>
