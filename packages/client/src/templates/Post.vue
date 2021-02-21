@@ -42,8 +42,6 @@
         />
       </div>
     </main>
-
-    <CommentModal slot="modal" v-if="commentModal.isOpen" />
   </SiteLayout>
 </template>
 
@@ -111,7 +109,6 @@ import capitalize from '~/utils/capitalize';
 import toHTML from '~/utils/toHTML';
 import ShareButtons from '~/components/ShareButtons';
 import CommentsList from '~/components/CommentsList';
-import CommentModal from '~/components/CommentModal';
 
 export default {
   name: 'PostDetail',
@@ -156,7 +153,6 @@ export default {
   components: {
     ShareButtons,
     CommentsList,
-    CommentModal,
   },
   computed: {
     post() {
@@ -164,9 +160,6 @@ export default {
     },
     content() {
       return toHTML(this.post.content);
-    },
-    commentModal() {
-      return this.$store.state.commentModal;
     },
   },
   methods: {

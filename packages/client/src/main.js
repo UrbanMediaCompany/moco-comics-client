@@ -1,4 +1,5 @@
 import Vuex, { Store } from 'vuex';
+import PortalVue from 'portal-vue';
 import SiteLayout from '~/layouts/Site.vue';
 
 import 'fontsource-assistant';
@@ -12,17 +13,13 @@ export default function (Vue, { head, appOptions }) {
   head.htmlAttrs = { lang: 'es', dir: 'ltr' };
 
   Vue.use(Vuex);
+  Vue.use(PortalVue);
 
   const persistedVisitor = localStorage.getItem('PERSISTED_VISITOR');
 
   appOptions.store = new Store({
     state: {
       persistedVisitor: persistedVisitor !== 'undefined' ? JSON.parse(persistedVisitor) : null,
-      commentModal: {
-        isOpen: false,
-        post: null,
-        repliesTo: null,
-      },
     },
     mutations: {
       persistVisitor(state, payload) {
@@ -30,16 +27,6 @@ export default function (Vue, { head, appOptions }) {
       },
       forgetVisitor(state) {
         state.persistedVisitor = null;
-      },
-      openCommentModal(state, payload) {
-        state.commentModal = { isOpen: true, post: payload.post, repliesTo: payload.comment || null };
-      },
-      closeCommentModal(state) {
-        state.commentModal = {
-          isOpen: false,
-          post: null,
-          repliesTo: null,
-        };
       },
     },
     actions: {
@@ -50,12 +37,6 @@ export default function (Vue, { head, appOptions }) {
       forgetVisitor({ commit }) {
         localStorage.removeItem('PERSISTED_VISITOR');
         commit('forgetVisitor');
-      },
-      openCommentModal({ commit }, { payload }) {
-        commit('openCommentModal', payload);
-      },
-      closeCommentModal({ commit }) {
-        commit('closeCommentModal');
       },
     },
   });

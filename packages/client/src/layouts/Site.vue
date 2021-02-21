@@ -107,7 +107,7 @@
       </div>
     </footer>
 
-    <slot name="modal" />
+    <portal-target name="modal"></portal-target>
   </div>
 </template>
 
