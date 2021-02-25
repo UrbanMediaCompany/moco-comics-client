@@ -106,10 +106,12 @@ export default {
   name: 'PostDetail',
   metaInfo() {
     const { siteName, siteUrl, author } = this.$page.metadata;
-    const { title, publishedDate, content, characters = [] } = this.$page.strapiPosts;
+    const { title, publishedDate, content, characters = [], media } = this.$page.strapiPosts;
 
     const canonicalUrl = `${siteUrl}${this.$route.path}`;
     const description = content.length < 140 ? content : `${content.slice(0, 137)}...`;
+    const socialCardImage = media[0];
+    const socialCardURL = `${siteUrl}/.netlify/functions/social-card?title=${title}&url=${socialCardImage.url}`;
 
     return {
       title,
@@ -119,7 +121,7 @@ export default {
         { property: 'og:site_name', content: siteName },
         { property: 'og:title', content: title },
         { property: 'og:description', content: description },
-        { property: 'og:image', content: '' },
+        { property: 'og:image', content: socialCardURL },
         { property: 'og:image:type', content: 'image/png' },
         { property: 'og:image:width', content: '1200' },
         { property: 'og:image:height', content: '630' },
