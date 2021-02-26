@@ -109,7 +109,7 @@
                 :class="{ 'is-active': post.node.id === observedPost }"
               >
                 <g-image
-                  :src="post.node.media[0].url"
+                  :src="post.node.media[0] ? post.node.media[0].url : ''"
                   alt=""
                   class="inline-block rounded-md w-16 h-16 object-cover mr-8 border-2 group-hover:border-mc-yellow"
                   :class="post.node.id === observedPost ? 'border-mc-yellow' : 'border-grey-400'"

@@ -26,8 +26,12 @@
     </div>
 
     <!-- Replies -->
-    <section class="pl-2" v-if="replies.length">
-      <article v-for="reply in replies" class="is-reply relative flex flex-row justify-between py-6" :key="reply.id">
+    <section class="pl-2" v-if="filteredReplies.length">
+      <article
+        v-for="reply in filteredReplies"
+        class="is-reply relative flex flex-row justify-between py-6"
+        :key="reply.id"
+      >
         <g-image :src="reply.gravatar" class="relative w-12 h-12 rounded-full mr-12 md:mr-24 lg:mr-24" alt="" />
 
         <div class="flex-1">
@@ -62,6 +66,11 @@ export default {
     formattedPublishedDate: String,
     content: String,
     replies: Array,
+  },
+  computed: {
+    filteredReplies() {
+      return this.replies.filter(Boolean);
+    },
   },
   methods: {
     capitalize,

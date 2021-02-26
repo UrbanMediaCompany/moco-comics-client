@@ -52,6 +52,7 @@ query($id: ID!) {
   }
 
   strapiPosts(id: $id) {
+    id
     title
     publishedDate: published_at
     formattedPublishedDate: published_at(format: "MMMM D, YYYY", locale: "es-MX")
@@ -111,7 +112,9 @@ export default {
     const canonicalUrl = `${siteUrl}${this.$route.path}`;
     const description = content.length < 140 ? content : `${content.slice(0, 137)}...`;
     const socialCardImage = media[0];
-    const socialCardURL = `${siteUrl}/.netlify/functions/social-card?title=${title}&url=${socialCardImage.url}`;
+    const socialCardURL = socialCardImage
+      ? `${siteUrl}/.netlify/functions/social-card?title=${title}&url=${socialCardImage.url}`
+      : `${siteUrl}/social-card/moco-comics.png`;
 
     return {
       title,
