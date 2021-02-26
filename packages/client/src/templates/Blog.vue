@@ -191,6 +191,7 @@ import Post from '~/components/Post';
 import ChevronLeft from '~/assets/icons/chevron-left.svg';
 import ChevronRight from '~/assets/icons/chevron-right.svg';
 import SocialsNav from '~/components/SocialsNav';
+import isSSR from '~/utils/isSSR';
 
 export default {
   metaInfo() {
@@ -243,7 +244,7 @@ export default {
     };
   },
   created() {
-    if (!window.matchMedia) return;
+    if (isSSR() || !window.matchMedia) return;
 
     const { matches: isMediumViewport } = window.matchMedia('(min-width: 768px)');
 

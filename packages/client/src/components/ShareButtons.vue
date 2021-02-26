@@ -59,6 +59,7 @@ import FacebookIcon from '~/assets/icons/facebook.svg';
 import TwitterIcon from '~/assets/icons/twitter.svg';
 import ClipboardIcon from '~/assets/icons/clipboard.svg';
 import CheckIcon from '~/assets/icons/check.svg';
+import isSSR from '~/utils/isSSR';
 
 export default {
   name: 'ShareButtons',
@@ -74,7 +75,7 @@ export default {
   },
   data() {
     return {
-      isClipboardAvailable: Boolean(navigator.clipboard),
+      isClipboardAvailable: !isSSR() && Boolean(navigator.clipboard),
       copySuccess: false,
     };
   },

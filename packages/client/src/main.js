@@ -15,7 +15,7 @@ export default function (Vue, { head, appOptions }) {
   Vue.use(Vuex);
   Vue.use(PortalVue);
 
-  const persistedVisitor = localStorage.getItem('PERSISTED_VISITOR');
+  const persistedVisitor = typeof localStorage !== 'undefined' ? localStorage.getItem('PERSISTED_VISITOR') : null;
 
   appOptions.store = new Store({
     state: {

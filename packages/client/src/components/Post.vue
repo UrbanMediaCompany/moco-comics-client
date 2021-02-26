@@ -26,6 +26,7 @@ import capitalize from '~/utils/capitalize';
 import toHTML from '~/utils/toHTML';
 import ShareButtons from '~/components/ShareButtons';
 import CommentsList from './CommentsList';
+import isSSR from '~/utils/isSSR';
 
 export default {
   name: 'Post',
@@ -34,7 +35,7 @@ export default {
     CommentsList,
   },
   props: {
-    observer: IntersectionObserver,
+    observer: isSSR() ? Object : IntersectionObserver,
     id: String,
     slug: String,
     title: String,
