@@ -14,4 +14,16 @@ module.exports = ({ env }) => ({
       customKey: ({ name, type }) => `${type}/${name}`,
     },
   },
+  email: {
+    provider: 'mailgun',
+    providerOptions: {
+      apiKey: env('MAILGUN_API_KEY'),
+      domain: env('MAILGUN_DOMAIN'),
+      host: env('MAILGUN_HOST', 'api.us.mailgun.net'),
+    },
+    settings: {
+      defaultFrom: env('MAILGUN_FROM_ADDRESS'),
+      defaultReplyTo: env('MAILGUN_REPLYTO_ADDRESS'),
+    },
+  },
 });
