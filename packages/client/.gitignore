@@ -120,3 +120,4 @@ build
 
 .temp
 dist
+static/rss.xml

@@ -14,10 +14,12 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
+    "@gridsome/plugin-sitemap": "^0.4.0",
     "fontsource-assistant": "^3.1.5",
     "fontsource-luckiest-guy": "^3.1.5",
     "fontsource-paytone-one": "^3.1.5",
     "gridsome": "^0.7.0",
+    "gridsome-plugin-rss": "^1.2.0",
     "node-fetch": "^2.6.1",
     "portal-vue": "^2.1.7",
     "showdown": "^1.9.1",

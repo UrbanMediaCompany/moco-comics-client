@@ -17,7 +17,28 @@ module.exports = {
       },
     ],
   },
-  plugins: ['gridsome-plugin-tailwindcss'],
+  plugins: [
+    'gridsome-plugin-tailwindcss',
+    '@gridsome/plugin-sitemap',
+    {
+      use: 'gridsome-plugin-rss',
+      options: {
+        contentTypeName: 'StrapiPosts',
+        feedOptions: {
+          title: 'Moco-Comics — Monitos de Juanele',
+          feed_url: 'https://moco-comics.com/rss.xml',
+          site_url: 'https://moco-comics.com',
+          image_url: 'https://moco-comics.com/social-card/moco-comics.png',
+          language: 'es_MX',
+        },
+        feedItemOptions: (node) => ({
+          title: node.title,
+          url: `https://moco-comics.com/blog/${node.slug}`,
+          author: '@juaneletamal',
+        }),
+      },
+    },
+  ],
   chainWebpack: (config) => {
     const svgRule = config.module.rule('svg');
     svgRule.uses.clear();
