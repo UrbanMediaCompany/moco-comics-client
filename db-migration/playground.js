@@ -1,7 +1,7 @@
-const characters = require('./db/output/characters.json');
-const products = require('./db/output/products.json');
-const posts = require('./db/output/posts.json');
-const comments = require('./db/output/comments.json');
+const characters = require('./db/migration/characters.json');
+const products = require('./db/migration/products.json');
+const posts = require('./db/migration/posts.json');
+const comments = require('./db/migration/comments.json');
 const normalizedComments = require('./db/normalized/comments.json');
 
 console.log(

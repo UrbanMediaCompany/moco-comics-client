@@ -133,6 +133,18 @@ const transformComments = async () => {
   return Promise.all(transformations);
 };
 
+const transformReplies = () => {
+  const replies = normalizedComments
+    .map((comment, index) => ({ ...comment, id: index + 1 }))
+    .filter((comment) => comment.parent !== null)
+    .map((comment) => {
+      const parentIndex = normalizedComments.findIndex((c) => c.id === comment.parent);
+      return { ...comment, replies_to: parentIndex + 1 };
+    });
+
+  return replies;
+};
+
 const client = new Client({
   user: 'fsvdr',
   host: 'localhost',
@@ -164,6 +176,11 @@ client.connect();
 
   // const comments = await transformComments();
   // fs.writeFile('db/migration/comments.json', JSON.stringify(comments), (error) => console.log);
+
+  // 5. Transform & update these
+
+  const replies = transformReplies();
+  fs.writeFile('db/migration/replies.json', JSON.stringify(replies), (error) => console.log);
 
   client.end();
 })();
