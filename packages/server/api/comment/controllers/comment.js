@@ -16,9 +16,13 @@ module.exports = {
 
     const {
       author,
+      email,
       content,
       post: { title, slug },
     } = entity;
+
+    // We don't want to receive emails about our own comments
+    if (email === process.env.EDITOR_EMAIL_ADDRESS) return entity;
 
     await strapi.plugins.email.services.email.send({
       to: process.env.FORWARD_EMAIL_ADDRESS,
