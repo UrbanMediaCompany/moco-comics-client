@@ -12718,10 +12718,10 @@ sliced@1.0.1:
   resolved "https://registry.yarnpkg.com/sliced/-/sliced-1.0.1.tgz#0b3a662b5d04c3177b1926bea82b03f837a2ef41"
   integrity sha1-CzpmK10Ewxd7GSa+qCsD+Dei70E=
 
-slugify@^1.4.6:
-  version "1.4.6"
-  resolved "https://registry.yarnpkg.com/slugify/-/slugify-1.4.6.tgz#ef288d920a47fb01c2be56b3487b6722f5e34ace"
-  integrity sha512-ZdJIgv9gdrYwhXqxsH9pv7nXxjUEyQ6nqhngRxoAAOlmMGA28FDq5O4/5US4G2/Nod7d1ovNcgURQJ7kHq50KQ==
+slug@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/slug/-/slug-4.0.3.tgz#0145b947b3491c4aa4a618dfcf7defdd27690347"
+  integrity sha512-CnR9sYvJn6JW8hDzxRVg8imqzaJrCuUMc8poiFmd3tqWQXxeEQdwsBbBidSdl+Q3obwxQ4hrx7kxcUH9oCE9yw==
 
 smart-buffer@^4.1.0:
   version "4.1.0"
