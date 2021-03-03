@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "mysql": "^2.18.1",
-    "pg": "^8.5.1",
     "turndown": "^7.0.0"
   }
 }
