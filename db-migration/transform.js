@@ -1,15 +1,10 @@
 const fs = require('fs');
-const mysql = require('mysql');
+const { client, queryOne } = require('./db');
 
 const normalizedCharacters = require('./db/normalized/characters.json');
 const normalizedProducts = require('./db/normalized/products.json');
 const normalizedPosts = require('./db/normalized/posts.json');
 const normalizedComments = require('./db/normalized/comments.json');
-
-const queryOne = (...params) =>
-  new Promise((resolve, reject) => {
-    client.query(...params, (error, result) => (error ? reject([error]) : resolve([null, result[0]])));
-  });
 
 const transformCharacters = async () => {
   const transformations = normalizedCharacters.map(async (character) => {
@@ -143,8 +138,6 @@ const transformReplies = () => {
 
   return replies;
 };
-
-const client = mysql.createConnection('mysql://localhost');
 
 (async () => {
   // IMPORTANT: FOLLOW THIS STEPS IN ORDER

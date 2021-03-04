@@ -1,9 +1,9 @@
 [
-  { "id": 1, "name": "Patote", "image": 354 },
-  { "id": 2, "name": "Borola Y Chocolomo", "image": 351 },
-  { "id": 3, "name": "Abuela Karateca", "image": 352 },
-  { "id": 4, "name": "Tilinia La Pulga Dentista", "image": 355 },
-  { "id": 5, "name": "Varios", "image": 356 },
-  { "id": 6, "name": "Extras", "image": 349 },
-  { "id": 7, "name": "Chancho", "image": 353 }
+  { "id": 1, "name": "Patote", "image": 6 },
+  { "id": 2, "name": "Borola Y Chocolomo", "image": 8 },
+  { "id": 3, "name": "Abuela Karateca", "image": 7 },
+  { "id": 4, "name": "Tilinia La Pulga Dentista", "image": 9 },
+  { "id": 5, "name": "Varios", "image": 3 },
+  { "id": 6, "name": "Extras", "image": 2 },
+  { "id": 7, "name": "Chancho", "image": 4 }
 ]
