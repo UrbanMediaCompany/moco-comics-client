@@ -27,7 +27,7 @@
   "dependencies": {
     "aws-sdk": "^2.793.0",
     "knex": "<0.20.0",
-    "pg": "^8.5.1",
+    "mysql": "^2.18.1",
     "slug": "^4.0.3",
     "sqlite3": "latest",
     "strapi": "3.3.2",
