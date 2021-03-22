@@ -57,7 +57,7 @@ module.exports = (api) => {
       }
     `);
 
-    const totalPages = totalCount / postsPerPage;
+    const totalPages = Math.ceil(totalCount / postsPerPage);
 
     Array.from({ length: totalPages }).forEach((_, index) => {
       const page = index + 1;

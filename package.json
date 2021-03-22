@@ -1,29 +1,63 @@
 {
-  "private": "true",
-  "name": "moco-comics",
-  "version": "4.0.0",
-  "repository": "git@gitlab.com:Codify/moco-comics.git",
-  "license": "MIT",
-  "workspaces": [
-    "packages/*"
-  ],
+  "name": "@moco-comics/client",
+  "private": true,
+  "version": "1.0.0",
   "scripts": {
-    "client": "yarn workspace @moco-comics/client dev",
-    "server": "yarn workspace @moco-comics/server dev",
-    "validate": "concurrently 'yarn workspace @moco-comics/server validate' 'yarn workspace @moco-comics/client validate' --names '📡,🔮' --prefix name",
-    "precommit": "concurrently 'yarn workspace @moco-comics/server precommit' 'yarn workspace @moco-comics/client precommit' --names '📡,🔮' --prefix name"
+    "build": "gridsome build",
+    "dev": "gridsome develop",
+    "explore": "gridsome explore",
+    "lint": "eslint . --ignore-path .gitignore",
+    "prettier": "prettier . --ignore-path .gitignore",
+    "check-format": "yarn prettier --list-different",
+    "format": "yarn prettier --write",
+    "validate": "yarn check-format && yarn lint && yarn build"
   },
-  "volta": {
-    "node": "14.15.0"
+  "dependencies": {
+    "@gridsome/plugin-sitemap": "^0.4.0",
+    "fontsource-assistant": "^3.1.5",
+    "fontsource-luckiest-guy": "^3.1.5",
+    "fontsource-paytone-one": "^3.1.5",
+    "gridsome": "^0.7.0",
+    "gridsome-plugin-rss": "^1.2.0",
+    "node-fetch": "^2.6.1",
+    "portal-vue": "^2.1.7",
+    "showdown": "^1.9.1",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+    "vuex": "^3.6.0"
   },
-  "dependencies": {},
   "devDependencies": {
-    "concurrently": "^5.3.0",
-    "husky": "^4.3.0"
+    "autoprefixer": "^9",
+    "eslint": "^7.13.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-gridsome": "^1.5.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-vue": "^7.1.0",
+    "gridsome-plugin-tailwindcss": "^4.1.1",
+    "husky": "^4.3.8",
+    "lint-staged": "^10.5.4",
+    "postcss": "^7",
+    "prettier": "^2.1.2",
+    "vue-eslint-parser": "^7.1.1",
+    "vue-svg-loader": "^0.16.0"
+  },
+  "lint-staged": {
+    "*.+(vue|js|json)": [
+      "prettier --write",
+      "prettier --list-different"
+    ],
+    "*.(vue|js)": [
+      "eslint"
+    ]
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn precommit"
+      "pre-commit": "lint-staged"
     }
+  },
+  "volta": {
+    "node": "14.15.0",
+    "yarn": "1.22.0"
   }
 }
