@@ -1,0 +1,25 @@
+.wordmark {
+  text-shadow: 5px 5px var(--mc-color-yellow-500);
+}
+
+.bubble {
+  border-radius: 50% / 10%;
+}
+
+.bubble::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 8%;
+  bottom: 5%;
+  right: -4%;
+  left: -4%;
+  background-color: inherit;
+  border-radius: 5% / 50%;
+}
+
+@media (min-width: 768px) {
+  .bubble::before {
+    bottom: 4%;
+  }
+}
