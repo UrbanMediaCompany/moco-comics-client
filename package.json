@@ -3,9 +3,11 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "build": "gridsome build",
-    "dev": "gridsome develop",
-    "explore": "gridsome explore",
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "start": "yarn develop",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
     "lint": "eslint . --ignore-path .gitignore",
     "prettier": "prettier . --ignore-path .gitignore",
     "check-format": "yarn prettier --list-different",
@@ -13,51 +15,43 @@
     "validate": "yarn check-format && yarn lint && yarn build"
   },
   "dependencies": {
-    "@gridsome/plugin-sitemap": "^0.4.0",
-    "fontsource-assistant": "^3.1.5",
-    "fontsource-luckiest-guy": "^3.1.5",
-    "fontsource-paytone-one": "^3.1.5",
-    "gridsome": "^0.7.0",
-    "gridsome-plugin-rss": "^1.2.0",
-    "node-fetch": "^2.6.1",
-    "portal-vue": "^2.1.7",
-    "showdown": "^1.9.1",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
-    "vuex": "^3.6.0"
+    "gatsby": "^3.1.2",
+    "gatsby-plugin-gatsby-cloud": "^2.1.0",
+    "gatsby-plugin-image": "^1.1.2",
+    "gatsby-plugin-manifest": "^3.1.0",
+    "gatsby-plugin-offline": "^4.1.0",
+    "gatsby-plugin-postcss": "^4.1.0",
+    "gatsby-plugin-react-helmet": "^4.1.0",
+    "gatsby-plugin-sharp": "^3.1.2",
+    "gatsby-source-filesystem": "^3.1.0",
+    "gatsby-transformer-sharp": "^3.1.0",
+    "postcss": "^8.2.8",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-helmet": "^6.1.0",
+    "tailwindcss": "^2.0.4"
   },
   "devDependencies": {
-    "autoprefixer": "^9",
-    "eslint": "^7.13.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-config-prettier": "^6.15.0",
-    "eslint-import-resolver-alias": "^1.1.2",
-    "eslint-plugin-gridsome": "^1.5.0",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-vue": "^7.1.0",
-    "gridsome-plugin-tailwindcss": "^4.1.1",
-    "husky": "^4.3.8",
-    "lint-staged": "^10.5.4",
-    "postcss": "^7",
-    "prettier": "^2.1.2",
-    "vue-eslint-parser": "^7.1.1",
-    "vue-svg-loader": "^0.16.0"
+    "babel-eslint": "^10.1.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-config-react-app": "^6.0.0",
+    "gatsby-plugin-eslint": "^3.0.0",
+    "lint-staged": "^10.5.1",
+    "prettier": "2.2.1",
+    "simple-git-hooks": ">=2.0.3"
+  },
+  "license": "0BSD",
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
   },
   "lint-staged": {
-    "*.+(vue|js|json)": [
+    "*.+(js|json|jsx)": [
       "prettier --write",
       "prettier --list-different"
     ],
-    "*.(vue|js)": [
+    "*.(js|jsx)": [
       "eslint"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "volta": {
-    "node": "14.15.0",
-    "yarn": "1.22.0"
   }
 }
