@@ -29,6 +29,7 @@
     "gatsby-plugin-react-svg": "^3.0.0",
     "gatsby-plugin-sharp": "^3.1.2",
     "gatsby-source-filesystem": "^3.1.0",
+    "gatsby-source-strapi": "^1.0.0-alpha.0",
     "gatsby-transformer-sharp": "^3.1.0",
     "postcss": "^8.2.8",
     "prop-types": "^15.7.2",
@@ -48,7 +49,7 @@
   },
   "license": "0BSD",
   "simple-git-hooks": {
-    "pre-commit": "npx lint-staged"
+    "pre-commit": "lint-staged"
   },
   "lint-staged": {
     "*.+(js|json|jsx)": [

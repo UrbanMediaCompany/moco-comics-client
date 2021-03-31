@@ -1,3 +1,7 @@
+require('dotenv').config({
+  path: '.env',
+});
+
 module.exports = {
   siteMetadata: {
     title: `Gatsby Default Starter`,
@@ -38,6 +42,24 @@ module.exports = {
     },
     `gatsby-plugin-gatsby-cloud`,
     'gatsby-plugin-eslint',
-    'gatsby-plugin-postcss',
+    {
+      resolve: `gatsby-plugin-postcss`,
+      options: {
+        postCssPlugins: [require('tailwindcss'), require('autoprefixer')],
+      },
+    },
+    {
+      resolve: `gatsby-source-strapi`,
+      options: {
+        apiURL: process.env.STRAPI_URL,
+        queryLimit: -1,
+        contentTypes: ['post', 'comment'],
+        singleTypes: [],
+        loginData: {
+          identifier: process.env.STRAPI_IDENTIFIER,
+          password: process.env.STRAPI_PASSWORD,
+        },
+      },
+    },
   ],
 };
