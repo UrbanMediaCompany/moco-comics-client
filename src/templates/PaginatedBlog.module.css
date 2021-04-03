@@ -1,0 +1,46 @@
+.hero::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 32%;
+  width: max(50rem, 80vw);
+  height: max(80rem, 80vh);
+  background-color: #ff695b;
+  transform: translateX(-50%) rotate(20deg);
+  border-top-right-radius: 4rem;
+  z-index: 0;
+}
+
+.title {
+  text-shadow: 5px 5px var(--mc-color-red-500);
+}
+
+a.is-active {
+  color: #000;
+}
+
+main {
+  display: grid;
+  gap: 5rem;
+  justify-content: space-evenly;
+}
+
+@media (min-width: 768px) {
+  main {
+    grid-template-columns: minmax(384px, 640px) 300px;
+    column-gap: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  main {
+    grid-template-columns: minmax(460px, 680px) 320px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .hero::before {
+    left: 40%;
+  }
+}
