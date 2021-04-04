@@ -68,5 +68,54 @@ module.exports = {
         },
       },
     },
+    'gatsby-plugin-sitemap',
+    {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        query: `
+          {
+            site {
+              siteMetadata {
+                title
+                description
+                siteUrl
+                site_url: siteUrl
+              }
+            }
+          }
+        `,
+        feeds: [
+          {
+            serialize: ({ query: { site, allStrapiPost } }) => {
+              return allStrapiPost.edges.map(({ node: post }) => {
+                return {
+                  title: post.title,
+                  date: post.publishedDate,
+                  description: post.content.length < 140 ? post.content : `${post.content.slice(0, 137)}...`,
+                  url: `${site.siteMetadata.siteUrl}/blog/${post.slug}`,
+                  guid: `${site.siteMetadata.siteUrl}/blog/${post.slug}`,
+                };
+              });
+            },
+            query: `
+              {
+                allStrapiPost(sort: { fields: published_at, order: DESC }) {
+                  edges {
+                    node {
+                      slug
+                      title
+                      publishedDate
+                      content
+                    }
+                  }
+                }
+              }
+            `,
+            output: '/rss.xml',
+            title: 'Moco-Comics | Monitos de Juanele',
+          },
+        ],
+      },
+    },
   ],
 };
