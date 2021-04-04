@@ -37,15 +37,16 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `Moco-Comics`,
+        short_name: `Moco-Comics`,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
+        background_color: `#ffc12d`,
+        theme_color: `#ffc12d`,
         display: `minimal-ui`,
         icon: `src/assets/favicon.png`, // This path is relative to the root of the site.
       },
     },
+    `gatsby-plugin-offline`,
     `gatsby-plugin-gatsby-cloud`,
     'gatsby-plugin-eslint',
     {
