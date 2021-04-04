@@ -13,6 +13,7 @@ exports.createPages = async ({ actions, graphql }) => {
         edges {
           node {
             id: strapiId
+            slug
           }
         }
       }
@@ -43,6 +44,16 @@ exports.createPages = async ({ actions, graphql }) => {
         nextPage: isLastPage ? null : `/pagina/${page + 1}`,
         previousPage: isFirstPage ? null : page === 2 ? `/` : `/pagina/${page - 1}`,
         postsInPage,
+      },
+    });
+  });
+
+  posts.forEach(({ node: post }) => {
+    actions.createPage({
+      path: `/blog/${post.slug}`,
+      component: path.resolve('src/templates/BlogPostDetail.jsx'),
+      context: {
+        id: post.id,
       },
     });
   });

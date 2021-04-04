@@ -9,6 +9,7 @@ import * as styles from './PaginatedBlog.module.css';
 import BlogPost from '../components/BlogPost';
 import CommentModal from '../components/CommentModal';
 import SocialsNav from '../components/SocialsNav';
+import useCommentModal from '../hooks/useCommentModal';
 
 const normalizeComments = (comments) => {
   return comments
@@ -29,14 +30,14 @@ const PaginatedBlog = ({
 }) => {
   const [observedPost, setObservedPost] = useState(null);
   const [comments, setComments] = useState(normalizeComments(allStrapiComment.edges));
-  const [commentModalContext, setCommentModalContext] = useState();
+  const [commentModalContext, presentModal, dismissModal] = useCommentModal();
 
   const handleNewComment = (comment) => {
     const postKey = comment.post;
     const postComments = comments[postKey] ? [...comments[postKey], comment] : [comment];
 
     setComments({ ...comments, [postKey]: postComments });
-    setCommentModalContext(undefined);
+    dismissModal();
   };
 
   return (
@@ -84,13 +85,13 @@ const PaginatedBlog = ({
         <p className="font-cartoon opacity-90 text-white text-lg">Monitos de Juanele</p>
       </header>
 
-      <main className="px-constrained -mt-20 md:pb-64">
+      <main className={`${styles.main} px-constrained -mt-20 md:pb-64`}>
         <section className="grid grid-cols-1 gap-36 pb-20 relative">
           {posts.map(({ node: post }) => (
             <BlogPost
               post={post}
               comments={comments[post.id] || []}
-              onCommentClick={(request) => setCommentModalContext(request)}
+              onCommentClick={presentModal}
               onIntersection={() => setObservedPost(post.id)}
               className="md:col-start-1"
               key={post.id}
@@ -172,7 +173,7 @@ const PaginatedBlog = ({
 
       <CommentModal
         presentationContext={commentModalContext}
-        dismiss={() => setCommentModalContext(undefined)}
+        dismiss={dismissModal}
         onCommentCreated={handleNewComment}
       />
     </Layout>
