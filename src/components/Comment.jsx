@@ -19,7 +19,7 @@ const Comment = ({ comment, onReplyClick }) => (
         <p className="col-span-2 text-sm mb-4 text-grey-700">{comment.content}</p>
 
         <button
-          onClick={onReplyClick}
+          onClick={() => onReplyClick(comment)}
           type="button"
           className="row-start-3 col-start-2 place-self-end flex flex-nowrap items-center font-display text-grey-400 text-sm hover:text-mc-red transition-colors duration-100 xs:row-start-1 xs:self-center"
         >

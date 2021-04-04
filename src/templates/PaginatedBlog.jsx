@@ -7,6 +7,7 @@ import ChevronLeft from '../assets/icons/chevron-left.svg';
 import ChevronRight from '../assets/icons/chevron-right.svg';
 import * as styles from './PaginatedBlog.module.css';
 import BlogPost from '../components/BlogPost';
+import CommentModal from '../components/CommentModal';
 
 const normalizeComments = (comments) => {
   return comments
@@ -27,8 +28,15 @@ const PaginatedBlog = ({
 }) => {
   const [observedPost, setObservedPost] = useState(null);
   const [comments, setComments] = useState(normalizeComments(allStrapiComment.edges));
+  const [commentModalContext, setCommentModalContext] = useState();
 
-  const handleCommentRequest = () => {};
+  const handleNewComment = (comment) => {
+    const postKey = comment.post;
+    const postComments = comments[postKey] ? [...comments[postKey], comment] : [comment];
+
+    setComments({ ...comments, [postKey]: postComments });
+    setCommentModalContext(undefined);
+  };
 
   return (
     <Layout>
@@ -81,7 +89,7 @@ const PaginatedBlog = ({
             <BlogPost
               post={post}
               comments={comments[post.id] || []}
-              onCommentClick={handleCommentRequest}
+              onCommentClick={(request) => setCommentModalContext(request)}
               onIntersection={() => setObservedPost(post.id)}
               className="md:col-start-1"
               key={post.id}
@@ -160,6 +168,12 @@ const PaginatedBlog = ({
           {/* <SocialsNav /> */}
         </aside>
       </main>
+
+      <CommentModal
+        presentationContext={commentModalContext}
+        dismiss={() => setCommentModalContext(undefined)}
+        onCommentCreated={handleNewComment}
+      />
     </Layout>
   );
 };

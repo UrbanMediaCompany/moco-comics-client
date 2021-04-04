@@ -16,9 +16,6 @@ const BlogPost = ({ post, comments, onIntersection, onCommentClick, className })
     onIntersection();
   }, [inView, onIntersection]);
 
-  const handleNewCommentRequest = () => {};
-  const handleReplyRequest = () => {};
-
   return (
     <article
       className={`flex flex-nowrap flex-col items-center ${className}`}
@@ -53,8 +50,8 @@ const BlogPost = ({ post, comments, onIntersection, onCommentClick, className })
 
         <CommentsList
           comments={comments}
-          onNewCommentClick={handleNewCommentRequest}
-          onReplyClick={handleReplyRequest}
+          onNewCommentClick={() => onCommentClick({ post })}
+          onReplyClick={(comment) => onCommentClick({ post, comment })}
         />
       </div>
     </article>
