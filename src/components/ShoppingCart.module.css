@@ -1,0 +1,3 @@
+.container {
+  bottom: calc(9rem + env(safe-area-inset-bottom));
+}
