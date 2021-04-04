@@ -8,6 +8,7 @@ import ChevronRight from '../assets/icons/chevron-right.svg';
 import * as styles from './PaginatedBlog.module.css';
 import BlogPost from '../components/BlogPost';
 import CommentModal from '../components/CommentModal';
+import SocialsNav from '../components/SocialsNav';
 
 const normalizeComments = (comments) => {
   return comments
@@ -165,7 +166,7 @@ const PaginatedBlog = ({
             </ul>
           </nav>
 
-          {/* <SocialsNav /> */}
+          <SocialsNav />
         </aside>
       </main>
 
