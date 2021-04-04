@@ -59,7 +59,7 @@ module.exports = {
       options: {
         apiURL: process.env.STRAPI_URL,
         queryLimit: -1,
-        contentTypes: ['post', 'comment'],
+        contentTypes: ['post', 'comment', 'product'],
         singleTypes: [],
         loginData: {
           identifier: process.env.STRAPI_IDENTIFIER,
