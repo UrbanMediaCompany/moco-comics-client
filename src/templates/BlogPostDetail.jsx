@@ -10,8 +10,9 @@ import markdownToHtml from '../utils/markdownToHtml';
 import * as styles from './BlogPostDetailPage.module.css';
 import useCommentModal from '../hooks/useCommentModal';
 import CommentModal from '../components/CommentModal';
+import SEO from '../components/SEO';
 
-const BlogPostDetailPage = ({ data: { strapiPost: post, allStrapiComment } }) => {
+const BlogPostDetailPage = ({ path, data: { strapiPost: post, allStrapiComment } }) => {
   const [comments, setComments] = useState(allStrapiComment.edges.map(({ node }) => node));
   const [commentModalContext, presentModal, dismissModal] = useCommentModal();
 
@@ -20,8 +21,27 @@ const BlogPostDetailPage = ({ data: { strapiPost: post, allStrapiComment } }) =>
     dismissModal();
   };
 
+  const description = post.content.length < 140 ? post.content : `${post.content.slice(0, 137)}...`;
+  const socialCardImage = post.media ? post.media[0] : null;
+  const socialCardURL = socialCardImage
+    ? `/.netlify/functions/social-card?title=${post.title}&url=${socialCardImage.url}`
+    : undefined;
+
   return (
     <Layout>
+      <SEO
+        title={post.title}
+        canonical={path}
+        description={description}
+        image={socialCardURL}
+        og={{
+          type: 'article',
+          published_time: post.publishedDate,
+          section: 'Comics',
+          tags: post.characters?.map((c) => c.name) ?? [],
+        }}
+      />
+
       <header
         className={`${styles.hero} relative w-full min-h-40 bg-mc-yellow pt-28 pb-32 px-constrained text-left overflow-hidden md:pt-44`}
       >
@@ -83,6 +103,7 @@ const BlogPostDetailPage = ({ data: { strapiPost: post, allStrapiComment } }) =>
 };
 
 BlogPostDetailPage.propTypes = {
+  path: PropTypes.string.isRequired,
   data: PropTypes.shape({
     strapiPost: PropTypes.shape({
       id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
@@ -93,6 +114,7 @@ BlogPostDetailPage.propTypes = {
       formattedPublishedDate: PropTypes.string.isRequired,
       media: PropTypes.arrayOf(
         PropTypes.shape({
+          url: PropTypes.string.isRequired,
           localFile: PropTypes.shape({
             id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
             childImageSharp: PropTypes.shape({
@@ -153,6 +175,7 @@ export const query = graphql`
       formattedPublishedDate: published_at(formatString: "MMMM D, YYYY", locale: "es-MX")
       media {
         id
+        url
         localFile {
           id
           childImageSharp {

@@ -10,6 +10,7 @@ import BlogPost from '../components/BlogPost';
 import CommentModal from '../components/CommentModal';
 import SocialsNav from '../components/SocialsNav';
 import useCommentModal from '../hooks/useCommentModal';
+import SEO from '../components/SEO';
 
 const normalizeComments = (comments) => {
   return comments
@@ -22,8 +23,10 @@ const normalizeComments = (comments) => {
 };
 
 const PaginatedBlog = ({
+  path,
   pageContext: { totalPages, currentPage, nextPage, previousPage },
   data: {
+    site: { siteMetadata },
     allStrapiPost: { edges: posts },
     allStrapiComment,
   },
@@ -40,8 +43,19 @@ const PaginatedBlog = ({
     dismissModal();
   };
 
+  const canonicalPagination = [
+    previousPage ? { rel: 'prev', href: `${siteMetadata.siteUrl}${previousPage === '/' ? '' : previousPage}` } : null,
+    nextPage ? { rel: 'next', href: `${siteMetadata.siteUrl}${nextPage}` } : null,
+  ].filter(Boolean);
+
   return (
     <Layout>
+      <SEO canonical={path}>
+        {canonicalPagination.map((m) => (
+          <link rel={m.rel} href={m.href} key={m.href} />
+        ))}
+      </SEO>
+
       <header
         className={`${styles.hero} relative w-full bg-mc-yellow pt-28 pb-32 px-constrained text-center overflow-hidden md:pt-44`}
       >
@@ -181,6 +195,8 @@ const PaginatedBlog = ({
 };
 
 PaginatedBlog.propTypes = {
+  path: PropTypes.string.isRequired,
+
   pageContext: PropTypes.shape({
     totalPages: PropTypes.number.isRequired,
     currentPage: PropTypes.number.isRequired,
@@ -189,6 +205,12 @@ PaginatedBlog.propTypes = {
   }).isRequired,
 
   data: PropTypes.shape({
+    site: PropTypes.shape({
+      siteMetadata: PropTypes.shape({
+        siteUrl: PropTypes.string.isRequired,
+      }).isRequired,
+    }).isRequired,
+
     allStrapiPost: PropTypes.shape({
       edges: PropTypes.arrayOf(
         PropTypes.shape({
@@ -248,6 +270,12 @@ export default PaginatedBlog;
 
 export const query = graphql`
   query PaginatedBlog($postsPerPage: Int!, $skip: Int!, $postsInPage: [Int]!) {
+    site {
+      siteMetadata {
+        siteUrl
+      }
+    }
+
     allStrapiPost(limit: $postsPerPage, skip: $skip, sort: { fields: published_at, order: DESC }) {
       edges {
         node {

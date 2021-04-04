@@ -5,9 +5,9 @@ require('dotenv').config({
 module.exports = {
   siteMetadata: {
     siteUrl: `https://moco-comics.com`,
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Moco-Comics`,
+    description: `Toda mi vida me ha gustado hacer comics. Intento que cada librito que hago sea único, con identidad propia y mejor que el anterior, tratando de mejorar cada vez. Se ven bonitos todos juntos, ¡Cómprenmen comics!`,
+    author: `@juaneletamal`,
     socials: {
       facebook: 'https://www.facebook.com/MocoComics/',
       twitter: 'https://twitter.com/JuaneleTamal',

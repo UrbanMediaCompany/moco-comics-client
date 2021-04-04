@@ -6,13 +6,9 @@ import SocialsNav from '../components/SocialsNav';
 import * as styles from '../styles/Tienda.module.css';
 import Product from '../components/Product';
 import ShoppingCart from '../components/ShoppingCart';
+import SEO from '../components/SEO';
 
-const StorePage = ({
-  data: {
-    site: { siteMetadata: metadata },
-    allStrapiProduct,
-  },
-}) => {
+const StorePage = ({ data: { allStrapiProduct } }) => {
   const [cart, setCart] = useState([]);
   const [isPayingWithCard, setIsPayingWithCard] = useState(false);
 
@@ -55,6 +51,8 @@ const StorePage = ({
 
   return (
     <Layout>
+      <SEO title="Tienda" canonical="/tienda" />
+
       <header
         className={`${styles.hero} relative w-full bg-mc-yellow pt-28 pb-32 px-constrained text-left overflow-hidden md:pt-44`}
       >
@@ -91,15 +89,6 @@ const StorePage = ({
 
 StorePage.propTypes = {
   data: PropTypes.shape({
-    site: PropTypes.shape({
-      siteMetadata: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        siteUrl: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired,
-        author: PropTypes.string.isRequired,
-      }).isRequired,
-    }).isRequired,
-
     allStrapiProduct: PropTypes.shape({
       edges: PropTypes.arrayOf(
         PropTypes.shape({
@@ -127,15 +116,6 @@ export default StorePage;
 
 export const query = graphql`
   query StorePageQuery {
-    site {
-      siteMetadata {
-        title
-        siteUrl
-        description
-        author
-      }
-    }
-
     allStrapiProduct(sort: { fields: created_at, order: DESC }) {
       edges {
         node {
