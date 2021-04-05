@@ -104,7 +104,7 @@ module.exports = {
                     node {
                       slug
                       title
-                      publishedDate
+                      publishedDate: published_at
                       content
                     }
                   }
