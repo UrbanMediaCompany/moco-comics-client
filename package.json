@@ -3,6 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
+    "postinstall": "netlify-lambda install",
     "build": "gatsby build",
     "develop": "gatsby develop",
     "start": "yarn develop",
@@ -33,6 +34,7 @@
     "gatsby-source-filesystem": "^3.1.0",
     "gatsby-source-strapi": "^1.0.0-alpha.0",
     "gatsby-transformer-sharp": "^3.1.0",
+    "netlify-lambda": "^2.0.3",
     "postcss": "^8.2.8",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
