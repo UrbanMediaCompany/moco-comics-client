@@ -36,7 +36,7 @@ exports.handler = async ({ body }) => {
     },
   } = JSON.parse(body);
   const hash = md5(email.trim().toLowerCase()).toString();
-  const gravatar = `http://www.gravatar.com/avatar/${hash}`;
+  const gravatar = `https://www.gravatar.com/avatar/${hash}`;
 
   // 3. Submit comment to Strapi
   const comment = { author, email, website, gravatar, content, post, replies_to };
