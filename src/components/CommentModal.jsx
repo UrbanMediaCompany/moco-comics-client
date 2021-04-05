@@ -58,7 +58,7 @@ const CommentModal = ({ presentationContext, dismiss, onCommentCreated }) => {
             <GatsbyImage
               image={post.media[0].localFile.childImageSharp.gatsbyImageData}
               alt=""
-              className="inline-block rounded-tl-md rounded-tr-md w-28 h-28 object-cover mr-8 border-2 border-white transform -rotate-6 -mb-8 md:w-40 md:h-40"
+              className="inline-block rounded-tl-md rounded-tr-md min-w-28 w-28 h-28 object-cover mr-8 border-2 border-white transform -rotate-6 -mb-8 md:min-w-40 md:w-40 md:h-40"
             />
           ) : null}
 
