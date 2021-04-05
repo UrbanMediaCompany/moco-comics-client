@@ -14,7 +14,7 @@ const Layout = ({ children }) => {
     <div className="bg-mc-grey w-full min-h-screen">
       <nav className="fixed bottom-sa-3 left-4 right-4 rounded-lg bg-mc-blue py-3 shadow-lg z-10 px-constrained border-b-6 border-black border-opacity-20 md:absolute md:bottom-auto md:top-4 md:left-8 md:right-8 md:bg-transparent md:shadow-none md:border-0 md:flex md:flex-row md:flex-nowrap md:justify-between md:items-center">
         <Link to="/" className="hidden md:block">
-          <StaticImage src="../assets/images/logo.png" alt="" loading="eager" quality="100" className="w-24" />
+          <StaticImage src="../assets/images/logo.png" alt="" loading="eager" quality="100" className="w-24 md:w-28" />
         </Link>
 
         <ul className="flex flex-row flex-nowrap justify-evenly items-center">

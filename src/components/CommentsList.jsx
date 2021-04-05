@@ -17,7 +17,11 @@ const CommentsList = ({ comments, onNewCommentClick, onReplyClick }) => {
       {/* Comments banner */}
       <div className="flex flex-col items-center md:flex-row md:items-center md:justify-evenly bg-mc-blue pt-6 pb-4 px-4 rounded-lg relative md:py-6">
         <div className="flex flex-nowrap justify-between items-start mb-6 md:mb-0">
-          <StaticImage src="../assets/images/juanele-cartoon.png" alt="" className="w-16 rounded-full bg-white mr-6" />
+          <StaticImage
+            src="../assets/images/juanele-cartoon.png"
+            alt=""
+            className="w-16 rounded-full webkit-mask-image bg-white mr-6"
+          />
 
           <p className="font-display text-white mx-3 text-sm max-w-lg">
             ¿Te gustó? ¿Te encantó? ¿Quieres comprarlos todos? ¡Díme que opinas!

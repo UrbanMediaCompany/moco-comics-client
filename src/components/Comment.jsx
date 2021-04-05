@@ -6,7 +6,7 @@ import ReplyIcon from '../assets/icons/corner-up-left.svg';
 const Comment = ({ comment, onReplyClick }) => (
   <article className="max-w-3xl mx-auto relative py-4 first:mt-6">
     <div className="flex flex-row justify-between">
-      <img src={comment.gravatar} className="relative w-16 h-16 rounded-full mr-4 md:mr-8" alt="" />
+      <img src={comment.gravatar} className="relative w-16 h-16 rounded-full webkit-mask-image mr-4 md:mr-8" alt="" />
 
       <div className="flex-1 grid grid-cols-2">
         <header>
@@ -35,7 +35,11 @@ const Comment = ({ comment, onReplyClick }) => (
       <section className="pl-2" v-if="filteredReplies.length">
         {comment.replies.map((reply) => (
           <article className="is-reply relative flex flex-row justify-between py-6" key={reply.id}>
-            <img src={reply.gravatar} className="relative w-12 h-12 rounded-full mr-12 md:mr-24 lg:mr-24" alt="" />
+            <img
+              src={reply.gravatar}
+              className="relative w-12 h-12 rounded-full webkit-mask-image mr-12 md:mr-24 lg:mr-24"
+              alt=""
+            />
 
             <div className="flex-1">
               <header>

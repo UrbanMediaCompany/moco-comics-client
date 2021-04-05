@@ -26,7 +26,7 @@ const Product = ({ product, addToCart }) => {
           className="w-full max-w-5xl border-4 border-black"
         />
 
-        <p className="absolute -bottom-6 right-0 w-32 h-32 bg-mc-yellow text-white font-display flex justify-center items-center border-b-8 border-mc-yellow-500 rounded-full">
+        <p className="absolute -bottom-6 right-0 w-32 h-32 bg-mc-yellow text-white font-display flex justify-center items-center border-b-8 border-mc-yellow-500 rounded-full webkit-mask-image">
           <span className="">{formatMoney(product.price)}</span>
         </p>
       </div>

@@ -110,7 +110,7 @@ const ShoppingCart = ({ items, products, updateCartItem, removeFromCart, onPurch
         <button
           type="button"
           onClick={() => setIsCartOpen(true)}
-          className="block w-full max-w-md text-center font-cartoon text-white uppercase px-7 pt-6 pb-3 bg-mc-red rounded-full shadow-sm border-b-4 border-mc-red-500"
+          className="block w-full max-w-md text-center font-cartoon text-white uppercase px-7 pt-6 pb-3 bg-mc-red rounded-full webkit-mask-image shadow-sm border-b-4 border-mc-red-500"
         >
           Total {total}
         </button>
@@ -119,7 +119,7 @@ const ShoppingCart = ({ items, products, updateCartItem, removeFromCart, onPurch
           <button
             onClick={() => setIsCartOpen(false)}
             type="button"
-            className="bg-white rounded-full shadow-sm p-6 ml-4"
+            className="bg-white rounded-full webkit-mask-image shadow-sm p-6 ml-4"
           >
             <CloseIcon className="text-mc-blue" />
           </button>
@@ -131,7 +131,7 @@ const ShoppingCart = ({ items, products, updateCartItem, removeFromCart, onPurch
           isLayoutOpened ? 'h-auto mb-10 md:mb-0' : ''
         }`}
       >
-        <p className="hidden md:flex justify-center items-center w-60 h-60 rounded-full bg-mc-red text-white font-cartoon text-center border-b-10 border-mc-red-500 uppercase text-lg p-12 md:p-16">
+        <p className="hidden md:flex justify-center items-center w-60 h-60 rounded-full webkit-mask-image bg-mc-red text-white font-cartoon text-center border-b-10 border-mc-red-500 uppercase text-lg p-12 md:p-16">
           Total <br />
           {total}
         </p>
@@ -198,7 +198,7 @@ const ShoppingCart = ({ items, products, updateCartItem, removeFromCart, onPurch
               <StaticImage
                 src="../assets/images/juanele-cartoon.png"
                 alt=""
-                className="w-20 rounded-full bg-white mr-6 bg-mc-blue border-2 border-white mb-2"
+                className="w-20 rounded-full webkit-mask-image bg-white mr-6 bg-mc-blue border-2 border-white mb-2"
               />
 
               <p className="font-display mb-2">¡Gracias por tu compra!</p>

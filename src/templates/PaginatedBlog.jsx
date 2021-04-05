@@ -61,33 +61,38 @@ const PaginatedBlog = ({
       >
         <div className="flex flex-nowrap justify-evenly items-center relative mb-12 max-w-7xl mx-auto">
           <div className="hidden flex-col flex-nowrap items-center pt-6 md:flex">
-            <div className="w-40 h-40 rounded-full border-6 border-white overflow-hidden mb-4">
-              <StaticImage src="../assets/images/chocolomo.png" alt="" loading="eager" />
+            <div className="w-40 h-40 rounded-full webkit-mask-image border-6 border-white overflow-hidden mb-4">
+              <StaticImage src="../assets/images/chocolomo.png" alt="" loading="eager" className="overflow-hidden" />
             </div>
             <p className="font-cartoon text-white">Chocolomo</p>
           </div>
 
           <div className="flex flex-col flex-nowrap items-center pt-6">
-            <div className="w-40 h-40 rounded-full border-6 border-white overflow-hidden mb-4">
-              <StaticImage src="../assets/images/patote.png" alt="" loading="eager" />
+            <div className="w-40 h-40 rounded-full webkit-mask-image border-6 border-white overflow-hidden mb-4">
+              <StaticImage src="../assets/images/patote.png" alt="" loading="eager" className="overflow-hidden" />
             </div>
             <p className="font-cartoon text-white">Patote</p>
           </div>
 
-          <div className="w-60 h-60 rounded-full border-6 border-white mx-3 overflow-hidden pt-2">
-            <StaticImage src="../assets/images/juanele-cartoon.png" alt="" loading="eager" />
+          <div className="w-60 h-60 rounded-full webkit-mask-image border-6 border-white mx-3 overflow-hidden pt-2">
+            <StaticImage
+              src="../assets/images/juanele-cartoon.png"
+              alt=""
+              loading="eager"
+              className="overflow-hidden"
+            />
           </div>
 
           <div className="flex flex-col flex-nowrap items-center pt-6">
-            <div className="w-40 h-40 rounded-full border-6 border-white overflow-hidden mb-4">
-              <StaticImage src="../assets/images/cuco.png" alt="" loading="eager" />
+            <div className="w-40 h-40 rounded-full webkit-mask-image border-6 border-white overflow-hidden mb-4">
+              <StaticImage src="../assets/images/cuco.png" alt="" loading="eager" className="overflow-hidden" />
             </div>
             <p className="font-cartoon text-white">Cuco</p>
           </div>
 
           <div className="hidden flex-col flex-nowrap items-center pt-6 md:flex">
-            <div className="w-40 h-40 rounded-full border-6 border-white overflow-hidden mb-4">
-              <StaticImage src="../assets/images/abuela.png" alt="" loading="eager" />
+            <div className="w-40 h-40 rounded-full webkit-mask-image border-6 border-white overflow-hidden mb-4">
+              <StaticImage src="../assets/images/abuela.png" alt="" loading="eager" className="overflow-hidden" />
             </div>
             <p className="font-cartoon text-white">Abuela</p>
           </div>
@@ -116,7 +121,7 @@ const PaginatedBlog = ({
         <aside className="pb-48 md:sticky md:-top-4 md:h-min">
           <nav className="mb-10">
             <div className="flex flex-row flex-nowrap items-center justify-center md:flex-col">
-              <p className="flex justify-center items-center rounded-full bg-mc-red text-white font-cartoon text-center border-b-10 border-mc-red-500 uppercase text-lg p-12 md:p-16">
+              <p className="flex justify-center items-center rounded-full webkit-mask-image bg-mc-red text-white font-cartoon text-center border-b-10 border-mc-red-500 uppercase text-lg p-12 md:p-16">
                 Página <br />
                 {currentPage} de {totalPages}
               </p>

@@ -57,7 +57,7 @@ const BlogPostDetailPage = ({ path, data: { strapiPost: post, allStrapiComment }
           <div className="flex flex-nowrap items-center">
             {post.characters.map((character) => (
               <div className="hidden flex-col flex-nowrap items-center pt-6 md:flex mr-4" key={character.id}>
-                <div className="w-32 rounded-full border-4 border-white overflow-hidden mb-4">
+                <div className="w-32 rounded-full webkit-mask-image border-4 border-white overflow-hidden mb-4">
                   <GatsbyImage image={character.image.localFile.childImageSharp.gatsbyImageData} alt="" />
                 </div>
               </div>

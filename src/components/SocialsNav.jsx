@@ -28,7 +28,7 @@ const SocialsNav = () => {
       <a
         href={socials.facebook}
         rel="noreferrer noopener"
-        className="text-facebook border-2 border-white bg-white rounded-full p-4 transform hover:rotate-12 transition-transform duration-300"
+        className="text-facebook border-2 border-white bg-white rounded-full webkit-mask-image p-4 transform hover:rotate-12 transition-transform duration-300"
       >
         <FacebookIcon />
       </a>
@@ -36,7 +36,7 @@ const SocialsNav = () => {
       <a
         href={socials.twitter}
         rel="noreferrer noopener"
-        className="text-twitter border-2 border-white bg-white rounded-full p-4 transform hover:-rotate-12 transition-transform duration-300"
+        className="text-twitter border-2 border-white bg-white rounded-full webkit-mask-image p-4 transform hover:-rotate-12 transition-transform duration-300"
       >
         <TwitterIcon />
       </a>
@@ -44,7 +44,7 @@ const SocialsNav = () => {
       <a
         href={socials.instagram}
         rel="noreferrer noopener"
-        className="text-instagram border-2 border-white bg-white rounded-full p-4 transform hover:rotate-12 transition-transform duration-300"
+        className="text-instagram border-2 border-white bg-white rounded-full webkit-mask-image p-4 transform hover:rotate-12 transition-transform duration-300"
       >
         <InstagramIcon />
       </a>

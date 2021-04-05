@@ -44,7 +44,7 @@ const CommentModal = ({ presentationContext, dismiss, onCommentCreated }) => {
         <button
           onClick={dismiss}
           type="button"
-          className="absolute -top-20 right-3 font-display text-xs bg-white p-2 rounded-full"
+          className="absolute -top-20 right-3 font-display text-xs bg-white p-2 rounded-full webkit-mask-image"
         >
           <CloseIcon className="text-mc-blue" />
         </button>

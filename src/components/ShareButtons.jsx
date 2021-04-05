@@ -58,7 +58,7 @@ const ShareButtons = ({ slug, title, characters }) => {
         rel="noopener noreferrer"
         className="flex flex-col flex-nowrap items-center font-display text-sm transform hover:-rotate-6 transition-transform duration-300 md:flex-row"
       >
-        <span className="inline-block bg-twitter p-3 rounded-full text-white mr-3">
+        <span className="inline-block bg-twitter p-3 rounded-full webkit-mask-image text-white mr-3">
           <TwitterIcon />
         </span>
 
@@ -71,14 +71,14 @@ const ShareButtons = ({ slug, title, characters }) => {
         rel="noopener noreferrer"
         className="flex flex-col flex-nowrap items-center font-display text-sm ml-8 transform hover:rotate-6 transition-transform duration-300 md:flex-row"
       >
-        <span className="inline-block bg-facebook p-3 rounded-full text-white mr-3">
+        <span className="inline-block bg-facebook p-3 rounded-full webkit-mask-image text-white mr-3">
           <FacebookIcon />
         </span>
         <span>Compartir</span>
       </a>
       {isClipboardAvailable && didCopy ? (
         <span className="flex flex-col flex-nowrap items-center font-display text-sm ml-8 md:flex-row">
-          <span className="inline-block bg-mc-yellow p-3 rounded-full text-white mr-3">
+          <span className="inline-block bg-mc-yellow p-3 rounded-full webkit-mask-image text-white mr-3">
             <CheckIcon />
           </span>
           <span>¡Copiado!</span>
@@ -88,7 +88,7 @@ const ShareButtons = ({ slug, title, characters }) => {
           onClick={copyToClipboard}
           className="flex flex-col flex-nowrap items-center font-display text-sm ml-8 transform hover:-rotate-6 transition-transform duration-300 md:mt-0 md:flex-row"
         >
-          <span className="inline-block bg-mc-yellow p-3 rounded-full text-white mr-3">
+          <span className="inline-block bg-mc-yellow p-3 rounded-full webkit-mask-image text-white mr-3">
             <ClipboardIcon />
           </span>
           <span>Copiar link</span>

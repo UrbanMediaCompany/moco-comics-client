@@ -127,6 +127,9 @@ module.exports = {
           fontFamily: config('theme.fontFamily.body'),
           fontSize: config('theme.fontSize.base'),
         },
+        '.webkit-mask-image': {
+          '-webkit-mask-image': '-webkit-radial-gradient(white, black)',
+        },
       });
     }),
   ],
