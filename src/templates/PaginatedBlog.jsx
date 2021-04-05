@@ -61,32 +61,32 @@ const PaginatedBlog = ({
       >
         <div className="flex flex-nowrap justify-evenly items-center relative mb-12 max-w-7xl mx-auto">
           <div className="hidden flex-col flex-nowrap items-center pt-6 md:flex">
-            <div className="w-40 rounded-full border-6 border-white overflow-hidden mb-4">
+            <div className="w-40 h-40 rounded-full border-6 border-white overflow-hidden mb-4">
               <StaticImage src="../assets/images/chocolomo.png" alt="" loading="eager" />
             </div>
             <p className="font-cartoon text-white">Chocolomo</p>
           </div>
 
           <div className="flex flex-col flex-nowrap items-center pt-6">
-            <div className="w-40 rounded-full border-6 border-white overflow-hidden mb-4">
+            <div className="w-40 h-40 rounded-full border-6 border-white overflow-hidden mb-4">
               <StaticImage src="../assets/images/patote.png" alt="" loading="eager" />
             </div>
             <p className="font-cartoon text-white">Patote</p>
           </div>
 
-          <div className="w-60 rounded-full border-6 border-white mx-3 overflow-hidden">
+          <div className="w-60 h-60 rounded-full border-6 border-white mx-3 overflow-hidden pt-2">
             <StaticImage src="../assets/images/juanele-cartoon.png" alt="" loading="eager" />
           </div>
 
           <div className="flex flex-col flex-nowrap items-center pt-6">
-            <div className="w-40 rounded-full border-6 border-white overflow-hidden mb-4">
+            <div className="w-40 h-40 rounded-full border-6 border-white overflow-hidden mb-4">
               <StaticImage src="../assets/images/cuco.png" alt="" loading="eager" />
             </div>
             <p className="font-cartoon text-white">Cuco</p>
           </div>
 
           <div className="hidden flex-col flex-nowrap items-center pt-6 md:flex">
-            <div className="w-40 rounded-full border-6 border-white overflow-hidden mb-4">
+            <div className="w-40 h-40 rounded-full border-6 border-white overflow-hidden mb-4">
               <StaticImage src="../assets/images/abuela.png" alt="" loading="eager" />
             </div>
             <p className="font-cartoon text-white">Abuela</p>
