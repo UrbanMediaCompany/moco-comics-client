@@ -21,6 +21,7 @@ const CommentsList = ({ comments, onNewCommentClick, onReplyClick }) => {
             src="../assets/images/juanele-cartoon.png"
             alt=""
             className="w-16 rounded-full webkit-mask-image bg-white mr-6"
+            placeholder="blurred"
           />
 
           <p className="font-display text-white mx-3 text-sm max-w-lg">

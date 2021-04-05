@@ -199,6 +199,7 @@ const ShoppingCart = ({ items, products, updateCartItem, removeFromCart, onPurch
                 src="../assets/images/juanele-cartoon.png"
                 alt=""
                 className="w-20 rounded-full webkit-mask-image bg-white mr-6 bg-mc-blue border-2 border-white mb-2"
+                placeholder="blurred"
               />
 
               <p className="font-display mb-2">¡Gracias por tu compra!</p>

@@ -14,7 +14,14 @@ const Layout = ({ children }) => {
     <div className="bg-mc-grey w-full min-h-screen">
       <nav className="fixed bottom-sa-3 left-4 right-4 rounded-lg bg-mc-blue py-3 shadow-lg z-10 px-constrained border-b-6 border-black border-opacity-20 md:absolute md:bottom-auto md:top-4 md:left-8 md:right-8 md:bg-transparent md:shadow-none md:border-0 md:flex md:flex-row md:flex-nowrap md:justify-between md:items-center">
         <Link to="/" className="hidden md:block">
-          <StaticImage src="../assets/images/logo.png" alt="" loading="eager" quality="100" className="w-24 md:w-28" />
+          <StaticImage
+            src="../assets/images/logo.png"
+            alt=""
+            loading="eager"
+            quality="100"
+            className="w-24 md:w-28"
+            placeholder="blurred"
+          />
         </Link>
 
         <ul className="flex flex-row flex-nowrap justify-evenly items-center">
@@ -68,12 +75,22 @@ const Layout = ({ children }) => {
             </p>
           </div>
 
-          <StaticImage src="../assets/images/juanele-with-arrow.svg" alt="" className="-ml-20 md:ml-0 md:order-first" />
+          <StaticImage
+            src="../assets/images/juanele-with-arrow.svg"
+            alt=""
+            className="-ml-20 md:ml-0 md:order-first"
+            placeholder="blurred"
+          />
         </div>
 
         <div className="bg-mc-yellow border-b-14 border-mc-yellow-500 pt-10 px-3.5 pb-40 md:pb-6">
           <h2 className="flex flex-nowrap justify-center items-center mb-20 -ml-8 md:ml-0">
-            <StaticImage src="../assets/images/logo.png" alt="" className="w-36 md:w-24 md:mr-8 mt-4" />
+            <StaticImage
+              src="../assets/images/logo.png"
+              alt=""
+              className="w-36 md:w-24 md:mr-8 mt-4"
+              placeholder="blurred"
+            />
 
             <span
               className={`${styles.wordmark} font-display w-min uppercase text-3xl text-white leading-none md:w-auto`}

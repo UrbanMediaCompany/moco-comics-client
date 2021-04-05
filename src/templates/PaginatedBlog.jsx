@@ -62,14 +62,26 @@ const PaginatedBlog = ({
         <div className="flex flex-nowrap justify-evenly items-center relative mb-12 max-w-7xl mx-auto">
           <div className="hidden flex-col flex-nowrap items-center pt-6 md:flex">
             <div className="w-40 h-40 rounded-full webkit-mask-image border-6 border-white overflow-hidden mb-4">
-              <StaticImage src="../assets/images/chocolomo.png" alt="" loading="eager" className="overflow-hidden" />
+              <StaticImage
+                src="../assets/images/chocolomo.png"
+                alt=""
+                loading="eager"
+                className="overflow-hidden"
+                placeholder="blurred"
+              />
             </div>
             <p className="font-cartoon text-white">Chocolomo</p>
           </div>
 
           <div className="flex flex-col flex-nowrap items-center pt-6">
             <div className="w-40 h-40 rounded-full webkit-mask-image border-6 border-white overflow-hidden mb-4">
-              <StaticImage src="../assets/images/patote.png" alt="" loading="eager" className="overflow-hidden" />
+              <StaticImage
+                src="../assets/images/patote.png"
+                alt=""
+                loading="eager"
+                className="overflow-hidden"
+                placeholder="blurred"
+              />
             </div>
             <p className="font-cartoon text-white">Patote</p>
           </div>
@@ -80,19 +92,32 @@ const PaginatedBlog = ({
               alt=""
               loading="eager"
               className="overflow-hidden"
+              placeholder="blurred"
             />
           </div>
 
           <div className="flex flex-col flex-nowrap items-center pt-6">
             <div className="w-40 h-40 rounded-full webkit-mask-image border-6 border-white overflow-hidden mb-4">
-              <StaticImage src="../assets/images/cuco.png" alt="" loading="eager" className="overflow-hidden" />
+              <StaticImage
+                src="../assets/images/cuco.png"
+                alt=""
+                loading="eager"
+                className="overflow-hidden"
+                placeholder="blurred"
+              />
             </div>
             <p className="font-cartoon text-white">Cuco</p>
           </div>
 
           <div className="hidden flex-col flex-nowrap items-center pt-6 md:flex">
             <div className="w-40 h-40 rounded-full webkit-mask-image border-6 border-white overflow-hidden mb-4">
-              <StaticImage src="../assets/images/abuela.png" alt="" loading="eager" className="overflow-hidden" />
+              <StaticImage
+                src="../assets/images/abuela.png"
+                alt=""
+                loading="eager"
+                className="overflow-hidden"
+                placeholder="blurred"
+              />
             </div>
             <p className="font-cartoon text-white">Abuela</p>
           </div>
