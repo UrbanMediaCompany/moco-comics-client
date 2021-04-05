@@ -29,7 +29,7 @@ const Layout = ({ children }) => {
             </Link>
           </li>
 
-          <li className="md:mr-14">
+          {/* <li className="md:mr-14">
             <Link
               to="/buscar"
               className="font-display text-sm text-white opacity-60 hover:opacity-100 transition-opacity duration-300 flex flex-col flex-nowrap items-center md:flex-row md:opacity-100 md:transform md:hover:rotate-6 md:transition-all md:hover:text-white"
@@ -38,7 +38,7 @@ const Layout = ({ children }) => {
               <SearchIcon />
               <span className="mt-1 md:mt-0 md:ml-6 md:text-base">Buscar</span>
             </Link>
-          </li>
+          </li> */}
 
           <li>
             <Link
@@ -84,12 +84,12 @@ const Layout = ({ children }) => {
 
           <nav className="max-w-4xl mx-auto mb-10">
             <ul className="flex flex-wrap justify-evenly items-center">
-              <li className="flex flex-nowrap items-center text-white font-display transform hover:-rotate-6 transition-all mb-8">
+              {/* <li className="flex flex-nowrap items-center text-white font-display transform hover:-rotate-6 transition-all mb-8">
                 <SearchIcon />
                 <Link className="ml-3" to="/buscar">
                   Buscar
                 </Link>
-              </li>
+              </li> */}
 
               <li className="flex flex-nowrap items-center text-white font-display transform hover:rotate-6 transition-all mb-8">
                 <ShopIcon />
