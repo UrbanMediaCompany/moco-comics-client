@@ -196,7 +196,7 @@ const ShoppingCart = ({ items, products, updateCartItem, removeFromCart, onPurch
           <section className="w-full px-8 py-6 mt-10 bg-mc-blue rounded-xl text-white shadow-sm border-b-6 border-black border-opacity-20">
             <div className="flex flex-col flex-nowrap items-center mb-6">
               <StaticImage
-                src="~/assets/images/juanele-cartoon.png"
+                src="../assets/images/juanele-cartoon.png"
                 alt=""
                 className="w-20 rounded-full bg-white mr-6 bg-mc-blue border-2 border-white mb-2"
               />
