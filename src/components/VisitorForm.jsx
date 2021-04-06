@@ -21,7 +21,12 @@ const VisitorForm = ({ onIdentified }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col items-stretch px-6 pt-10 pb-6">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col items-stretch px-6 pt-10 pb-6"
+      method="POST"
+      data-netlify="true"
+    >
       <div className="w-full max-w-xl mx-auto mb-4 md:flex flex-nowrap justify-evenly md:max-w-none">
         <label className="block flex-1 cursor-pointer mb-4 md:mr-4">
           <span className="font-display text-sm block mb-2">¿Cómo te llamas?</span>
