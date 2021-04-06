@@ -36,8 +36,9 @@ const PaginatedBlog = ({
   const [commentModalContext, presentModal, dismissModal] = useCommentModal();
 
   const handleNewComment = (comment) => {
-    const postKey = comment.post;
-    const postComments = comments[postKey] ? [...comments[postKey], comment] : [comment];
+    const postKey = comment.post.id;
+    const newComment = { ...comment, publishedDate: comment.created_at, formattedPublishedDate: 'Just now' };
+    const postComments = comments[postKey] ? [...comments[postKey], newComment] : [newComment];
 
     setComments({ ...comments, [postKey]: postComments });
     dismissModal();

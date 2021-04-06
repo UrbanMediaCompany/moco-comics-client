@@ -31,9 +31,9 @@ const CommentModal = ({ presentationContext, dismiss, onCommentCreated }) => {
       body: encodeFormData(body),
     })
       .then(async (response) => {
-        const newComment = await response.json();
+        const data = await response.json();
 
-        if (response.ok && newComment) onCommentCreated(newComment);
+        if (response.ok && data) onCommentCreated(data.comment);
       })
       .catch(dismiss);
   };
