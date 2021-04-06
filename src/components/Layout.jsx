@@ -69,7 +69,7 @@ const Layout = ({ children }) => {
           >
             <p className="relative text-white text-sm font-bold md:text-base">
               Nací en 1982 luego de participar en la guerra de Vietnam. Tras haber estudiado cartonismo y ciencias de la
-              procrastinación en la Universidad de la Sorbona en 1982, decicí salvar a los pingüinos de ellos mismos
+              procrastinación en la Universidad de la Sorbona en 1982, decidí salvar a los pingüinos de ellos mismos
               haciendo este comic. Es bien sabido que los pingüinos dejan de atacarse unos a otros y a su medio ambiente
               cuando están entretenidos con comics. Denme dinero.
             </p>
