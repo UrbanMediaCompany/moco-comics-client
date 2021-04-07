@@ -137,7 +137,7 @@ const ShoppingCart = ({ items, products, updateCartItem, removeFromCart, onPurch
         </p>
 
         {/** Checkout form */}
-        <form className="w-full px-8 pt-6 bg-white rounded-xl md:-mt-12 shadow-sm overflow-y-auto">
+        <form className="relative w-full px-8 pt-6 bg-white rounded-xl md:-mt-12 shadow-sm overflow-y-auto">
           <legend className="w-full font-display mb-8 text-center">Artículos en tu carrito</legend>
 
           {items.length !== 0 ? null : <p className="text-sm text-center mb-8">No hay artículos en tu carrito...</p>}
