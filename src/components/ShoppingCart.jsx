@@ -10,79 +10,72 @@ import * as styles from './ShoppingCart.module.css';
 
 const ShoppingCart = ({ items, products, updateCartItem, removeFromCart, onPurchaseIntent }) => {
   const isMobileViewport = useMatchMedia('(max-width: 767px)');
-
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [isInternationalShipping, setIsInternationalShipping] = useState(false);
-
   const [purchaseSuccess, setPurchaseSuccess] = useState(false);
   const [, setPurchaseError] = useState(false);
-
   const [, setPayer] = useState();
 
+  // We need a persistence reference to the cart items and internationalShipping state
+  // that the PayPal script can closure over
+  const cartItems = useRef([]);
+  const isInternationalShipping = useRef(false);
+  cartItems.current = items;
+
+  // PayPal script provides this on initialization so we reference them
+  // across renders
   const disablePaypalButtons = useRef(() => {});
   const enablePaypalButtons = useRef(() => {});
 
   const [total] = [items.reduce((acc, item) => acc + products[item.id].price * item.quantity, 0)].map(formatMoney);
-
   const isLayoutOpened = isMobileViewport && isCartOpen;
-
-  const initPaypalButtons = (_, actions) => {
-    // Disable buttons on load
-    actions.disable();
-
-    // We'll need these in the future so keep a reference
-    disablePaypalButtons.current = actions.disable;
-    enablePaypalButtons.current = actions.enable;
-  };
-
-  const onPaypalButtonClick = ({ fundingSource }) => {
-    setPurchaseSuccess(false);
-    setPurchaseError(false);
-    onPurchaseIntent(fundingSource);
-  };
-
-  const createPaypalOrder = () => {
-    return fetch('/.netlify/functions/checkout', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ cart: items, isInternationalShipping: isInternationalShipping }),
-    })
-      .then((res) => res.json())
-      .then(({ order }) => order)
-      .catch((err) => [err]);
-  };
-
-  const onPaypalOrderApproved = (data, actions) => {
-    setPurchaseSuccess(true);
-    onPurchaseIntent(null);
-
-    return actions.order.capture().then(({ payer: { name } }) => {
-      setPayer(`${name.given_name} ${name.surname}`);
-    });
-  };
-
-  const onPaypalOrderCancelled = () => {
-    onPurchaseIntent(null);
-  };
-
-  const onPaypalOrderError = () => {
-    setPurchaseError(true);
-    onPurchaseIntent(null);
-  };
 
   useEffect(() => {
     loadPayPalSDK().then(() => {
       window.paypal
         .Buttons({
           style: { label: 'pay' },
-          onInit: initPaypalButtons,
-          onClick: onPaypalButtonClick,
-          createOrder: createPaypalOrder,
-          onApprove: onPaypalOrderApproved,
-          onCancel: onPaypalOrderCancelled,
-          onError: onPaypalOrderError,
+          onInit: (_, actions) => {
+            // Disable buttons on load
+            actions.disable();
+
+            disablePaypalButtons.current = actions.disable;
+            enablePaypalButtons.current = actions.enable;
+          },
+          onClick: ({ fundingSource }) => {
+            setPurchaseSuccess(false);
+            setPurchaseError(false);
+            onPurchaseIntent(fundingSource);
+          },
+          createOrder: () => {
+            return fetch('/.netlify/functions/checkout', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                cart: cartItems.current,
+                isInternationalShipping: isInternationalShipping.current,
+              }),
+            })
+              .then((res) => res.json())
+              .then(({ order }) => order)
+              .catch((err) => [err]);
+          },
+          onApprove: (data, actions) => {
+            setPurchaseSuccess(true);
+            onPurchaseIntent(null);
+
+            return actions.order.capture().then(({ payer: { name } }) => {
+              setPayer(`${name.given_name} ${name.surname}`);
+            });
+          },
+          onCancel: () => {
+            onPurchaseIntent(null);
+          },
+          onError: () => {
+            setPurchaseError(true);
+            onPurchaseIntent(null);
+          },
         })
         .render('#paypal-buttons');
     });
@@ -177,14 +170,16 @@ const ShoppingCart = ({ items, products, updateCartItem, removeFromCart, onPurch
             <input
               type="checkbox"
               name="international-shipping"
-              onChange={({ target: { checked } }) => setIsInternationalShipping(checked)}
+              onChange={({ target: { checked } }) => {
+                isInternationalShipping.current = checked;
+              }}
               value="true"
               className="checkbox appearance-none w-8 h-8 rounded-lg mr-4 border-2 border-mc-grey-500 bg-white checked:bg-check-mark"
             />
             <span className="flex-1 font-display text-sm leading-none">Envío Internacional</span>
           </label>
 
-          {!isInternationalShipping ? null : (
+          {!isInternationalShipping.current ? null : (
             <p className="text-sm pl-4 mb-8">Se incluirán $10USD de gastos de envío al momento del pago ¯\_(ツ)_/¯</p>
           )}
 

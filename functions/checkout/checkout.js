@@ -2,7 +2,7 @@ const paypal = require('@paypal/checkout-server-sdk');
 const asyncFetch = require('./async-fetch');
 
 const Environment = new paypal.core.SandboxEnvironment(
-  process.env.GRIDSOME_PAYPAL_CLIENT_ID,
+  process.env.GATSBY_PAYPAL_CLIENT_ID,
   process.env.PAYPAL_CLIENT_SECRET,
 );
 const Client = new paypal.core.PayPalHttpClient(Environment);
