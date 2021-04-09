@@ -9,7 +9,7 @@ export const wrapRootElement = ({ element }) => {
   return (
     <>
       <Helmet>
-        <script async defer data-domain="moco-comics.com" src="https://plausible.io/js/plausible.js"></script>
+        <script async defer data-domain="moco-comics.com" src="https://stats.moco-comics.com/js/index.js"></script>
       </Helmet>
 
       {element}
