@@ -12,7 +12,18 @@ import encodeFormData from '../utils/encodeFormData';
 const CommentModal = ({ presentationContext, dismiss, onCommentCreated }) => {
   const { visitor, setVisitor, forgetVisitor } = useVisitor();
 
-  if (!presentationContext) return null;
+  // Placeholder for the Netlify post-processing bots
+  if (!presentationContext)
+    return (
+      <form method="POST" name="new-comment" data-netlify="true" hidden>
+        <input type="hidden" name="form-name" value="new-comment" />
+        <input type="text" name="name" />
+        <input type="email" name="email" />
+        <input type="website" name="website" />
+        <textarea name="comment"></textarea>
+        <input type="number" name="post" />
+      </form>
+    );
 
   const { post, comment: parent } = presentationContext;
 
