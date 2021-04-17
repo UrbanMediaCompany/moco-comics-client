@@ -68,7 +68,7 @@ const PaginatedBlog = ({
                 alt=""
                 loading="eager"
                 className="overflow-hidden"
-                placeholder="blurred"
+                placeholder="tracedSVG"
               />
             </div>
             <p className="font-cartoon text-white">Chocolomo</p>
@@ -81,7 +81,7 @@ const PaginatedBlog = ({
                 alt=""
                 loading="eager"
                 className="overflow-hidden"
-                placeholder="blurred"
+                placeholder="tracedSVG"
               />
             </div>
             <p className="font-cartoon text-white">Patote</p>
@@ -93,7 +93,7 @@ const PaginatedBlog = ({
               alt=""
               loading="eager"
               className="overflow-hidden"
-              placeholder="blurred"
+              placeholder="tracedSVG"
             />
           </div>
 
@@ -104,7 +104,7 @@ const PaginatedBlog = ({
                 alt=""
                 loading="eager"
                 className="overflow-hidden"
-                placeholder="blurred"
+                placeholder="tracedSVG"
               />
             </div>
             <p className="font-cartoon text-white">Cuco</p>
@@ -117,7 +117,7 @@ const PaginatedBlog = ({
                 alt=""
                 loading="eager"
                 className="overflow-hidden"
-                placeholder="blurred"
+                placeholder="tracedSVG"
               />
             </div>
             <p className="font-cartoon text-white">Abuela</p>

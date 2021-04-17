@@ -20,7 +20,7 @@ const Layout = ({ children }) => {
             loading="eager"
             quality="100"
             className="w-24 md:w-28"
-            placeholder="blurred"
+            placeholder="none"
           />
         </Link>
 
@@ -79,7 +79,7 @@ const Layout = ({ children }) => {
             src="../assets/images/juanele-with-arrow.svg"
             alt=""
             className="-ml-20 md:ml-0 md:order-first"
-            placeholder="blurred"
+            placeholder="tracedSVG"
           />
         </div>
 
@@ -89,7 +89,7 @@ const Layout = ({ children }) => {
               src="../assets/images/logo.png"
               alt=""
               className="w-36 md:w-24 md:mr-8 mt-4"
-              placeholder="blurred"
+              placeholder="none"
             />
 
             <span
