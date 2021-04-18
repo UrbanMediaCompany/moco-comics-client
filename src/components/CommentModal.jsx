@@ -7,39 +7,29 @@ import { GatsbyImage } from 'gatsby-plugin-image';
 import useVisitor from '../hooks/useVistor';
 import VisitorForm from './VisitorForm';
 import CommentForm from './CommentForm';
-import encodeFormData from '../utils/encodeFormData';
 
 const CommentModal = ({ presentationContext, dismiss, onCommentCreated }) => {
   const { visitor, setVisitor, forgetVisitor } = useVisitor();
 
-  // Placeholder for the Netlify post-processing bots
-  if (!presentationContext)
-    return (
-      <form method="POST" name="new-comment" data-netlify="true" hidden>
-        <input type="hidden" name="form-name" value="new-comment" />
-        <input type="text" name="name" />
-        <input type="email" name="email" />
-        <input type="website" name="website" />
-        <textarea name="comment"></textarea>
-        <input type="number" name="post" />
-      </form>
-    );
+  if (!presentationContext) return null;
 
   const { post, comment: parent } = presentationContext;
 
   const submitComment = (comment) => {
-    const body = {
+    const newComment = {
       ...comment,
       ...visitor,
       post: post.id,
     };
 
-    if (parent) body.replies_to = parent.id;
+    if (parent) newComment.replies_to = parent.id;
 
-    fetch('/', {
+    fetch('/.netlify/functions/submit-comment', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encodeFormData(body),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ comment: newComment }),
     })
       .then(async (response) => {
         const data = await response.json();

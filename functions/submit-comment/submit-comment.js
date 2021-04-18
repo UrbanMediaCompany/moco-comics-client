@@ -31,9 +31,7 @@ exports.handler = async ({ body }) => {
 
   // 2. Generate Gravatar URL
   const {
-    payload: {
-      data: { name: author, email, website, comment: content, post, replies_to = null },
-    },
+    comment: { name: author, email, website, comment: content, post, replies_to = null },
   } = JSON.parse(body);
   const hash = md5(email.trim().toLowerCase()).toString();
   const gravatar = `https://www.gravatar.com/avatar/${hash}`;
