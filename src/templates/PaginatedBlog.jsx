@@ -37,7 +37,7 @@ const PaginatedBlog = ({
 
   const handleNewComment = (comment) => {
     const postKey = comment.post.id;
-    const newComment = { ...comment, publishedDate: comment.created_at, formattedPublishedDate: 'Just now' };
+    const newComment = { ...comment, publishedDate: comment.created_at, formattedPublishedDate: 'Justo ahora' };
     const postComments = comments[postKey] ? [...comments[postKey], newComment] : [newComment];
 
     setComments({ ...comments, [postKey]: postComments });
