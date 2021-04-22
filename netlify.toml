@@ -1,2 +1,10 @@
 [build]
   functions = "functions/"
+
+[[redirects]]
+from = "/comic/*"
+to = "/blog/:splat"
+
+[[redirects]]
+from = "/archivo-de-comics"
+to = "/"
