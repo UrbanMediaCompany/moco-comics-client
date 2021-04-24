@@ -85,6 +85,7 @@ module.exports = {
       rotate: ['group-hover'],
       cursor: ['disabled'],
       opacity: ['disabled', 'hover'],
+      textColor: ['disabled'],
     },
   },
   plugins: [

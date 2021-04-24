@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { GatsbyImage } from 'gatsby-plugin-image';
 import { useInView } from 'react-intersection-observer';
 import capitalize from '../utils/capitalize';
 import markdownToHtml from '../utils/markdownToHtml';
 import ShareButtons from './ShareButtons';
 import CommentsList from './CommentsList';
+import MediaSlider from './MediaSlider';
 
 const BlogPost = ({ post, comments, onIntersection, onCommentClick, className }) => {
   const { ref, inView } = useInView({ threshold: 0.6 });
@@ -23,15 +23,7 @@ const BlogPost = ({ post, comments, onIntersection, onCommentClick, className })
       id={post.slug}
       ref={ref}
     >
-      {post.media?.map(({ localFile: image }) => (
-        <div className="px-6 mb-8" key={image.id}>
-          <GatsbyImage
-            image={image.childImageSharp.gatsbyImageData}
-            alt=""
-            className="w-full max-w-5xl border-4 mx-auto border-black"
-          />
-        </div>
-      ))}
+      <MediaSlider media={post.media || []} />
 
       <div className="w-full bg-white border-t-10 border-grey-300 rounded-lg shadow-sm overflow-hidden">
         <header className="px-8 pt-8 mb-8">
