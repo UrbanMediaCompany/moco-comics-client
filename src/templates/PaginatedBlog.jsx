@@ -45,13 +45,13 @@ const PaginatedBlog = ({
   };
 
   const canonicalPagination = [
-    previousPage ? { rel: 'prev', href: `${siteMetadata.siteUrl}${previousPage === '/' ? '' : previousPage}` } : null,
+    previousPage ? { rel: 'prev', href: `${siteMetadata.siteUrl}${previousPage}` } : null,
     nextPage ? { rel: 'next', href: `${siteMetadata.siteUrl}${nextPage}` } : null,
   ].filter(Boolean);
 
   return (
     <Layout>
-      <SEO canonical={path}>
+      <SEO pathname={path}>
         {canonicalPagination.map((m) => (
           <link rel={m.rel} href={m.href} key={m.href} />
         ))}

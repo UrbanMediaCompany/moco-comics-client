@@ -8,7 +8,7 @@ import Product from '../components/Product';
 import ShoppingCart from '../components/ShoppingCart';
 import SEO from '../components/SEO';
 
-const StorePage = ({ data: { allStrapiProduct } }) => {
+const StorePage = ({ path, data: { allStrapiProduct } }) => {
   const [cart, setCart] = useState([]);
   const [isPayingWithCard, setIsPayingWithCard] = useState(false);
 
@@ -51,7 +51,7 @@ const StorePage = ({ data: { allStrapiProduct } }) => {
 
   return (
     <Layout>
-      <SEO title="Tienda" canonical="/tienda" />
+      <SEO title="Tienda" pathname={path} />
 
       <header
         className={`${styles.hero} relative w-full bg-mc-yellow pt-28 pb-32 px-constrained text-left overflow-hidden md:pt-44`}
@@ -88,6 +88,7 @@ const StorePage = ({ data: { allStrapiProduct } }) => {
 };
 
 StorePage.propTypes = {
+  path: PropTypes.string.isRequired,
   data: PropTypes.shape({
     allStrapiProduct: PropTypes.shape({
       edges: PropTypes.arrayOf(

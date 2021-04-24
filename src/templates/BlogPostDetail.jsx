@@ -31,7 +31,7 @@ const BlogPostDetailPage = ({ path, data: { strapiPost: post, allStrapiComment }
     <Layout>
       <SEO
         title={post.title}
-        canonical={path}
+        pathname={path}
         description={description}
         image={socialCardURL}
         og={{

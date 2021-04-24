@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
 
-function SEO({ children, lang, canonical, title, description, image, imageAlt, og }) {
+function SEO({ children, lang, pathname, title, description, image, imageAlt, og }) {
   const {
     site: { siteMetadata },
   } = useStaticQuery(
@@ -21,7 +21,7 @@ function SEO({ children, lang, canonical, title, description, image, imageAlt, o
     `,
   );
 
-  const canonicalUrl = `${siteMetadata.siteUrl}${canonical}`;
+  const canonicalUrl = `${siteMetadata.siteUrl}${pathname}`;
   const canonicalTitle = title ? `${title} | ${siteMetadata.title}` : `${siteMetadata.title} | Monitos de Juanele`;
 
   return (
@@ -68,7 +68,7 @@ function SEO({ children, lang, canonical, title, description, image, imageAlt, o
 SEO.propTypes = {
   children: PropTypes.node,
   lang: PropTypes.string,
-  canonical: PropTypes.string,
+  pathname: PropTypes.string.isRequired,
   title: PropTypes.string,
   description: PropTypes.string,
   image: PropTypes.string,
@@ -84,7 +84,6 @@ SEO.propTypes = {
 SEO.defaultProps = {
   children: null,
   lang: 'es',
-  canonical: '',
   title: '',
   description: '',
   image: '/social-card/moco-comics.png',
