@@ -12,7 +12,9 @@ const MediaSlider = ({ media }) => {
     <div className="relative">
       {media.map(({ localFile: image }, index) => (
         <div
-          className={`top-0 left-0 px-6 mb-8 ${activeImage === index ? 'static' : 'absolute opacity-0'} `}
+          className={`top-0 left-0 px-6 mb-8 flex justify-center items-center ${
+            activeImage === index ? 'static' : 'absolute opacity-0'
+          } `}
           key={image.id}
         >
           <GatsbyImage

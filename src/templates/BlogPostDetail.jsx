@@ -11,6 +11,7 @@ import * as styles from './BlogPostDetailPage.module.css';
 import useCommentModal from '../hooks/useCommentModal';
 import CommentModal from '../components/CommentModal';
 import SEO from '../components/SEO';
+import MediaSlider from '../components/MediaSlider';
 
 const BlogPostDetailPage = ({ path, data: { strapiPost: post, allStrapiComment } }) => {
   const [comments, setComments] = useState(allStrapiComment.edges.map(({ node }) => node));
@@ -67,15 +68,7 @@ const BlogPostDetailPage = ({ path, data: { strapiPost: post, allStrapiComment }
       </header>
 
       <main className={`${styles.main} relative px-constrained -mt-28 pb-28 md:pb-64`}>
-        {post.media.map((image) => (
-          <section key={image.id} className="px-6 mb-8">
-            <GatsbyImage
-              image={image.localFile.childImageSharp.gatsbyImageData}
-              alt=""
-              className="w-full max-w-5xl border-4 mx-auto border-black"
-            />
-          </section>
-        ))}
+        <MediaSlider media={post.media || []} />
 
         <div className="w-full bg-white border-t-10 border-grey-300 rounded-lg shadow-sm overflow-hidden mb-16">
           <section
