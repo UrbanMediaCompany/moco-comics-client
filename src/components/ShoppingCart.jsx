@@ -65,9 +65,16 @@ const ShoppingCart = ({ items, products, updateCartItem, removeFromCart, onPurch
             setPurchaseSuccess(true);
             onPurchaseIntent(null);
 
-            return actions.order.capture().then(({ payer: { name } }) => {
-              setPayer(`${name.given_name} ${name.surname}`);
-            });
+            return fetch('/.netlify/functions/capture-payment', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ orderID: data.orderID }),
+            })
+              .then((res) => res.json())
+              .then(({ result: { payer: { name } } }) => setPayer(`${name.given_name} ${name.surname}`))
+              .catch((err) => [err]);
           },
           onCancel: () => {
             onPurchaseIntent(null);
