@@ -5,7 +5,7 @@
   "scripts": {
     "postinstall": "netlify-lambda install",
     "build": "gatsby build",
-    "develop": "gatsby develop",
+    "develop": "gatsby develop -H 0.0.0.0",
     "start": "yarn develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
